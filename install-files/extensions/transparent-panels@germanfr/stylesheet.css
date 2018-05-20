@@ -1,0 +1,103 @@
+#panel,
+#panelLeft,
+#panelCenter,
+#panelRight {
+	transition-duration: 200;
+}
+
+/* Customizable CSS class.
+ * Define this class on you cinnamon.css theme. */
+.panel-transparent {}
+
+
+/* ===================================================================
+ * Full transparency
+ * ===================================================================*/
+
+.panel-transparent-full__internal,
+#panel.panel-transparent-full__internal,
+.panel-transparent-full__internal #panelLeft,
+.panel-transparent-full__internal #panelCenter,
+.panel-transparent-full__internal #panelRight,
+#panel.panel-transparent-full__internal:highlight {
+	border-image: none;
+	border: none;
+	box-shadow: none;
+	background-gradient-direction: vertical;
+	background-gradient-start: transparent;
+	background-gradient-end: transparent;
+	background: transparent;
+}
+
+/* ===================================================================
+ * Transparency with shadow
+ * ===================================================================*/
+
+.panel-transparent-gradient__internal,
+#panel.panel-transparent-gradient__internal,
+.panel-transparent-gradient__internal #panelLeft,
+.panel-transparent-gradient__internal #panelCenter,
+.panel-transparent-gradient__internal #panelRight,
+#panel.panel-transparent-gradient__internal:highlight {
+	border-image: none;
+	border: none;
+	box-shadow: none;
+	background-gradient-direction: vertical;
+	background-gradient-start: transparent;
+	background-gradient-end: transparent;
+	background: transparent;
+}
+
+.panel-transparent-gradient__internal,
+.panel-bottom.panel-transparent-gradient__internal,
+#panel.panel-transparent-gradient__internal,
+#panel.panel-transparent-gradient__internal:highlight {
+	background-gradient-direction: vertical;
+	background-gradient-start: transparent;
+	background-gradient-end: rgba(0,0,0,0.4);
+}
+
+.panel-transparent-gradient__internal.panel-top,
+#panel.panel-transparent-gradient__internal.panel-top,
+#panel.panel-transparent-gradient__internal.panel-top:highlight,
+.panel-transparent-gradient__internal.panel-left,
+#panel.panel-transparent-gradient__internal.panel-left,
+#panel.panel-transparent-gradient__internal.panel-left:highlight {
+	background-gradient-start: rgba(0,0,0,0.4);
+	background-gradient-end: transparent;
+}
+
+.panel-transparent-gradient__internal.panel-right,
+#panel.panel-transparent-gradient__internal.panel-right,
+#panel.panel-transparent-gradient__internal.panel-right:highlight,
+.panel-transparent-gradient__internal.panel-left,
+#panel.panel-transparent-gradient__internal.panel-left,
+#panel.panel-transparent-gradient__internal.panel-left:highlight {
+	background-gradient-direction: horizontal;
+}
+
+/* ===================================================================
+ * Semy transparent
+ * ===================================================================*/
+
+.panel-transparent-semi__internal,
+#panel.panel-transparent-semi__internal,
+.panel-transparent-semi__internal #panelLeft,
+.panel-transparent-semi__internal #panelCenter,
+.panel-transparent-semi__internal #panelRight,
+#panel.panel-transparent-semi__internal:highlight {
+	border-image: none;
+	border: none;
+	background-gradient-direction: vertical;
+	background-gradient-start: transparent;
+	background-gradient-end: transparent;
+	background: transparent;
+ }
+
+.panel-transparent-semi__internal,
+#panel.panel-transparent-semi__internal,
+#panel.panel-transparent-semi__internal:highlight {
+	background-gradient-start: rgba(0,0,0,0.4);
+	background-gradient-end: rgba(0,0,0,0.4);
+	background-color: rgba(0,0,0,0.4);
+}

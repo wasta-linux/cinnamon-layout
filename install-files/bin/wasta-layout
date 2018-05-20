@@ -1,0 +1,384 @@
+#!/bin/bash
+
+# ==============================================================================
+# wasta-layout
+#
+# This script can be run at any time to "toggle" cinnamon default settings
+#   to provide different layout defaults for the system
+#
+# enabled-applets wasta numbers (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
+#   menu@cinnamon.org:101
+#   show-desktop@cinnamon.org:102
+#   panel-launchers@cinnamon.org:103
+#   scale@cinnamon.org:104
+#   window-list@cinnamon.org:105
+#   removable-drives@cinnamon.org:106
+#   inhibit@cinnamon.org:107
+#   systray@cinnamon.org:108
+#   bluetooth@cinnamon.org:109
+#   network@cinnamon.org:110
+#   sound@cinnamon.org:111
+#   power@cinnamon.org:112
+#   calendar@simonwiles.net:113
+#   windows-quick-list@cinnamon.org:114
+#   IcingTaskManager@json:115
+#   user@cinnamon.org:116
+#   trash@cinnamon.org:117
+#   calendar@cinnamon.org:118
+#   notifications@cinnamon.org:119
+#   
+#   2017-12-24 rik: initial script
+#   2018-01-18 rik: default: remove calendar@cinnamon.org so will be re-created
+#       with defaults
+#       - save and restore worldclocks from calendar@simonwiles.net
+#   2018-01-20 rik: resetting all "panels" items that could have multiple
+#       panels.  Without this, "cinnamon-settings panel" was crashing.
+#   2018-01-20 rik: change cupertino to have shutdown menu on right side
+#
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Ensure script running as regular user
+# ------------------------------------------------------------------------------
+if [ $(id -u) -eq 0 ];
+then
+    echo "This script should NOT be run with SUDO!  Must be regular user!!"
+    echo "Exiting...."
+    sleep 5s
+    exit 1
+fi
+
+# ------------------------------------------------------------------------------
+# Setup
+# ------------------------------------------------------------------------------
+DIR=/usr/share/wasta-cinnamon-layout
+
+# ------------------------------------------------------------------------------
+# Functions
+# ------------------------------------------------------------------------------
+updateITMPinned()
+{
+    #if SAVED_LAUNCHERS set pinned-apps
+    if [ "$SAVED_LAUNCHERS" ];
+    then
+        DEFAULT_CONFIG=/usr/share/cinnamon/applets/IcingTaskManager@json/3.*/settings-schema.json
+        JSON_DIR=/home/$USER/.cinnamon/configs/IcingTaskManager@json
+        # NOTE: #.json has to match enabled-applets number!!
+        JSON_FILE=$JSON_DIR/115.json
+
+        if ! [ -e "$JSON_FILE" ];
+        then
+            echo "copying in default json config: $DEFAULT_CONFIG"
+            mkdir -p $JSON_DIR 
+            cp $DEFAULT_CONFIG $JSON_FILE
+        fi
+
+        #now update saved launchers for ALL instances (hopefully not going to make anyone angry...)
+        echo "updating config for JSON_FILE: $JSON_FILE"
+        #jq can't do "sed -i" inplace update, so need to re-create file, then
+        # update ownership (in case run as root)
+        NEW_FILE=$(jq '.["pinned-apps"].value='"$SAVED_LAUNCHERS" < $JSON_FILE)
+        echo "$NEW_FILE" > $JSON_FILE
+    fi
+}
+
+updateWorldClocks()
+{
+    if [ "$SAVED_WC" ];
+    then
+        DEFAULT_CONFIG=/usr/share/cinnamon/applets/calendar@simonwiles.net/settings-schema.json
+        JSON_DIR=/home/$USER/.cinnamon/configs/calendar@simonwiles.net
+        # NOTE: #.json has to match enabled-applets number!!
+        JSON_FILE=$JSON_DIR/113.json
+
+        if ! [ -e "$JSON_FILE" ];
+        then
+            echo "copying in default json config: $DEFAULT_CONFIG"
+            mkdir -p $JSON_DIR 
+            cp $DEFAULT_CONFIG $JSON_FILE
+        fi
+
+        #now update saved launchers for ALL instances (hopefully not going to make anyone angry...)
+        echo "updating config for JSON_FILE: $JSON_FILE"
+        #jq can't do "sed -i" inplace update, so need to re-create file, then
+        # update ownership (in case run as root)
+#        JQ_INPUT=.[\"worldclocks\"].value=$SAVED_WC
+#        echo "JQ_INPUT***$JQ_INPUT***"
+#        NEW_FILE=$(jq "$JQ_INPUT" < $JSON_FILE)
+#        JQ_INPUT=.[\"worldclocks\"].value=$SAVED_WC
+#        echo "JQ_INPUT***$JQ_INPUT***"
+        NEW_FILE=$(jq '.["worldclocks"].value='"$SAVED_WC" < $JSON_FILE)
+        # read -p "$NEW_FILE"
+        echo "$NEW_FILE" > $JSON_FILE
+    fi
+}
+
+# ------------------------------------------------------------------------------
+# Main Processing
+# ------------------------------------------------------------------------------
+
+# SAVE current itm OR panel-launcher apps to restore later....
+SAVED_LAUNCHERS=""
+
+PL_FILE=/home/$USER/.cinnamon/configs/panel-launchers@cinnamon.org/103.json
+if [ -e "$PL_FILE" ];
+then
+    PL_LAUNCHERS=$(jq -c '.["launcherList"].value' < $PL_FILE)
+fi
+
+ITM_FILE=/home/$USER/.cinnamon/configs/IcingTaskManager@json/115.json
+if [ -e "$ITM_FILE" ];
+then
+    ITM_PINNED_APPS=$(jq -c '.["pinned-apps"].value' < $ITM_FILE)
+fi
+
+if [ "$PL_FILE" -nt "$ITM_FILE" ];
+then
+    echo "*** PL newest"
+    SAVED_LAUNCHERS=$PL_LAUNCHERS
+    echo "*** SAVED_LAUNCHERS set to: $PL_LAUNCHERS"
+elif [ "$ITM_FILE" -nt "$PL_FILE" ];
+then
+    echo "*** ITM newest"
+    SAVED_LAUNCHERS=$ITM_PINNED_APPS
+    echo "*** SAVED_LAUNCHERS set to: $ITM_PINNED_APPS"
+else
+    echo "*** PL and ITM don't exist..... both equal implying only at default"
+fi
+
+echo "*** SAVED_LAUNCHERS final value: $SAVED_LAUNCHERS"
+
+# SAVE current world clocks
+SAVED_WC=""
+
+WC_FILE=/home/$USER/.cinnamon/configs/calendar@simonwiles.net/113.json
+if [ -e "$WC_FILE" ];
+then
+    SAVED_WC=$(jq -c '.["worldclocks"].value' < $WC_FILE)
+    #SAVED_WC=$(echo "$TEMP_WC" | sed "s@\ @'\\\ '@g")
+    echo "*** SAVED_WC set to: $SAVED_WC"
+fi
+
+# prompt user    
+CHOICE=$(zenity --list --title="wasta [Layout]" \
+    --window-icon=/usr/share/icons/hicolor/64x64/apps/wasta-linux.png \
+    --height=300 --text \
+"This utility <i><b>changes</b></i> the layout of the <i>panel</i> (taskbar) and other
+items of the Cinnamon Desktop Interface.
+
+<b><i>Choose your preferred layout:</i></b>" --radiolist \
+    --column "" --column "Layout" --column "Description" \
+    TRUE        default           "Default Cinnamon layout" \
+    FALSE       redmond7          "Windows 7 inspired layout" \
+    FALSE       cupertino         "MacOS/OSX insipired layout" \
+    FALSE       unity             "Ubuntu Unity inspired layout")
+
+if [ "$CHOICE" == "" ];
+then
+    # EXIT: no layout selected
+    echo
+    echo "*** no layout selected: exiting..."
+    echo
+    exit 0
+fi
+
+pkexec /usr/bin/wasta-layout-system $CHOICE
+RETURN=$?
+if [ "$RETURN" != "0" ];
+then
+    # didn't return clean from wasta-layout-system: get outta here!
+    exit 1
+fi
+
+# all layouts: stop plank and remove any user-level plank autostart:
+#   wasta-layout-system cupertino will enable correctly at system level
+rm -f /home/$USER/.config/autostart/plank-wasta-layout.desktop
+
+case "$CHOICE" in
+    
+"default")
+    # menu@cinnamon.org:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+
+    # calendar@cinnamon.org:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/calendar@cinnamon.org
+
+    # if SAVED_LAUNCHERS set panel-launchers
+    if [ "$SAVED_LAUNCHERS" ];
+    then
+        DEFAULT_CONFIG=/usr/share/cinnamon/applets/panel-launchers@cinnamon.org/settings-schema.json
+        JSON_DIR=/home/$USER/.cinnamon/configs/panel-launchers@cinnamon.org
+        # NOTE: #.json has to match enabled-applets number!!
+        JSON_FILE=$JSON_DIR/103.json
+
+        if ! [ -e "$JSON_FILE" ];
+        then
+            echo "copying in default json config: $DEFAULT_CONFIG"
+            mkdir -p $JSON_DIR 
+            cp $DEFAULT_CONFIG $JSON_FILE
+        fi
+
+        #update saved launchers
+        echo "updating JSON_FILE: $JSON_FILE"
+        #jq can't do "sed -i" inplace update, so need to re-create file, then
+        # update ownership (in case run as root)
+        NEW_FILE=$(jq '.["launcherList"].value='"$SAVED_LAUNCHERS" < $JSON_FILE)
+        echo "$NEW_FILE" > $JSON_FILE
+    fi
+;;
+        
+"redmond7")
+    # menu@cinnamon.org:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+
+    # IcingTaskManager@json:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/IcingTaskManager@json
+    rm -rf /home/$USER/.cinnamon/configs/IcingTaskManager@json
+
+    # calendar@simonwiles.net:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
+    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+
+    # if SAVED_LAUNCHERS set pinned-apps
+    updateITMPinned
+
+    # if SAVED_WC set worldclocks
+    updateWorldClocks
+;;
+
+"unity")
+    # menu@cinnamon.org:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+
+    # IcingTaskManager@json:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/IcingTaskManager@json
+    rm -rf /home/$USER/.cinnamon/configs/IcingTaskManager@json
+
+    # calendar@simonwiles.net:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
+    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+
+    # transparent-panels@germanfr
+    #   - remove any local extension and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
+    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
+
+    # if SAVED_LAUNCHERS set pinned-apps
+    updateITMPinned
+
+    # if SAVED_WC set worldclocks
+    updateWorldClocks
+;;
+
+"cupertino")
+    # menu@cinnamon.org:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+
+    # calendar@simonwiles.net:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
+    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+
+    # transparent-panels@germanfr
+    #   - remove any local extension and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
+    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
+
+    PLANK_FOLDER=/home/$USER/.config/plank/dock1/launchers
+    if ! [ -e "$PLANK_FOLDER" ];
+    then
+        echo "creating default plank launcher folder"
+        mkdir -p $PLANK_FOLDER
+        rsync -av $DIR/resources/launchers/ $PLANK_FOLDER/
+        sleep 1 
+    fi
+
+    # reset keys associated with plank
+    gsettings reset net.launchpad.plank.dock.settings:/ hide-mode
+    gsettings reset net.launchpad.plank.dock.settings:/ show-dock-item
+    gsettings reset net.launchpad.plank.dock.settings:/ theme
+    gsettings reset net.launchpad.plank.dock.settings:/ zoom-enabled
+    gsettings reset net.launchpad.plank.dock.settings:/ zoom-percent
+        
+    # start Plank
+    nohup plank &> /dev/null &
+
+    # if SAVED_WC set worldclocks
+    updateWorldClocks
+;;
+
+*)
+;;
+    #do nothing
+esac
+
+
+if [ $RETURN -ne 0 ];
+then
+    MSG="$CHOICE Layout choice <b>NOT APPLIED</b>\n\n"
+else
+    MSG="$CHOICE layout <b>APPLIED</b>\n\n"
+fi
+
+echo
+echo " *** restarting Cinnamon ***"
+echo
+sleep 1s
+
+MSG+="Restarting Cinnamon to Apply Changes\n\n"
+
+# need to reset keys associated with panel layouts
+gsettings reset org.cinnamon enabled-applets
+gsettings reset org.cinnamon enabled-extensions
+# all "panels" items need reset since number of panels could have changed
+gsettings reset org.cinnamon panels-autohide
+gsettings reset org.cinnamon panels-enabled
+gsettings reset org.cinnamon panels-height
+gsettings reset org.cinnamon panels-hide-delay
+gsettings reset org.cinnamon panels-resizable
+gsettings reset org.cinnamon panels-scale-text-icons
+gsettings reset org.cinnamon panels-show-delay
+
+# restart cinnamon
+nohup cinnamon --replace &> /dev/null &
+
+# unity needs the panel-height reset again: maybe because before the replace
+#   it was not active?  POSSIBLY want to do all the resetting here instead
+#   of before?
+gsettings reset org.cinnamon panels-height
+
+# give a few seconds for Cinnamon to finish restarting
+sleep 3s
+
+echo
+echo " *** Cinnamon restarted ***"
+echo
+
+MSG+="Cinnamon Restarted Successfully\n\n"
+MSG+="<b>Please reboot your computer if you have any trouble</b>\n\n"
+
+# ------------------------------------------------------------------------------
+# Finished
+# ------------------------------------------------------------------------------
+
+# prompt user
+zenity --info --title "wasta [Layout]: Finished" --no-wrap --height=150 --width=450 \
+    --window-icon=/usr/share/icons/hicolor/64x64/apps/wasta-linux.png \
+    --text="$MSG"
+
+exit 0
+

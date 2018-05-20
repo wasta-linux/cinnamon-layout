@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=wasta [Layout]
+Comment=Change Cinnamon Default Layout
+Exec=wasta-layout
+Terminal=false
+Type=Application
+Icon=wasta-linux
+Categories=Application;System;

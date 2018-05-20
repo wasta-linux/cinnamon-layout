@@ -1,0 +1,8 @@
+{
+    "last-edited": 1508655311, 
+    "max-instances": -1, 
+    "uuid": "calendar@simonwiles.net", 
+    "name": "World Clock Calendar", 
+    "icon": "stock_calendar", 
+    "description": "Fork of the Cinnamon calendar applet with support for displaying multiple timezones"
+}
