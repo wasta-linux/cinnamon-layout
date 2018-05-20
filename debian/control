@@ -1,14 +1,14 @@
-Source: wasta-cinnamon-layout-3-6
+Source: wasta-cinnamon-layout-3-8
 Section: utils
 Priority: optional
 Maintainer: Rik Shaw <rikshaw76@gmail.com>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.7
-Homepage: https://github.com/wasta-linux/wasta-cinnamon-layout-3-6
+Homepage: https://github.com/wasta-linux/wasta-cinnamon-layout
 
-Package: wasta-cinnamon-layout-3-6
+Package: wasta-cinnamon-layout-3-8
 Architecture: all
-Depends: cinnamon (>= 3.6), jq, plank, ${shlibs:Depends}, ${misc:Depends}
+Depends: cinnamon (>= 3.8), jq, plank, ${shlibs:Depends}, ${misc:Depends}
 Recommends: arc-theme, wasta-vertex-ubuntu
-Description: Wasta-Layout Cinnamon 3.6
- Wasta-Layout options for Cinnamon 3.6
+Description: Wasta-Layout Cinnamon 3.8
+ Wasta-Layout options for Cinnamon 3.8

@@ -1,4 +1,4 @@
-# z_11_wasta-cinnamon.gschema.override
+# z_12_wasta-layout-default.gschema.override
 #
 #   If same key overridden in 2 files, "last wins" regarding filenames
 #       (so a "z_10_*" filename would win over a "10_*" filename)
@@ -66,6 +66,8 @@
 #   2018-04-03 rik: setting gnome background to match wasta default
 #   2018-04-04 rik: removing backgrounds: should be set PER series so
 #       wasta-cinnamon-xenial or wasta-cinnamon-bionic will set
+#   2018-05-20 rik: initial Cinnamon 3.8 release
+#       - moving button-layout settings to wm section
 #
 # ==============================================================================
 
@@ -126,11 +128,11 @@ volume-sound-enabled = true
 volume-sound-file = '/usr/share/sounds/freedesktop/stereo/audio-volume-change.oga'
 
 [org.cinnamon.desktop.wm.preferences]
+button-layout = ':minimize,maximize,close'
 theme = 'Arc-Darker'
 titlebar-font = 'Ubuntu Bold 11'
 
 [org.cinnamon.muffin]
-button-layout = ':minimize,maximize,close'
 edge-tiling = true
 
 [org.cinnamon.sounds]

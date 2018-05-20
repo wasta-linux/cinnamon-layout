@@ -1,6 +1,6 @@
 Format: http://dep.debian.net/deps/dep5
-Upstream-Name: wasta-cinnamon-layout-3-6
-Source: https://github.com/wasta-linux/wasta-cinnamon-layout-3-6
+Upstream-Name: wasta-cinnamon-layout-3-8
+Source: https://github.com/wasta-linux/wasta-cinnamon-layout
 
 Files: *
 Copyright: 2018 Rik Shaw <rikshaw76@gmail.com>
