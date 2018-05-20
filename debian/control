@@ -10,5 +10,7 @@ Package: wasta-cinnamon-layout-3-8
 Architecture: all
 Depends: cinnamon (>= 3.8), jq, plank, ${shlibs:Depends}, ${misc:Depends}
 Recommends: arc-theme, wasta-vertex-ubuntu
+Breaks: wasta-cinnamon-layout-3-6
+Replaces: wasta-cinnamon-layout-3-6
 Description: Wasta-Layout Cinnamon 3.8
  Wasta-Layout options for Cinnamon 3.8
