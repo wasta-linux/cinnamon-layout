@@ -1,4 +1,4 @@
-# z_11_wasta-cinnamon.gschema.override
+# z_12_wasta-layout-default.gschema.override
 #
 #   If same key overridden in 2 files, "last wins" regarding filenames
 #       (so a "z_10_*" filename would win over a "10_*" filename)
