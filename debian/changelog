@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-3-6 (1.0.4) bionic; urgency=medium
+
+  * ITM updated
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sun, 20 May 2018 17:31:10 +0300
+
 wasta-cinnamon-layout-3-6 (1.0.3) bionic; urgency=medium
 
   * schemas: renaming to z_12_wasta-layout-default.gschema.override
