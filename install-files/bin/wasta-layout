@@ -35,6 +35,7 @@
 #       panels.  Without this, "cinnamon-settings panel" was crashing.
 #   2018-01-20 rik: change cupertino to have shutdown menu on right side
 #   2018-05-20 rik: ITM settigns location updated per cinnamon version.
+#   2018-05-23 rik: resetting button-layout for window controls
 #
 # ==============================================================================
 
@@ -346,6 +347,7 @@ MSG+="Restarting Cinnamon to Apply Changes\n\n"
 # need to reset keys associated with panel layouts
 gsettings reset org.cinnamon enabled-applets
 gsettings reset org.cinnamon enabled-extensions
+gsettings reset org.cinnamon.muffin button-layout
 # all "panels" items need reset since number of panels could have changed
 gsettings reset org.cinnamon panels-autohide
 gsettings reset org.cinnamon panels-enabled

@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-3-6 (1.0.6) xenial; urgency=medium
+
+  * wasta-layout: resetting button-layout for window controls
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Wed, 23 May 2018 09:07:32 +0300
+
 wasta-cinnamon-layout-3-6 (1.0.5) xenial; urgency=medium
 
   * cupertino: setting window buttons to left side
