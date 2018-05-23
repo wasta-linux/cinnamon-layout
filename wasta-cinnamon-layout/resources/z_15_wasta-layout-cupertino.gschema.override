@@ -32,6 +32,7 @@
 #   2018-01-02 rik: initial script
 #   2018-02-28 rik: set panels-scale-text-icons to false or else ibus menus
 #       get corrupted.
+#   2018-05-22 rik: setting window controls to left side
 #
 # ==============================================================================
 
@@ -42,6 +43,9 @@ panels-enabled = ['1:0:top']
 panels-height = ['1:28']
 panels-resizable = ['1:false']
 panels-scale-text-icons = ['1:false']
+
+[org.cinnamon.desktop.wm.preferences]
+button-layout = 'close,minimize,maximize:'
 
 [net.launchpad.plank.dock.settings]
 dock-items = ['desktop.dockitem', 'firefox.dockitem', 'thunderbird.dockitem', 'nemo.dockitem', 'libreoffice-writer.dockitem', 'vlc.dockitem', 'cinnamon-settings.dockitem', 'trash.dockitem']
