@@ -13,6 +13,7 @@
 #   2018-02-28 rik: ITM - include-all-windows: set to "false"
 #   - ITM: thumbnail-padding: set to 5
 #   2018-05-23 rik: setting ITM setting file to 3.8
+#   2018-05-23 rik: correcting transparent-panels adjustment
 #
 # ==============================================================================
 
@@ -83,10 +84,11 @@ echo "$NEW_FILE" > $JSON_FILE
 JSON_FILE=/usr/share/cinnamon/extensions/transparent-panels@germanfr/settings-schema.json
 echo "updating JSON_FILE: $JSON_FILE"
 # updates:
-# - set transparency to "semi-transparent"
+# - transparency-type: panel-semi-transparent
+# - first-launch: false (so won't show prompt)
 # - note: jq can't do "sed -i" inplace update, so need to re-create file, then
 #     update ownership (in case run as root)
-NEW_FILE=$(jq '.["transparency-type"].default="panel-transparent-semi__internal" | .["first-launch"].default=false' \
+NEW_FILE=$(jq '.["transparency-type"].default="panel-semi-transparent" | .["first-launch"].default=false' \
     < $JSON_FILE)
 echo "$NEW_FILE" > $JSON_FILE
 
