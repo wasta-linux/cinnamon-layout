@@ -12,6 +12,7 @@
 #   - ITM thumbnail-size default=8
 #   2018-02-28 rik: ITM - include-all-windows: set to "false"
 #   - ITM: thumbnail-padding: set to 5
+#   2018-05-23 rik: setting ITM setting file to 3.8
 #
 # ==============================================================================
 
@@ -60,7 +61,7 @@ NEW_FILE=$(jq '.["use-custom-format"].default=true | .["custom-format"].default=
 echo "$NEW_FILE" > $JSON_FILE
 
 # applet: IcingTaskManager@json
-JSON_FILE=/usr/share/cinnamon/applets/IcingTaskManager@json/3.*/settings-schema.json
+JSON_FILE=/usr/share/cinnamon/applets/IcingTaskManager@json/3.8/settings-schema.json
 echo "updating JSON_FILE: $JSON_FILE"
 # updates:
 # - number-display: for "all open apps" (rather than only showing number if more than 1)
