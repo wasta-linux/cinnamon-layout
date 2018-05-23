@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-3-6 (1.0.5) xenial; urgency=medium
+
+  * cupertino: setting window buttons to left side
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Wed, 23 May 2018 08:44:16 +0300
+
 wasta-cinnamon-layout-3-6 (1.0.4) bionic; urgency=medium
 
   * ITM updated
