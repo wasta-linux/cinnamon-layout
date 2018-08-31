@@ -1,3 +1,5 @@
+# ==============================================================================
+#
 # z_12_wasta-layout-default.gschema.override
 #
 #   If same key overridden in 2 files, "last wins" regarding filenames
@@ -5,7 +7,9 @@
 #       wasta-core uses "z_10_*" filenames, regional customizations
 #       use "z_20_*" filenames.
 #
-# enabled-applets wasta numbers (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
+# enabled-applets wasta numbers:
+#   (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder)
+#
 #   menu@cinnamon.org:101
 #   show-desktop@cinnamon.org:102
 #   panel-launchers@cinnamon.org:103
@@ -68,6 +72,7 @@
 #       wasta-cinnamon-xenial or wasta-cinnamon-bionic will set
 #   2018-05-20 rik: initial Cinnamon 3.8 release
 #       - moving button-layout settings to wm section
+#   2018-08-31 rik: setting nemo bulk-rename-tool to thunar
 #
 # ==============================================================================
 
@@ -201,6 +206,7 @@ volumes-visible = true
 default-zoom-level = 'standard'
 
 [org.nemo.preferences]
+bulk-rename-tool = "b'thunar -B'"
 context-menus-show-all-actions = true
 date-format = 'iso'
 default-sort-order = 'name'
