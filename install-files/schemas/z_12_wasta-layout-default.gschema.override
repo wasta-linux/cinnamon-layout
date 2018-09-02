@@ -205,7 +205,7 @@ volumes-visible = true
 default-zoom-level = 'standard'
 
 [org.nemo.preferences]
-bulk-rename-tool = "b'thunar -B'"
+bulk-rename-tool = b'thunar -B'
 context-menus-show-all-actions = true
 date-format = 'iso'
 default-sort-order = 'name'

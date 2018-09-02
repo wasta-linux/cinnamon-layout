@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-3-8 (1.1.9) bionic; urgency=medium
+
+  * schemas: correcting syntax for bulk-rename-tool
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sun, 02 Sep 2018 19:59:21 +0300
+
 wasta-cinnamon-layout-3-8 (1.1.8) bionic; urgency=medium
 
   * minor cleanup
