@@ -64,7 +64,7 @@ updateITMPinned()
     if [ "$SAVED_LAUNCHERS" ];
     then
         # ITM has different configs for different cinnamon versions
-        # 2018-0Identical for 3.4 and 3.8
+        # 2018-04: Identical for 3.4 and 3.8
         DEFAULT_CONFIG=/usr/share/cinnamon/applets/IcingTaskManager@json/3.8/settings-schema.json
         JSON_DIR=/home/$USER/.cinnamon/configs/IcingTaskManager@json
         # NOTE: #.json has to match enabled-applets number!!

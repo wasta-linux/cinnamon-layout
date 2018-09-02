@@ -1,5 +1,4 @@
 # ==============================================================================
-#
 # z_12_wasta-layout-default.gschema.override
 #
 #   If same key overridden in 2 files, "last wins" regarding filenames

@@ -6,7 +6,9 @@
 #       wasta-core "z_10_*" files.  Regional customizations
 #       use "z_20_*" filenames to override the "z_10_*" through "z_19_*" files.
 #
-# enabled-applet wasta numbers (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
+# enabled-applet wasta numbers:
+#   (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
+#
 #   menu@cinnamon.org:101
 #   show-desktop@cinnamon.org:102
 #   panel-launchers@cinnamon.org:103
