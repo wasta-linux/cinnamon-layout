@@ -72,6 +72,7 @@
 #   2018-05-20 rik: initial Cinnamon 3.8 release
 #       - moving button-layout settings to wm section
 #   2018-08-31 rik: setting nemo bulk-rename-tool to thunar
+#   2018-09-05 rik: gtk sort-directories-first = true
 #
 # ==============================================================================
 
@@ -190,6 +191,9 @@ triggers = ['<Control>space']
 custom-font = 'Ubuntu 11'
 xkb-icon-rgba = '#FFFFFF'
 use-custom-font = true
+
+[org.gtk.Settings.FileChooser]
+sort-directories-first = true
 
 [org.nemo.desktop]
 computer-icon-visible = false
