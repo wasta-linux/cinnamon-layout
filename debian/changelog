@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-3-8 (1.1.11) bionic; urgency=medium
+
+  * postinst: adjusting default ITM pinned-apps
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Wed, 19 Sep 2018 10:37:20 +0300
+
 wasta-cinnamon-layout-3-8 (1.1.10) bionic; urgency=medium
 
   * schemas: gtk sort-directories-first = true

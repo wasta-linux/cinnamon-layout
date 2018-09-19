@@ -14,6 +14,7 @@
 #   - ITM: thumbnail-padding: set to 5
 #   2018-05-23 rik: setting ITM setting file to 3.8
 #   2018-05-23 rik: correcting transparent-panels adjustment
+#   2018-09-19 rik: adjusting default ITM pinned-apps
 #
 # ==============================================================================
 
@@ -76,7 +77,7 @@ echo "updating JSON_FILE: $JSON_FILE"
 # - thumbnail-size: set to 8
 # - note: jq can't do "sed -i" inplace update, so need to re-create file, then
 #     update ownership (in case run as root)
-NEW_FILE=$(jq '.["number-display"].default=2 | .["pinned-apps"].default=["firefox.desktop", "thunderbird.desktop", "nemo.desktop", "libreoffice-writer.desktop", "vlc.desktop"] | .["cycleMenusHotkey"].default="" | .["enable-hover-peek"].default=false | .["icon-spacing"].default=15 | .["icon-spacing"].max=21 | .["icon-padding"].default=11 | .["include-all-windows"].default=false | .["thumbnail-padding"].default=5 | .["thumbnail-size"].default=8' \
+NEW_FILE=$(jq '.["number-display"].default=2 | .["pinned-apps"].default=["firefox.desktop", "nemo.desktop", "libreoffice-writer.desktop", "wasta-backup.desktop", "wasta-resources.desktop"] | .["cycleMenusHotkey"].default="" | .["enable-hover-peek"].default=false | .["icon-spacing"].default=15 | .["icon-spacing"].max=21 | .["icon-padding"].default=11 | .["include-all-windows"].default=false | .["thumbnail-padding"].default=5 | .["thumbnail-size"].default=8' \
     < $JSON_FILE)
 echo "$NEW_FILE" > $JSON_FILE
 
