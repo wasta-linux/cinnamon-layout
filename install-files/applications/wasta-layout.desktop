@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=wasta [Layout]
-Comment=Change Cinnamon Default Layout
+Name=wasta [Layout]: cinnamon
+Comment=Change Cinnamon default layout
 Exec=wasta-layout
 Terminal=false
 Type=Application

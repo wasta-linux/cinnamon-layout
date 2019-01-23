@@ -338,12 +338,7 @@ else
     MSG="$CHOICE layout <b>APPLIED</b>\n\n"
 fi
 
-echo
-echo " *** restarting Cinnamon ***"
-echo
 sleep 1s
-
-MSG+="Restarting Cinnamon to Apply Changes\n\n"
 
 # need to reset keys associated with panel layouts
 gsettings reset org.cinnamon enabled-applets
@@ -358,22 +353,33 @@ gsettings reset org.cinnamon panels-resizable
 gsettings reset org.cinnamon panels-scale-text-icons
 gsettings reset org.cinnamon panels-show-delay
 
-# restart cinnamon
-nohup cinnamon --replace &> /dev/null &
+if [ "$XDG_SESSION_DESKTOP" == "cinnamon" ];
+then
+    echo
+    echo " *** restarting Cinnamon ***"
+    echo
+    MSG+="Restarting Cinnamon to Apply Changes\n\n"
+
+    # restart cinnamon
+    nohup cinnamon --replace &> /dev/null &
+
+    # give a few seconds for Cinnamon to finish restarting
+    sleep 3s
+
+    echo
+    echo " *** Cinnamon restarted ***"
+    echo
+    MSG+="Cinnamon Restarted Successfully\n\n"
+else
+    # cinnamon NOT active, don't attempt restart
+    MSG+="Cinnamon not active so no need to restart\n\n"
+fi
 
 # unity needs the panel-height reset again: maybe because before the replace
 #   it was not active?  POSSIBLY want to do all the resetting here instead
 #   of before?
 gsettings reset org.cinnamon panels-height
 
-# give a few seconds for Cinnamon to finish restarting
-sleep 3s
-
-echo
-echo " *** Cinnamon restarted ***"
-echo
-
-MSG+="Cinnamon Restarted Successfully\n\n"
 MSG+="<b>Please reboot your computer if you have any trouble</b>\n\n"
 
 # ------------------------------------------------------------------------------
