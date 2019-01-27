@@ -6,3 +6,4 @@ Terminal=false
 Type=Application
 Icon=wasta-linux
 Categories=Application;System;
+OnlyShowIn=X-Cinnamon;

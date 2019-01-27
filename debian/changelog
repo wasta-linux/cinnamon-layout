@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-3-8 (1.1.13) bionic; urgency=medium
+
+  * wasta-layout.desktop: OnlyShowIn=X-Cinnamon;
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sun, 27 Jan 2019 19:44:59 +0300
+
 wasta-cinnamon-layout-3-8 (1.1.12) bionic; urgency=medium
 
   * wasta-layout: don't restart if not in cinnamon
