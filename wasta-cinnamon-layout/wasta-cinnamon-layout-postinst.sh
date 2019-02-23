@@ -76,9 +76,10 @@ echo "updating JSON_FILE: $JSON_FILE"
 # - include-all-windows: set to "false" so child windows aren't shown
 # - thumbnail-padding: set to 5 (for space around thumbnails)
 # - thumbnail-size: set to 8
+# - disable deprecation notice
 # - note: jq can't do "sed -i" inplace update, so need to re-create file, then
 #     update ownership (in case run as root)
-NEW_FILE=$(jq '.["number-display"].default=2 | .["pinned-apps"].default=["firefox.desktop", "nemo.desktop", "libreoffice-writer.desktop", "wasta-backup.desktop", "wasta-resources.desktop"] | .["cycleMenusHotkey"].default="" | .["enable-hover-peek"].default=false | .["icon-spacing"].default=15 | .["icon-spacing"].max=21 | .["icon-padding"].default=11 | .["include-all-windows"].default=false | .["thumbnail-padding"].default=5 | .["thumbnail-size"].default=8' \
+NEW_FILE=$(jq '.["number-display"].default=2 | .["pinned-apps"].default=["firefox.desktop", "nemo.desktop", "libreoffice-writer.desktop", "wasta-backup.desktop", "wasta-resources.desktop"] | .["cycleMenusHotkey"].default="" | .["enable-hover-peek"].default=false | .["icon-spacing"].default=15 | .["icon-spacing"].max=21 | .["icon-padding"].default=11 | .["include-all-windows"].default=false | .["thumbnail-padding"].default=5 | .["thumbnail-size"].default=8 | .["deprecationNoticeRun"].default=true' \
     < $JSON_FILE)
 echo "$NEW_FILE" > $JSON_FILE
 

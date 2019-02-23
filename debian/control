@@ -8,7 +8,7 @@ Homepage: https://github.com/wasta-linux/wasta-cinnamon-layout
 
 Package: wasta-cinnamon-layout-4-0
 Architecture: all
-Depends: cinnamon (>= 4.0), jq, plank, ${shlibs:Depends}, ${misc:Depends}
+Depends: cinnamon (>= 4.0), jq, plank, python:any, python3, ${shlibs:Depends}, ${misc:Depends}
 Recommends: arc-theme, wasta-vertex-ubuntu
 Breaks: wasta-cinnamon-layout-3-6, wasta-cinnamon-layout-3-8
 Replaces: wasta-cinnamon-layout-3-6, wasta-cinnamon-layout-3-8
