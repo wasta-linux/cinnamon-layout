@@ -27,6 +27,8 @@
 #   user@cinnamon.org:116
 #   trash@cinnamon.org:117
 #   calendar@cinnamon.org:118
+#   notifications@cinnamon.org:119
+#   grouped-window-list@cinnamon.org:120
 #   
 #   After modifying these .override files, reload with:
 #       glib-compile-schemas /usr/share/glib-2.0/schemas/
@@ -73,6 +75,7 @@
 #       - moving button-layout settings to wm section
 #   2018-08-31 rik: setting nemo bulk-rename-tool to thunar
 #   2018-09-05 rik: gtk sort-directories-first = true
+#   2019-02-23 rik: updates for cinnamon 4.0
 #
 # ==============================================================================
 
@@ -88,12 +91,11 @@ enabled-applets = ['panel1:left:0:menu@cinnamon.org:101', 'panel1:left:1:show-de
 enabled-extensions = []
 favorite-apps = ['firefox.desktop', 'nemo.desktop', 'libreoffice-writer.desktop']
 overview-corner = ['false:false:false', 'false:false:false', 'false:false:false', 'false:false:false']
+panel-edit-mode = false
+panel-zone-icon-sizes = [{"panelId": 1, "left": 24, "center": 24, "right": 24}]
 panels-autohide = ['1:false']
 panels-enabled = ['1:0:bottom']
 panels-height = ['1:28']
-panel-edit-mode = false
-panels-resizable = ['1:false']
-panels-scale-text-icons = ['1:false']
 show-snap-osd = false
 startup-animation = false
 
@@ -180,6 +182,7 @@ menus-have-icons = true
 
 [org.cinnamon.theme]
 name = 'Arc-Dark'
+symbolic-relative-size = 0.67
 
 [org.freedesktop.ibus.general]
 use-system-keyboard-layout = false

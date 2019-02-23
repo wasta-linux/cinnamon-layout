@@ -1,9 +1,9 @@
 Format: http://dep.debian.net/deps/dep5
-Upstream-Name: wasta-cinnamon-layout-3-8
+Upstream-Name: wasta-cinnamon-layout-4-0
 Source: https://github.com/wasta-linux/wasta-cinnamon-layout
 
 Files: *
-Copyright: 2018 Rik Shaw <rikshaw76@gmail.com>
+Copyright: 2019 Rik Shaw <rikshaw76@gmail.com>
 License: GPL-3.0+
 
 Files: install-files/applets/calendar@simonwiles.net

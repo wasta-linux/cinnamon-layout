@@ -62,6 +62,7 @@ NEW_FILE=$(jq '.["use-custom-format"].default=true | .["custom-format"].default=
     < $JSON_FILE)
 echo "$NEW_FILE" > $JSON_FILE
 
+# legacy: remove for 20.04
 # applet: IcingTaskManager@json
 JSON_FILE=/usr/share/cinnamon/applets/IcingTaskManager@json/3.8/settings-schema.json
 echo "updating JSON_FILE: $JSON_FILE"

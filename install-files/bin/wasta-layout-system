@@ -9,6 +9,7 @@
 #   2018-01-18 rik: only killall plank if plank process detected
 #   2018-03-26 rik: adding removeMenuFavs function for unity
 #   - adding changeMenuIcon function for unity
+#   2019-02-23 rik: updating for cinnamon 4.0 compatibility
 #
 # ==============================================================================
 
@@ -61,7 +62,7 @@ resetMenu()
     echo "    $JSON_FILE"
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["favbox-show"].default=true | .["menu-icon-custom"].default=false | .["menu-icon"].default="'/usr/share/cinnamon/theme/menu-symbolic.svg'" | .["menu-label"].default="Menu"' \
+    NEW_FILE=$(jq '.["favbox-show"].default=true | .["menu-custom"].default=true | .["menu-icon"].default="'/usr/share/cinnamon/theme/menu-symbolic.svg'" | .["menu-label"].default="Menu"' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }
@@ -93,7 +94,7 @@ changeMenuIcon()
     echo "    $JSON_FILE"
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["menu-icon-custom"].default=true | .["menu-icon"].default="'$DIR/resources/launcher_bfb.png'" | .["menu-label"].default=""' \
+    NEW_FILE=$(jq '.["menu-custom"].default=true | .["menu-icon"].default="'$DIR/resources/launcher_bfb.png'" | .["menu-label"].default=""' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }

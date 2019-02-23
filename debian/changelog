@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-4-0 (4.0.0) bionic; urgency=medium
+
+  * initial cinnamon 4.0 release
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sat, 23 Feb 2019 10:46:02 +0300
+
 wasta-cinnamon-layout-3-8 (1.1.13) bionic; urgency=medium
 
   * wasta-layout.desktop: OnlyShowIn=X-Cinnamon;

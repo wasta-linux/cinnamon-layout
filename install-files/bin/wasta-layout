@@ -6,7 +6,9 @@
 # This script can be run at any time to "toggle" cinnamon default settings
 #   to provide different layout defaults for the system
 #
-# enabled-applets wasta numbers (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
+# enabled-applets wasta numbers
+#   (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
+#
 #   menu@cinnamon.org:101
 #   show-desktop@cinnamon.org:102
 #   panel-launchers@cinnamon.org:103
@@ -26,7 +28,8 @@
 #   trash@cinnamon.org:117
 #   calendar@cinnamon.org:118
 #   notifications@cinnamon.org:119
-#   
+#   grouped-window-list@cinnamon.org:120
+#
 #   2017-12-24 rik: initial script
 #   2018-01-18 rik: default: remove calendar@cinnamon.org so will be re-created
 #       with defaults
@@ -36,6 +39,7 @@
 #   2018-01-20 rik: change cupertino to have shutdown menu on right side
 #   2018-05-20 rik: UpdateITMPinned adjusted for Cinnamon 3.8 schema location
 #   2018-05-22 rik: resetting button-layout for window controls
+#   2019-02-23 rik: updating for cinnamon 4.0: migrate ITM to GWL
 #
 # ==============================================================================
 
@@ -58,17 +62,15 @@ DIR=/usr/share/wasta-cinnamon-layout
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
-updateITMPinned()
+updateGWLPinned()
 {
     #if SAVED_LAUNCHERS set pinned-apps
     if [ "$SAVED_LAUNCHERS" ];
     then
-        # ITM has different configs for different cinnamon versions
-        # 2018-04: Identical for 3.4 and 3.8
-        DEFAULT_CONFIG=/usr/share/cinnamon/applets/IcingTaskManager@json/3.8/settings-schema.json
-        JSON_DIR=/home/$USER/.cinnamon/configs/IcingTaskManager@json
+        DEFAULT_CONFIG=/usr/share/cinnamon/applets/grouped-window-list@cinnamon.org/settings-schema.json
+        JSON_DIR=/home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
         # NOTE: #.json has to match enabled-applets number!!
-        JSON_FILE=$JSON_DIR/115.json
+        JSON_FILE=$JSON_DIR/120.json
 
         if ! [ -e "$JSON_FILE" ];
         then
@@ -130,24 +132,42 @@ then
     PL_LAUNCHERS=$(jq -c '.["launcherList"].value' < $PL_FILE)
 fi
 
+# legacy: remove for 20.04
 ITM_FILE=/home/$USER/.cinnamon/configs/IcingTaskManager@json/115.json
 if [ -e "$ITM_FILE" ];
 then
     ITM_PINNED_APPS=$(jq -c '.["pinned-apps"].value' < $ITM_FILE)
 fi
 
-if [ "$PL_FILE" -nt "$ITM_FILE" ];
+GWL_FILE=/home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org/120.json
+if [ -e "$GWL_FILE" ];
+then
+    GWL_PINNED_APPS=$(jq -c '.["pinned-apps"].value' < $GWL_FILE)
+fi
+
+# legacy: remove for 20.04
+# migration from ITM to GWL
+if [ "$ITM_FILE" -nt "$GWL_FILE" ];
+then
+    echo "*** Migrating ITM Pinned Apps to GWL"
+    mkdir -p "/home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org"
+    # copy ITM to GWL, preserving date/time
+    cp -p $ITM_FILE $GWL_FILE
+    GWL_PINNED_APPS=$ITM_PINNED_APPS
+fi
+
+if [ "$PL_FILE" -nt "$GWL_FILE" ];
 then
     echo "*** PL newest"
     SAVED_LAUNCHERS=$PL_LAUNCHERS
     echo "*** SAVED_LAUNCHERS set to: $PL_LAUNCHERS"
-elif [ "$ITM_FILE" -nt "$PL_FILE" ];
+elif [ "$GWL_FILE" -nt "$PL_FILE" ];
 then
-    echo "*** ITM newest"
-    SAVED_LAUNCHERS=$ITM_PINNED_APPS
-    echo "*** SAVED_LAUNCHERS set to: $ITM_PINNED_APPS"
+    echo "*** GWL newest"
+    SAVED_LAUNCHERS=$GWL_PINNED_APPS
+    echo "*** SAVED_LAUNCHERS set to: $GWL_PINNED_APPS"
 else
-    echo "*** PL and ITM don't exist..... both equal implying only at default"
+    echo "*** PL and GWL don't exist..... both equal implying only at default"
 fi
 
 echo "*** SAVED_LAUNCHERS final value: $SAVED_LAUNCHERS"
@@ -241,10 +261,16 @@ case "$CHOICE" in
     rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
     rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
 
+    # legacy: remove for 20.04
     # IcingTaskManager@json:
     #   - remove any local applet and configs (will be re-created from defaults)
     rm -rf /home/$USER/.local/share/cinnamon/applets/IcingTaskManager@json
     rm -rf /home/$USER/.cinnamon/configs/IcingTaskManager@json
+
+    # grouped-window-list@cinnamon.org:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
 
     # calendar@simonwiles.net:
     #   - remove any local applet and configs (will be re-created from defaults)
@@ -252,7 +278,7 @@ case "$CHOICE" in
     rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
 
     # if SAVED_LAUNCHERS set pinned-apps
-    updateITMPinned
+    updateGWLPinned
 
     # if SAVED_WC set worldclocks
     updateWorldClocks
@@ -264,10 +290,16 @@ case "$CHOICE" in
     rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
     rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
 
+    # legacy: remove for 20.04
     # IcingTaskManager@json:
     #   - remove any local applet and configs (will be re-created from defaults)
     rm -rf /home/$USER/.local/share/cinnamon/applets/IcingTaskManager@json
     rm -rf /home/$USER/.cinnamon/configs/IcingTaskManager@json
+
+    # grouped-window-list@cinnamon.org:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
 
     # calendar@simonwiles.net:
     #   - remove any local applet and configs (will be re-created from defaults)
@@ -280,7 +312,7 @@ case "$CHOICE" in
     rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
 
     # if SAVED_LAUNCHERS set pinned-apps
-    updateITMPinned
+    updateGWLPinned
 
     # if SAVED_WC set worldclocks
     updateWorldClocks

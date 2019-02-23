@@ -26,7 +26,9 @@
 #   IcingTaskManager@json:115
 #   user@cinnamon.org:116
 #   trash@cinnamon.org:117
-#   separator@cinnamon.org:118
+#   calendar@cinnamon.org:118
+#   notifications@cinnamon.org:119
+#   grouped-window-list@cinnamon.org:120
 #
 #   After modifying these .override files, reload with:
 #       glib-compile-schemas /usr/share/glib-2.0/schemas/
@@ -35,6 +37,7 @@
 #   2018-02-28 rik: set panels-scale-text-icons to false or else ibus menus
 #       get corrupted.
 #   2018-05-22 rik: setting window controls to left side
+#   2019-02-23 rik: updates for cinnamon 4.0
 #
 # ==============================================================================
 
@@ -43,8 +46,6 @@ enabled-applets = ['panel1:left:0:menu@cinnamon.org:101', 'panel1:right:1:remova
 enabled-extensions = ['transparent-panels@germanfr']
 panels-enabled = ['1:0:top']
 panels-height = ['1:28']
-panels-resizable = ['1:false']
-panels-scale-text-icons = ['1:false']
 
 [org.cinnamon.desktop.wm.preferences]
 button-layout = 'close,minimize,maximize:'

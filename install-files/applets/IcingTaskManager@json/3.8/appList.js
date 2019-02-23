@@ -39,7 +39,7 @@ class AppList {
       }
     });
 
-    this.signals = new SignalManager.SignalManager({});
+    this.signals = new SignalManager.SignalManager(null);
     this.metaWorkspace = params.metaWorkspace;
 
     const managerOrientation = this.state.isHorizontal ? 'HORIZONTAL' : 'VERTICAL';
@@ -177,9 +177,6 @@ class AppList {
     const appSystem = this.state.trigger('getAppSystem');
     for (let i = 0; i < favorites.length; i++) {
       let app = appSystem.lookup_app(favorites[i].id);
-      if (!app) {
-        app = appSystem.lookup_settings_app(favorites[i].id);
-      }
       if (!app) {
         continue;
       }
