@@ -92,7 +92,7 @@ enabled-extensions = []
 favorite-apps = ['firefox.desktop', 'nemo.desktop', 'libreoffice-writer.desktop']
 overview-corner = ['false:false:false', 'false:false:false', 'false:false:false', 'false:false:false']
 panel-edit-mode = false
-panel-zone-icon-sizes = '[{"panelId": 1, "left": 24, "center": 24, "right": 24}]'
+panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24}]'
 panels-autohide = ['1:false']
 panels-enabled = ['1:0:bottom']
 panels-height = ['1:28']
@@ -114,6 +114,10 @@ disable-user-switching = true
 [org.cinnamon.desktop.media-handling]
 automount = true
 automount-open = false
+
+[org.cinnamon.desktop.privacy]
+remember-recent-files = true
+recent-files-max-age = 30
 
 [org.cinnamon.desktop.screensaver]
 ask-for-away-message = false

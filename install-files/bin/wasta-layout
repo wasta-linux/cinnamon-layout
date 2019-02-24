@@ -62,33 +62,34 @@ DIR=/usr/share/wasta-cinnamon-layout
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
-updateITMPinned()
-{
-    #if SAVED_LAUNCHERS set pinned-apps
-    if [ "$SAVED_LAUNCHERS" ];
-    then
-        # ITM has different configs for different cinnamon versions
-        # 2018-04: Identical for 3.4 and 3.8
-        DEFAULT_CONFIG=/usr/share/cinnamon/applets/IcingTaskManager@json/3.8/settings-schema.json
-        JSON_DIR=/home/$USER/.cinnamon/configs/IcingTaskManager@json
-        # NOTE: #.json has to match enabled-applets number!!
-        JSON_FILE=$JSON_DIR/115.json
 
-        if ! [ -e "$JSON_FILE" ];
-        then
-            echo "copying in default json config: $DEFAULT_CONFIG"
-            mkdir -p $JSON_DIR 
-            cp $DEFAULT_CONFIG $JSON_FILE
-        fi
-
-        #now update saved launchers for ALL instances (hopefully not going to make anyone angry...)
-        echo "updating config for JSON_FILE: $JSON_FILE"
-        #jq can't do "sed -i" inplace update, so need to re-create file, then
-        # update ownership (in case run as root)
-        NEW_FILE=$(jq '.["pinned-apps"].value='"$SAVED_LAUNCHERS" < $JSON_FILE)
-        echo "$NEW_FILE" > $JSON_FILE
-    fi
-}
+#updateITMPinned()
+#{
+#    #if SAVED_LAUNCHERS set pinned-apps
+#    if [ "$SAVED_LAUNCHERS" ];
+#    then
+#        # ITM has different configs for different cinnamon versions
+#        # 2018-04: Identical for 3.4 and 3.8
+#        DEFAULT_CONFIG=/usr/share/cinnamon/applets/IcingTaskManager@json/3.8/settings-schema.json
+#        JSON_DIR=/home/$USER/.cinnamon/configs/IcingTaskManager@json
+#        # NOTE: #.json has to match enabled-applets number!!
+#        JSON_FILE=$JSON_DIR/115.json
+#
+#        if ! [ -e "$JSON_FILE" ];
+#        then
+#            echo "copying in default json config: $DEFAULT_CONFIG"
+#            mkdir -p $JSON_DIR 
+#            cp $DEFAULT_CONFIG $JSON_FILE
+#        fi
+#
+#        #now update saved launchers for ALL instances (hopefully not going to make anyone angry...)
+#        echo "updating config for JSON_FILE: $JSON_FILE"
+#        #jq can't do "sed -i" inplace update, so need to re-create file, then
+#        # update ownership (in case run as root)
+#        NEW_FILE=$(jq '.["pinned-apps"].value='"$SAVED_LAUNCHERS" < $JSON_FILE)
+#        echo "$NEW_FILE" > $JSON_FILE
+#    fi
+#}
 
 updateGWLPinned()
 {
@@ -176,42 +177,42 @@ fi
 
 # legacy: remove for 20.04
 # migration from ITM to GWL
-#if [ "$ITM_FILE" -nt "$GWL_FILE" ];
-#then
-#    echo "*** Migrating ITM Pinned Apps to GWL"
-#    mkdir -p "/home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org"
-#    # copy ITM to GWL, preserving date/time
-#    cp -p $ITM_FILE $GWL_FILE
-#    GWL_PINNED_APPS=$ITM_PINNED_APPS
-#fi
+if [ "$ITM_FILE" -nt "$GWL_FILE" ];
+then
+    echo "*** Migrating ITM Pinned Apps to GWL"
+    mkdir -p "/home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org"
+    # copy ITM to GWL, preserving date/time
+    cp -p $ITM_FILE $GWL_FILE
+    GWL_PINNED_APPS=$ITM_PINNED_APPS
+fi
 
-#if [ "$PL_FILE" -nt "$GWL_FILE" ];
-#then
-#    echo "*** PL newest"
-#    SAVED_LAUNCHERS=$PL_LAUNCHERS
-#    echo "*** SAVED_LAUNCHERS set to: $PL_LAUNCHERS"
-#elif [ "$GWL_FILE" -nt "$PL_FILE" ];
-#then
-#    echo "*** GWL newest"
-#    SAVED_LAUNCHERS=$GWL_PINNED_APPS
-#    echo "*** SAVED_LAUNCHERS set to: $GWL_PINNED_APPS"
-#else
-#    echo "*** PL and GWL don't exist..... both equal implying only at default"
-#fi
-
-if [ "$PL_FILE" -nt "$ITM_FILE" ];
+if [ "$PL_FILE" -nt "$GWL_FILE" ];
 then
     echo "*** PL newest"
     SAVED_LAUNCHERS=$PL_LAUNCHERS
     echo "*** SAVED_LAUNCHERS set to: $PL_LAUNCHERS"
-elif [ "$ITM_FILE" -nt "$PL_FILE" ];
+elif [ "$GWL_FILE" -nt "$PL_FILE" ];
 then
-    echo "*** ITM newest"
-    SAVED_LAUNCHERS=$ITM_PINNED_APPS
-    echo "*** SAVED_LAUNCHERS set to: $ITM_PINNED_APPS"
+    echo "*** GWL newest"
+    SAVED_LAUNCHERS=$GWL_PINNED_APPS
+    echo "*** SAVED_LAUNCHERS set to: $GWL_PINNED_APPS"
 else
-    echo "*** PL and ITM don't exist..... both equal implying only at default"
+    echo "*** PL and GWL don't exist..... both equal implying only at default"
 fi
+
+#if [ "$PL_FILE" -nt "$ITM_FILE" ];
+#then
+#    echo "*** PL newest"
+#    SAVED_LAUNCHERS=$PL_LAUNCHERS
+#    echo "*** SAVED_LAUNCHERS set to: $PL_LAUNCHERS"
+#elif [ "$ITM_FILE" -nt "$PL_FILE" ];
+#then
+#    echo "*** ITM newest"
+#    SAVED_LAUNCHERS=$ITM_PINNED_APPS
+#    echo "*** SAVED_LAUNCHERS set to: $ITM_PINNED_APPS"
+#else
+#    echo "*** PL and ITM don't exist..... both equal implying only at default"
+#fi
 
 echo "*** SAVED_LAUNCHERS final value: $SAVED_LAUNCHERS"
 
@@ -312,8 +313,8 @@ case "$CHOICE" in
 
     # grouped-window-list@cinnamon.org:
     #   - remove any local applet and configs (will be re-created from defaults)
-    #rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
-    #rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
+    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
 
     # calendar@simonwiles.net:
     #   - remove any local applet and configs (will be re-created from defaults)
@@ -321,7 +322,7 @@ case "$CHOICE" in
     rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
 
     # if SAVED_LAUNCHERS set pinned-apps
-    updateITMPinned
+    updateGWLPinned
 
     # if SAVED_WC set worldclocks
     updateWorldClocks
@@ -341,8 +342,8 @@ case "$CHOICE" in
 
     # grouped-window-list@cinnamon.org:
     #   - remove any local applet and configs (will be re-created from defaults)
-    #rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
-    #rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
+    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
 
     # calendar@simonwiles.net:
     #   - remove any local applet and configs (will be re-created from defaults)
@@ -355,7 +356,7 @@ case "$CHOICE" in
     rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
 
     # if SAVED_LAUNCHERS set pinned-apps
-    updateITMPinned
+    updateGWLPinned
 
     # if SAVED_WC set worldclocks
     updateWorldClocks
@@ -383,7 +384,7 @@ case "$CHOICE" in
         echo "creating default plank launcher folder"
         mkdir -p $PLANK_FOLDER
         rsync -av $DIR/resources/launchers/ $PLANK_FOLDER/
-        sleep 1 
+        sleep 1
     fi
 
     # reset keys associated with plank
