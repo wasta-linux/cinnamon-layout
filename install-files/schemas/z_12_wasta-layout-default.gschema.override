@@ -96,6 +96,8 @@ panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24}]'
 panels-autohide = ['1:false']
 panels-enabled = ['1:0:bottom']
 panels-height = ['1:28']
+panels-hide-delay = ['1:0']
+panels-show-delay = ['1:0']
 show-snap-osd = false
 startup-animation = false
 

@@ -30,7 +30,7 @@ fi
 # Setup
 # ------------------------------------------------------------------------------
 echo
-echo " *** Script Entry: wasta-layout-setup"
+echo " *** Script Entry: wasta-layout-system"
 echo
 # Check for input parameter: required
 
@@ -212,7 +212,7 @@ glib-compile-schemas /usr/share/glib-2.0/schemas/ || true;
 sleep 1
 
 echo
-echo " *** Script Exit: wasta-layout-setup"
+echo " *** Script Exit: wasta-layout-system"
 echo
 
 exit 0
