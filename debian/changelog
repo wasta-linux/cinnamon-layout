@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-4-0 (4.0.4) bionic; urgency=medium
+
+  * wasta-layout: don't reset panel-height (legacy from previous logic)
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Wed, 27 Feb 2019 20:19:52 +0300
+
 wasta-cinnamon-layout-4-0 (4.0.3) bionic; urgency=medium
 
   * z_12_wasta-layout-default.gschema.override:

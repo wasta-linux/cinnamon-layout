@@ -531,7 +531,7 @@ case "$CHOICE" in
     updateWorldClocks
 
     # need to set keys associated with panel layouts
-    gsettings set org.cinnamon enabled-applets "['panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116', 'panel2:left:0:menu@cinnamon.org:101', 'panel2:left:1:grouped-window-list@cinnamon.org:120', 'panel2:right:1:trash@cinnamon.org:117']"
+    gsettings set org.cinnamon enabled-applets "['panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116', 'panel2:left:0:menu@cinnamon.org:101', 'panel2:left:1:show-desktop@cinnamon.org:102', 'panel2:left:2:grouped-window-list@cinnamon.org:120', 'panel2:right:1:trash@cinnamon.org:117']"
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
     # all "panels" items need reset since number of panels could have changed
@@ -654,11 +654,6 @@ else
     # cinnamon NOT active, don't attempt restart
     MSG+="Cinnamon not active so no need to restart\n\n"
 fi
-
-# unity needs the panel-height reset again: maybe because before the replace
-#   it was not active?  POSSIBLY want to do all the resetting here instead
-#   of before?
-gsettings reset org.cinnamon panels-height
 
 # ------------------------------------------------------------------------------
 # Optionally run wasta-system-layout
