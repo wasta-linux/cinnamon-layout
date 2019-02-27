@@ -1,3 +1,10 @@
+wasta-cinnamon-layout-4-0 (4.0.2) bionic; urgency=medium
+
+  * wasta-layout: allowing to run non-interactively
+    - set settings for local user only instead of system-wide
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Mon, 25 Feb 2019 20:23:24 +0300
+
 wasta-cinnamon-layout-4-0 (4.0.1) bionic; urgency=medium
 
   * wasta-layout: migrating ITM to GWL

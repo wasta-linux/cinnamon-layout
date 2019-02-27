@@ -1,4 +1,5 @@
 install-files/applications                    usr/share
+install-files/Arc-Dark-Wasta                  usr/share/themes
 install-files/applets                         usr/share/cinnamon
 install-files/bin                             usr
 install-files/extensions                      usr/share/cinnamon

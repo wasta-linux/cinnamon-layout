@@ -43,6 +43,8 @@
 #
 # ==============================================================================
 
+# ****TODO: need to reset configs (menu icon, label, etc.) depending on layout, since no longer relying on wasta-layout-system to set the default for the current user.
+
 # ------------------------------------------------------------------------------
 # Ensure script running as regular user
 # ------------------------------------------------------------------------------
@@ -57,7 +59,43 @@ fi
 # ------------------------------------------------------------------------------
 # Setup
 # ------------------------------------------------------------------------------
+echo
+echo " *** Script Entry: wasta-layout"
+echo
+# Check for input parameter
+CHOICE=$1
+AUTO=""
+
+if [ "$CHOICE" ];
+then
+    case "$CHOICE" in
+    default|redmond7|cupertino|unity)
+        echo
+        echo "*** wasta-layout called with valid input parameter: $CHOICE"
+        echo
+        AUTO="auto"
+    ;;
+
+    *)
+        echo
+        echo "*** wasta-layout called with invalid input parameter: $CHOICE"
+        echo
+        CHOICE=""
+    ;;
+    esac
+fi
+
 DIR=/usr/share/wasta-cinnamon-layout
+
+PREV_LAUNCHERS=""
+PREV_LAUNCHERS_FILE=/home/$USER/.config/wasta-layout-launchers.txt
+if [ -e $PREV_LAUNCHERS_FILE ];
+then
+    PREV_LAUNCHERS=$(cat $PREV_LAUNCHERS_FILE)
+    echo
+    echo "*** PREV_LAUNCHERS: $PREV_LAUNCHERS"
+    echo
+fi
 
 # ------------------------------------------------------------------------------
 # Functions
@@ -103,15 +141,18 @@ updateGWLPinned()
 
         if ! [ -e "$JSON_FILE" ];
         then
-            echo "copying in default json config: $DEFAULT_CONFIG"
-            mkdir -p $JSON_DIR 
+            echo
+            echo "*** copying in default json config: $DEFAULT_CONFIG"
+            echo
+            mkdir -p $JSON_DIR
             cp $DEFAULT_CONFIG $JSON_FILE
         fi
 
-        #now update saved launchers for ALL instances (hopefully not going to make anyone angry...)
-        echo "updating config for JSON_FILE: $JSON_FILE"
-        #jq can't do "sed -i" inplace update, so need to re-create file, then
-        # update ownership (in case run as root)
+        #update saved launchers
+        echo
+        echo "*** updating JSON_FILE: $JSON_FILE"
+        echo
+        #jq can't do "sed -i" inplace update, so need to re-create file
         NEW_FILE=$(jq '.["pinned-apps"].value='"$SAVED_LAUNCHERS" < $JSON_FILE)
         echo "$NEW_FILE" > $JSON_FILE
     fi
@@ -128,31 +169,93 @@ updateWorldClocks()
 
         if ! [ -e "$JSON_FILE" ];
         then
-            echo "copying in default json config: $DEFAULT_CONFIG"
-            mkdir -p $JSON_DIR 
+            echo
+            echo "*** copying in default json config: $DEFAULT_CONFIG"
+            echo
+            mkdir -p $JSON_DIR
             cp $DEFAULT_CONFIG $JSON_FILE
         fi
 
-        #now update saved launchers for ALL instances (hopefully not going to make anyone angry...)
+        #update saved launchers
+        echo
+        echo "*** updating JSON_FILE: $JSON_FILE"
+        echo
         echo "updating config for JSON_FILE: $JSON_FILE"
-        #jq can't do "sed -i" inplace update, so need to re-create file, then
-        # update ownership (in case run as root)
-#        JQ_INPUT=.[\"worldclocks\"].value=$SAVED_WC
-#        echo "JQ_INPUT***$JQ_INPUT***"
-#        NEW_FILE=$(jq "$JQ_INPUT" < $JSON_FILE)
-#        JQ_INPUT=.[\"worldclocks\"].value=$SAVED_WC
-#        echo "JQ_INPUT***$JQ_INPUT***"
+        #jq can't do "sed -i" inplace update, so need to re-create file
         NEW_FILE=$(jq '.["worldclocks"].value='"$SAVED_WC" < $JSON_FILE)
         # read -p "$NEW_FILE"
         echo "$NEW_FILE" > $JSON_FILE
     fi
 }
 
+resetMenu()
+{
+    # menu applet reset
+    DEFAULT_CONFIG=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
+    JSON_DIR=/home/$USER/.cinnamon/configs/menu@cinnamon.org
+    # NOTE: #.json has to match enabled-applets number!!
+    JSON_FILE=$JSON_DIR/101.json
+
+    mkdir -p $JSON_DIR
+    cp $DEFAULT_CONFIG $JSON_FILE
+
+    # reset to show favorite / shutdown options
+    # reset to not use custom menu icon
+    # reset menu icon value
+    # reset label to "Menu"
+    echo
+    echo "*** Resetting JSON_FILE:"
+    echo "      $JSON_FILE"
+    echo
+    #jq can't do "sed -i" inplace update, so need to re-create file, then
+    # update ownership (in case run as root)
+    NEW_FILE=$(jq '.["favbox-show"].value=true | .["menu-custom"].value=true | .["menu-icon"].value="'/usr/share/cinnamon/theme/menu-symbolic.svg'" | .["menu-label"].value="Menu"' \
+        < $JSON_FILE)
+    echo "$NEW_FILE" > $JSON_FILE
+}
+
+removeMenuFavs()
+{
+    JSON_DIR=/home/$USER/.cinnamon/configs/menu@cinnamon.org
+    # NOTE: #.json has to match enabled-applets number!!
+    JSON_FILE=$JSON_DIR/101.json
+    # hide favorite / shutdown options
+    # use custom menu icon
+    # remove label
+    echo
+    echo "*** Removing Favorites and Session options from JSON_FILE:"
+    echo "      $JSON_FILE"
+    echo
+    #jq can't do "sed -i" inplace update, so need to re-create file, then
+    # update ownership (in case run as root)
+    NEW_FILE=$(jq '.["favbox-show"].value=false' \
+        < $JSON_FILE)
+    echo "$NEW_FILE" > $JSON_FILE
+}
+
+changeMenuIcon()
+{
+    JSON_DIR=/home/$USER/.cinnamon/configs/menu@cinnamon.org
+    # NOTE: #.json has to match enabled-applets number!!
+    JSON_FILE=$JSON_DIR/101.json
+    # use custom menu icon
+    # remove label
+    echo
+    echo "*** Changing Menu Icon for JSON_FILE:"
+    echo "      $JSON_FILE"
+    echo
+    #jq can't do "sed -i" inplace update, so need to re-create file, then
+    # update ownership (in case run as root)
+    NEW_FILE=$(jq '.["menu-custom"].value=true | .["menu-icon"].value="'$DIR/resources/launcher_bfb.png'" | .["menu-label"].value=""' \
+        < $JSON_FILE)
+    echo "$NEW_FILE" > $JSON_FILE
+}
+
 # ------------------------------------------------------------------------------
 # Main Processing
 # ------------------------------------------------------------------------------
 
-# SAVE current itm OR panel-launcher apps to restore later....
+# SAVE current GWL OR panel-launcher apps to restore later....
 SAVED_LAUNCHERS=""
 
 PL_FILE=/home/$USER/.cinnamon/configs/panel-launchers@cinnamon.org/103.json
@@ -179,7 +282,9 @@ fi
 # migration from ITM to GWL
 if [ "$ITM_FILE" -nt "$GWL_FILE" ];
 then
+    echo
     echo "*** Migrating ITM Pinned Apps to GWL"
+    echo
     mkdir -p "/home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org"
     # copy ITM to GWL, preserving date/time
     cp -p $ITM_FILE $GWL_FILE
@@ -188,16 +293,28 @@ fi
 
 if [ "$PL_FILE" -nt "$GWL_FILE" ];
 then
+    echo
     echo "*** PL newest"
     SAVED_LAUNCHERS=$PL_LAUNCHERS
     echo "*** SAVED_LAUNCHERS set to: $PL_LAUNCHERS"
+    echo
 elif [ "$GWL_FILE" -nt "$PL_FILE" ];
 then
+    echo
     echo "*** GWL newest"
     SAVED_LAUNCHERS=$GWL_PINNED_APPS
     echo "*** SAVED_LAUNCHERS set to: $GWL_PINNED_APPS"
+    echo
 else
+    echo
     echo "*** PL and GWL don't exist..... both equal implying only at default"
+    # Attempt to set to saved file $PREV_LAUNCHERS
+    if [ "$PREV_LAUNCHERS" ];
+    then
+        SAVED_LAUNCHERS=$PREV_LAUNCHERS
+        echo "*** SAVED_LAUNCHERS set from PREV_LAUNCHERS_FILE: $PREV_LAUNCHERS"
+    fi
+    echo
 fi
 
 #if [ "$PL_FILE" -nt "$ITM_FILE" ];
@@ -214,7 +331,15 @@ fi
 #    echo "*** PL and ITM don't exist..... both equal implying only at default"
 #fi
 
+echo
 echo "*** SAVED_LAUNCHERS final value: $SAVED_LAUNCHERS"
+echo
+
+# Write PREV_LAUNCHERS_FILE (if cupertino used then PL and GWL will be deleted)
+if [ "$SAVED_LAUNCHERS" ];
+then
+    echo "$SAVED_LAUNCHERS" > $PREV_LAUNCHERS_FILE
+fi
 
 # SAVE current world clocks
 SAVED_WC=""
@@ -223,23 +348,27 @@ WC_FILE=/home/$USER/.cinnamon/configs/calendar@simonwiles.net/113.json
 if [ -e "$WC_FILE" ];
 then
     SAVED_WC=$(jq -c '.["worldclocks"].value' < $WC_FILE)
-    #SAVED_WC=$(echo "$TEMP_WC" | sed "s@\ @'\\\ '@g")
+    echo
     echo "*** SAVED_WC set to: $SAVED_WC"
+    echo
 fi
 
-# prompt user    
-CHOICE=$(zenity --list --title="wasta [Layout]" \
-    --window-icon=/usr/share/icons/hicolor/64x64/apps/wasta-linux.png \
-    --height=300 --text \
+# prompt user if $CHOICE not yet set
+if ! [ "$AUTO" ];
+then
+    CHOICE=$(zenity --list --title="wasta [Layout]" \
+        --window-icon=/usr/share/icons/hicolor/64x64/apps/wasta-linux.png \
+        --height=300 --text \
 "This utility <i><b>changes</b></i> the layout of the <i>panel</i> (taskbar) and other
 items of the Cinnamon Desktop Interface.
 
 <b><i>Choose your preferred layout:</i></b>" --radiolist \
-    --column "" --column "Layout" --column "Description" \
-    TRUE        default           "Default Cinnamon layout" \
-    FALSE       redmond7          "Windows 7 inspired layout" \
-    FALSE       cupertino         "MacOS/OSX insipired layout" \
-    FALSE       unity             "Ubuntu Unity inspired layout")
+        --column "" --column "Layout" --column "Description" \
+        TRUE        default           "Default Cinnamon layout" \
+        FALSE       redmond7          "Windows 7 inspired layout" \
+        FALSE       cupertino         "MacOS/OSX insipired layout" \
+        FALSE       unity             "Ubuntu Unity inspired layout")
+fi
 
 if [ "$CHOICE" == "" ];
 then
@@ -250,25 +379,27 @@ then
     exit 0
 fi
 
-pkexec /usr/bin/wasta-layout-system $CHOICE
-RETURN=$?
-if [ "$RETURN" != "0" ];
+# all layouts: stop plank and disable any user-level plank
+# autostart (cupertino will later re-enable)
+killall plank > /dev/null 2>&1 || true;
+
+PLANK_FILE=/home/$USER/.config/autostart/plank-wasta-layout.desktop
+if [ -e $PLANK_FILE ];
 then
-    # didn't return clean from wasta-layout-system: get outta here!
-    exit 1
+    desktop-file-edit --set-key="X-GNOME-Autostart-enabled" --set-value=false \
+        $PLANK_FILE
 fi
 
-# all layouts: stop plank and remove any user-level plank autostart:
-#   wasta-layout-system cupertino will enable correctly at system level
-rm -f /home/$USER/.config/autostart/plank-wasta-layout.desktop
-
 case "$CHOICE" in
-    
+
 "default")
     # menu@cinnamon.org:
     #   - remove any local applet and configs (will be re-created from defaults)
     rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
     rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+
+    # reset menu applet to default:
+    resetMenu
 
     # calendar@cinnamon.org:
     #   - remove any local applet and configs (will be re-created from defaults)
@@ -285,25 +416,44 @@ case "$CHOICE" in
 
         if ! [ -e "$JSON_FILE" ];
         then
-            echo "copying in default json config: $DEFAULT_CONFIG"
-            mkdir -p $JSON_DIR 
+            echo
+            echo "*** copying in default json config: $DEFAULT_CONFIG"
+            echo
+            mkdir -p $JSON_DIR
             cp $DEFAULT_CONFIG $JSON_FILE
         fi
 
         #update saved launchers
-        echo "updating JSON_FILE: $JSON_FILE"
+        echo
+        echo "*** updating JSON_FILE: $JSON_FILE"
+        echo
         #jq can't do "sed -i" inplace update, so need to re-create file, then
         # update ownership (in case run as root)
         NEW_FILE=$(jq '.["launcherList"].value='"$SAVED_LAUNCHERS" < $JSON_FILE)
         echo "$NEW_FILE" > $JSON_FILE
     fi
+
+    # need to set keys associated with panel layouts
+    gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:101', 'panel1:left:1:show-desktop@cinnamon.org:102', 'panel1:left:2:panel-launchers@cinnamon.org:103', 'panel1:left:3:window-list@cinnamon.org:105', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@cinnamon.org:118', 'panel1:right:9:windows-quick-list@cinnamon.org:114']"
+    gsettings set org.cinnamon enabled-extensions "[]"
+    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
+    # all "panels" items need reset since number of panels could have changed
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
+    gsettings set org.cinnamon panels-autohide "['1:false']"
+    gsettings set org.cinnamon panels-enabled "['1:0:bottom']"
+    gsettings set org.cinnamon panels-height "['1:28']"
+    gsettings set org.cinnamon panels-hide-delay "['1:0']"
+    gsettings set org.cinnamon panels-show-delay "['1:0']"
 ;;
-        
+
 "redmond7")
     # menu@cinnamon.org:
     #   - remove any local applet and configs (will be re-created from defaults)
     rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
     rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+
+    # reset Main Menu
+    resetMenu
 
     # legacy: remove for 20.04
     # IcingTaskManager@json:
@@ -326,6 +476,18 @@ case "$CHOICE" in
 
     # if SAVED_WC set worldclocks
     updateWorldClocks
+
+    # need to set keys associated with panel layouts
+    gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:101', 'panel1:left:1:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:windows-quick-list@cinnamon.org:114']"
+    gsettings set org.cinnamon enabled-extensions "[]"
+    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
+    # all "panels" items need reset since number of panels could have changed
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
+    gsettings set org.cinnamon panels-autohide "['1:false']"
+    gsettings set org.cinnamon panels-enabled "['1:0:bottom']"
+    gsettings set org.cinnamon panels-height "['1:35']"
+    gsettings set org.cinnamon panels-hide-delay "['1:0']"
+    gsettings set org.cinnamon panels-show-delay "['1:0']"
 ;;
 
 "unity")
@@ -333,6 +495,13 @@ case "$CHOICE" in
     #   - remove any local applet and configs (will be re-created from defaults)
     rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
     rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+
+    # reset Main Menu
+    resetMenu
+    # remove Favorites and Session options from Main Menu
+    removeMenuFavs
+    # set bfb icon and no label for Main Menu
+    changeMenuIcon
 
     # legacy: remove for 20.04
     # IcingTaskManager@json:
@@ -360,6 +529,18 @@ case "$CHOICE" in
 
     # if SAVED_WC set worldclocks
     updateWorldClocks
+
+    # need to set keys associated with panel layouts
+    gsettings set org.cinnamon enabled-applets "['panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116', 'panel2:left:0:menu@cinnamon.org:101', 'panel2:left:1:grouped-window-list@cinnamon.org:120', 'panel2:right:1:trash@cinnamon.org:117']"
+    gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
+    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
+    # all "panels" items need reset since number of panels could have changed
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
+    gsettings set org.cinnamon panels-autohide "['1:false', '2:false']"
+    gsettings set org.cinnamon panels-enabled "['1:0:top', '2:0:left']"
+    gsettings set org.cinnamon panels-height "['1:28', '2:40']"
+    gsettings set org.cinnamon panels-hide-delay "['1:0', '2:0']"
+    gsettings set org.cinnamon panels-show-delay "['1:0', '2:0']"
 ;;
 
 "cupertino")
@@ -367,6 +548,13 @@ case "$CHOICE" in
     #   - remove any local applet and configs (will be re-created from defaults)
     rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
     rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+
+    # reset Main Menu
+    resetMenu
+    # remove Favorites and Session options from Main Menu
+    # rik: not enabling for now so as to not confuse users... but it is
+    # "cleaner looking" with favorties removed
+    # removeMenuFavs
 
     # calendar@simonwiles.net:
     #   - remove any local applet and configs (will be re-created from defaults)
@@ -381,7 +569,9 @@ case "$CHOICE" in
     PLANK_FOLDER=/home/$USER/.config/plank/dock1/launchers
     if ! [ -e "$PLANK_FOLDER" ];
     then
-        echo "creating default plank launcher folder"
+        echo
+        echo "*** Creating default plank launcher folder"
+        echo
         mkdir -p $PLANK_FOLDER
         rsync -av $DIR/resources/launchers/ $PLANK_FOLDER/
         sleep 1
@@ -397,41 +587,56 @@ case "$CHOICE" in
     # start Plank
     nohup plank &> /dev/null &
 
+    # set Plank to autostart
+    if ! [ -e $PLANK_FILE ];
+    then
+        echo
+        echo "*** Creating plank autostart file"
+        echo
+        cp /usr/share/applications/plank.desktop $PLANK_FILE
+        desktop-file-edit --add-only-show-in="X-Cinnamon" $PLANK_FILE
+        desktop-file-edit --set-name="Plank (Wasta-Layout)" $PLANK_FILE
+    fi
+    # ensure plank will autostart for user
+    desktop-file-edit --set-key="X-GNOME-Autostart-enabled" --set-value=true \
+        $PLANK_FILE
+
     # if SAVED_WC set worldclocks
     updateWorldClocks
+
+    # need to set keys associated with panel layouts
+    gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:101', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116']"
+    gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
+    gsettings set org.cinnamon.desktop.wm.preferences button-layout 'close,minimize,maximize:'
+    # all "panels" items need reset since number of panels could have changed
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
+    gsettings set org.cinnamon panels-autohide "['1:false']"
+    gsettings set org.cinnamon panels-enabled "['1:0:top']"
+    gsettings set org.cinnamon panels-height "['1:28']"
+    gsettings set org.cinnamon panels-hide-delay "['1:0']"
+    gsettings set org.cinnamon panels-show-delay "['1:0']"
 ;;
 
 *)
-;;
     #do nothing
+;;
+
 esac
 
-
-if [ $RETURN -ne 0 ];
+RETURN=$?
+if [ $RETURN == 0 ];
 then
-    MSG="$CHOICE Layout choice <b>NOT APPLIED</b>\n\n"
+    MSG+="Wasta-Layout user interface updated to: $CHOICE\n\n"
 else
-    MSG="$CHOICE layout <b>APPLIED</b>\n\n"
+    MSG+="Error: Wasta-Layout user interface not updated\n\n"
 fi
 
 sleep 1s
 
-# need to reset keys associated with panel layouts
-gsettings reset org.cinnamon enabled-applets
-gsettings reset org.cinnamon enabled-extensions
-gsettings reset org.cinnamon.desktop.wm.preferences button-layout
-# all "panels" items need reset since number of panels could have changed
-gsettings reset org.cinnamon panel-zone-icon-sizes
-gsettings reset org.cinnamon panels-autohide
-gsettings reset org.cinnamon panels-enabled
-gsettings reset org.cinnamon panels-height
-gsettings reset org.cinnamon panels-hide-delay
-gsettings reset org.cinnamon panels-show-delay
-
 if [ "$XDG_SESSION_DESKTOP" == "cinnamon" ];
 then
     echo
-    echo " *** restarting Cinnamon ***"
+    echo "*** Restarting Cinnamon ***"
     echo
     MSG+="Restarting Cinnamon to Apply Changes\n\n"
 
@@ -442,7 +647,7 @@ then
     sleep 3s
 
     echo
-    echo " *** Cinnamon restarted ***"
+    echo "*** Cinnamon restarted ***"
     echo
     MSG+="Cinnamon Restarted Successfully\n\n"
 else
@@ -455,16 +660,53 @@ fi
 #   of before?
 gsettings reset org.cinnamon panels-height
 
-MSG+="<b>Please reboot your computer if you have any trouble</b>\n\n"
+# ------------------------------------------------------------------------------
+# Optionally run wasta-system-layout
+# ------------------------------------------------------------------------------
+
+# prompt for running wasta-layout-system
+if ! [ "$AUTO" ];
+then
+    SET_DEFAULT=$(zenity --question --title "wasta [Layout]: Update System Default?" \
+        --no-wrap --height=150 --width=450 \
+        --window-icon=/usr/share/icons/hicolor/64x64/apps/wasta-linux.png \
+        --text="Update Wasta-Layout system default to $CHOICE?
+
+<i>NOTE: you will need to provide an administrative password</i>")
+
+    if [ "$SET_DEFAULT" == 0 ];
+    then
+        pkexec /usr/bin/wasta-layout-system $CHOICE
+        RETURN=$?
+        if [ "$RETURN" -ne 0 ];
+        then
+            # didn't return clean from wasta-layout-system: get outta here!
+            exit 1
+        fi
+        MSG+="Wasta-Layout system default updated to: $CHOICE\n\n"
+    else
+        MSG+="Wasta-Layout system default not updated\n\n"
+    fi
+fi
 
 # ------------------------------------------------------------------------------
 # Finished
 # ------------------------------------------------------------------------------
 
+MSG+="<b>Please reboot your computer if you have any trouble</b>\n\n"
+
+echo
+echo "*** output messages:"
+echo "$MSG"
+echo "*** wasta-layout finished"
+echo
+
 # prompt user
-zenity --info --title "wasta [Layout]: Finished" --no-wrap --height=150 --width=450 \
-    --window-icon=/usr/share/icons/hicolor/64x64/apps/wasta-linux.png \
-    --text="$MSG"
+if ! [ "$AUTO" ];
+then
+    zenity --info --title "wasta [Layout]: Finished" --no-wrap --height=150 --width=450 \
+        --window-icon=/usr/share/icons/hicolor/64x64/apps/wasta-linux.png \
+        --text="$MSG"
+fi
 
 exit 0
-

@@ -187,7 +187,7 @@ buttons-have-icons = false
 menus-have-icons = true
 
 [org.cinnamon.theme]
-name = 'Arc-Dark'
+name = 'Arc-Dark-Wasta'
 symbolic-relative-size = 0.67
 
 [org.freedesktop.ibus.general]
