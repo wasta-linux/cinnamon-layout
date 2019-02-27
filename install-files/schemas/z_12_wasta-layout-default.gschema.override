@@ -76,6 +76,9 @@
 #   2018-08-31 rik: setting nemo bulk-rename-tool to thunar
 #   2018-09-05 rik: gtk sort-directories-first = true
 #   2019-02-23 rik: updates for cinnamon 4.0
+#   2019-02-28 rik: setting enable-indicators = false since cinnamon 4.0
+#       diodon and skypeforlinux indicators are duplicated each time the status
+#       changes (leading to many duplicate diodon indicators, for example).
 #
 # ==============================================================================
 
@@ -86,7 +89,7 @@ desktop-effects = false
 desktop-effects-close-effect = 'none'
 desktop-effects-map-effect = 'none'
 desktop-layout = 'traditional'
-enable-indicators = true
+enable-indicators = false
 enabled-applets = ['panel1:left:0:menu@cinnamon.org:101', 'panel1:left:1:show-desktop@cinnamon.org:102', 'panel1:left:2:panel-launchers@cinnamon.org:103', 'panel1:left:3:window-list@cinnamon.org:105', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@cinnamon.org:118', 'panel1:right:9:windows-quick-list@cinnamon.org:114']
 enabled-extensions = []
 favorite-apps = ['firefox.desktop', 'nemo.desktop', 'libreoffice-writer.desktop']
