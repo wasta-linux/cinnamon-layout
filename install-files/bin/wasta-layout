@@ -60,7 +60,7 @@ fi
 # Setup
 # ------------------------------------------------------------------------------
 echo
-echo " *** Script Entry: wasta-layout"
+echo " *** Script Entry: wasta-layout for user: $USER"
 echo
 # Check for input parameter
 CHOICE=$1
@@ -71,14 +71,14 @@ then
     case "$CHOICE" in
     default|redmond7|cupertino|unity)
         echo
-        echo "*** wasta-layout called with valid input parameter: $CHOICE"
+        echo "*** wasta-layout called with valid layout: $CHOICE"
         echo
         AUTO="auto"
     ;;
 
     *)
         echo
-        echo "*** wasta-layout called with invalid input parameter: $CHOICE"
+        echo "*** wasta-layout called with invalid layout $CHOICE"
         echo
         CHOICE=""
     ;;
@@ -86,9 +86,11 @@ then
 fi
 
 DIR=/usr/share/wasta-cinnamon-layout
+CONFIG_DIR=/home/$USER/.config/wasta-layout
+mkdir -p $CONFIG_DIR
 
 PREV_LAUNCHERS=""
-PREV_LAUNCHERS_FILE=/home/$USER/.config/wasta-layout-launchers.txt
+PREV_LAUNCHERS_FILE=$CONFIG_DIR/wasta-layout-launchers.txt
 if [ -e $PREV_LAUNCHERS_FILE ];
 then
     PREV_LAUNCHERS=$(cat $PREV_LAUNCHERS_FILE)
@@ -627,6 +629,7 @@ RETURN=$?
 if [ $RETURN == 0 ];
 then
     MSG+="Wasta-Layout user interface updated to: $CHOICE\n\n"
+    echo "$CHOICE" > $CONFIG_DIR/current-wasta-layout.txt
 else
     MSG+="Error: Wasta-Layout user interface not updated\n\n"
 fi
