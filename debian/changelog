@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-4-0 (4.0.6) bionic; urgency=medium
+
+  * debian/control: add dependencies to ensure cinnamon components up to 4.0+
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sat, 02 Mar 2019 13:52:38 +0300
+
 wasta-cinnamon-layout-4-0 (4.0.5) bionic; urgency=medium
 
   * wasta-layout: save current wasta layout config
