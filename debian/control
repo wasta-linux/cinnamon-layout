@@ -8,7 +8,7 @@ Homepage: https://github.com/wasta-linux/wasta-cinnamon-layout
 
 Package: wasta-cinnamon-layout-4-0
 Architecture: all
-Depends: arc-theme (>=20181023-1), cinnamon (>= 4.0), cinnamon-common (>= 4.0), cinnamon-control-center (>= 4.0), cinnamon-screensaver (>= 4.0), cinnamon-session (>= 4.0), cinnamon-settings-daemon (>= 4.0), jq, muffin (>= 4.0), nemo (>= 4.0), plank, python:any, python3, wasta-vertex-ubuntu, ${shlibs:Depends}, ${misc:Depends}
+Depends: arc-theme (>=20181023-1), cinnamon (>= 4.0), cinnamon-common (>= 4.0), cinnamon-control-center (>= 4.0), cinnamon-desktop-data (>= 4.0), cinnamon-l10n (>= 4.0), cinnamon-screensaver (>= 4.0), cinnamon-session (>= 4.0), cinnamon-settings-daemon (>= 4.0), cjs (>= 4.0), jq, muffin (>= 4.0), nemo (>= 4.0), plank, python:any, python3, wasta-vertex-ubuntu, ${shlibs:Depends}, ${misc:Depends}
 Recommends: arc-solid-theme, wasta-papirus
 Breaks: wasta-cinnamon-layout-3-6, wasta-cinnamon-layout-3-8
 Replaces: wasta-cinnamon-layout-3-6, wasta-cinnamon-layout-3-8
