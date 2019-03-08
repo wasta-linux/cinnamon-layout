@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-4-0 (4.0.7) bionic; urgency=medium
+
+  * z_12_wasta-layout-default: on battery set screen to turn off at 20 min
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Fri, 08 Mar 2019 11:08:17 +0300
+
 wasta-cinnamon-layout-4-0 (4.0.6) bionic; urgency=medium
 
   * debian/control: add dependencies to ensure cinnamon components up to 4.0+

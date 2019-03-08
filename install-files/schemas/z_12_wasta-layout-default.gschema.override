@@ -182,6 +182,7 @@ lid-close-suspend-with-external-monitor = true
 lock-on-suspend = false
 percentage-action = 5
 percentage-critical = 10
+sleep-display-battery = 1200
 sleep-inactive-battery-timeout = 1800
 use-time-for-policy = false
 
