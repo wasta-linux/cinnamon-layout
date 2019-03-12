@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-4-0 (4.0.8) bionic; urgency=medium
+
+  * wasta-layout: correct prompt for wasta-layout-system
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Tue, 12 Mar 2019 09:21:38 +0300
+
 wasta-cinnamon-layout-4-0 (4.0.7) bionic; urgency=medium
 
   * z_12_wasta-layout-default: on battery set screen to turn off at 20 min

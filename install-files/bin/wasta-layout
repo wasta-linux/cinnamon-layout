@@ -40,6 +40,7 @@
 #   2018-05-20 rik: UpdateITMPinned adjusted for Cinnamon 3.8 schema location
 #   2018-05-22 rik: resetting button-layout for window controls
 #   2019-02-23 rik: updating for cinnamon 4.0: migrate ITM to GWL
+#   2019-03-12 rik: correcting prompt for wasta-layout-system
 #
 # ==============================================================================
 
@@ -665,12 +666,13 @@ fi
 # prompt for running wasta-layout-system
 if ! [ "$AUTO" ];
 then
-    SET_DEFAULT=$(zenity --question --title "wasta [Layout]: Update System Default?" \
+    zenity --question --title "wasta [Layout]: Update System Default?" \
         --no-wrap --height=150 --width=450 \
         --window-icon=/usr/share/icons/hicolor/64x64/apps/wasta-linux.png \
-        --text="Update Wasta-Layout system default to $CHOICE?
+        --text="<b>Update Wasta-Layout system default to $CHOICE?</b>
 
-<i>NOTE: you will need to provide an administrative password</i>")
+<i>NOTE: you will need to provide an administrative password</i>"
+    SET_DEFAULT=$?
 
     if [ "$SET_DEFAULT" == 0 ];
     then
