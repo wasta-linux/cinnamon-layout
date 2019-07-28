@@ -29,6 +29,7 @@
 #   calendar@cinnamon.org:118
 #   notifications@cinnamon.org:119
 #   grouped-window-list@cinnamon.org:120
+#   collapsible-systray@feuerfuchs.eu:121
 #
 #   2017-12-24 rik: initial script
 #   2018-01-18 rik: default: remove calendar@cinnamon.org so will be re-created
@@ -41,6 +42,7 @@
 #   2018-05-22 rik: resetting button-layout for window controls
 #   2019-02-23 rik: updating for cinnamon 4.0: migrate ITM to GWL
 #   2019-03-12 rik: correcting prompt for wasta-layout-system
+#   2019-07-28 rik: adding widescreen
 #
 # ==============================================================================
 
@@ -70,7 +72,7 @@ AUTO=""
 if [ "$CHOICE" ];
 then
     case "$CHOICE" in
-    default|redmond7|cupertino|unity)
+    default|redmond7|cupertino|unity|widescreen)
         echo
         echo "*** wasta-layout called with valid layout: $CHOICE"
         echo
@@ -186,6 +188,36 @@ updateWorldClocks()
         echo "updating config for JSON_FILE: $JSON_FILE"
         #jq can't do "sed -i" inplace update, so need to re-create file
         NEW_FILE=$(jq '.["worldclocks"].value='"$SAVED_WC" < $JSON_FILE)
+        # read -p "$NEW_FILE"
+        echo "$NEW_FILE" > $JSON_FILE
+    fi
+}
+
+updateIconList()
+{
+    if [ "$SAVED_CS_ICON_LIST" ];
+    then
+        DEFAULT_CONFIG=/usr/share/cinnamon/applets/collapsible-systray@feuerfuchs.eu/4.0/settings-schema.json
+        JSON_DIR=/home/$USER/.cinnamon/configs/collapsible-systray@feuerfuchs.eu
+        # NOTE: #.json has to match enabled-applets number!!
+        JSON_FILE=$JSON_DIR/121.json
+
+        if ! [ -e "$JSON_FILE" ];
+        then
+            echo
+            echo "*** copying in default json config: $DEFAULT_CONFIG"
+            echo
+            mkdir -p $JSON_DIR
+            cp $DEFAULT_CONFIG $JSON_FILE
+        fi
+
+        #update icon-visibility-list
+        echo
+        echo "*** updating JSON_FILE: $JSON_FILE"
+        echo
+        echo "updating config for JSON_FILE: $JSON_FILE"
+        #jq can't do "sed -i" inplace update, so need to re-create file
+        NEW_FILE=$(jq '.["icon-visibility-list"].value='"$SAVED_CS_ICON_LIST" < $JSON_FILE)
         # read -p "$NEW_FILE"
         echo "$NEW_FILE" > $JSON_FILE
     fi
@@ -356,6 +388,18 @@ then
     echo
 fi
 
+# SAVE collapsible-systray icon-visibility-list
+SAVED_CS_ICON_LIST=""
+
+CS_FILE=/home/$USER/.cinnamon/configs/collapsible-systray@feuerfuchs.eu/121.json
+if [ -e "$CS_FILE" ];
+then
+    SAVED_CS_ICON_LIST=$(jq -c '.["icon-visibility-list"].value' < $CS_FILE)
+    echo
+    echo "*** SAVED_CS_ICON_LIST set to: $SAVED_CS_ICON_LIST"
+    echo
+fi
+
 # prompt user if $CHOICE not yet set
 if ! [ "$AUTO" ];
 then
@@ -370,7 +414,8 @@ items of the Cinnamon Desktop Interface.
         TRUE        default           "Default Cinnamon layout" \
         FALSE       redmond7          "Windows 7 inspired layout" \
         FALSE       cupertino         "MacOS/OSX insipired layout" \
-        FALSE       unity             "Ubuntu Unity inspired layout")
+        FALSE       unity             "Ubuntu Unity inspired layout" \
+        FALSE       widescreen        "Left panel widescreen layout")
 fi
 
 if [ "$CHOICE" == "" ];
@@ -616,6 +661,54 @@ case "$CHOICE" in
     gsettings set org.cinnamon panels-autohide "['1:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:top']"
     gsettings set org.cinnamon panels-height "['1:28']"
+    gsettings set org.cinnamon panels-hide-delay "['1:0']"
+    gsettings set org.cinnamon panels-show-delay "['1:0']"
+;;
+
+"widescreen")
+    # menu@cinnamon.org:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+
+    # reset Main Menu
+    resetMenu
+    # set bfb icon and no label for Main Menu
+    changeMenuIcon
+
+    # grouped-window-list@cinnamon.org:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
+
+    # calendar@simonwiles.net:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
+    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+
+    # transparent-panels@germanfr
+    #   - remove any local extension and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
+    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
+
+    # if SAVED_LAUNCHERS set pinned-apps
+    updateGWLPinned
+
+    # if SAVED_WC set worldclocks
+    updateWorldClocks
+
+    # if SAVED_CS_ICON_LIST set icon-visiblity-list
+    updateIconList
+
+    # need to set keys associated with panel layouts
+    gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:collapsible-systray@feuerfuchs.eu:121', 'panel1:right:4:inhibit@cinnamon.org:107', 'panel1:right:5:sound@cinnamon.org:111', 'panel1:right:6:network@cinnamon.org:110', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:spacer@cinnamon.org:150', 'panel1:right:9:calendar@simonwiles.net:113', 'panel1:right:10:spacer@cinnamon.org:151']"
+    gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
+    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
+    # all "panels" items need reset since number of panels could have changed
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22}]'
+    gsettings set org.cinnamon panels-autohide "['1:false']"
+    gsettings set org.cinnamon panels-enabled "['1:0:left']"
+    gsettings set org.cinnamon panels-height "['1:40']"
     gsettings set org.cinnamon panels-hide-delay "['1:0']"
     gsettings set org.cinnamon panels-show-delay "['1:0']"
 ;;

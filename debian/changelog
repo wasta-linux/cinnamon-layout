@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-4-0 (4.0.9) bionic; urgency=medium
+
+  * adding 'widescreen' layout
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sun, 28 Jul 2019 17:32:03 +0300
+
 wasta-cinnamon-layout-4-0 (4.0.8) bionic; urgency=medium
 
   * wasta-layout: correct prompt for wasta-layout-system
