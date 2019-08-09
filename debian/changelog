@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-4-2 (4.2.1) bionic; urgency=medium
+
+  * correcting package name in debian/control, etc.
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Fri, 09 Aug 2019 10:56:43 +0300
+
 wasta-cinnamon-layout-4-2 (4.2.0) bionic; urgency=medium
 
   * Initial Cinnamon 4.2 compatibility
