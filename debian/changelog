@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-4-2 (4.2.0) bionic; urgency=medium
+
+  * Initial Cinnamon 4.2 compatibility
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Fri, 09 Aug 2019 09:55:13 +0300
+
 wasta-cinnamon-layout-4-0 (4.0.9) bionic; urgency=medium
 
   * adding 'widescreen' layout

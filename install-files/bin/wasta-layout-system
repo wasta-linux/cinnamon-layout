@@ -10,6 +10,7 @@
 #   2018-03-26 rik: adding removeMenuFavs function for unity
 #   - adding changeMenuIcon function for unity
 #   2019-02-23 rik: updating for cinnamon 4.0 compatibility
+#   2019-07-28 rik: adding widescreen layout
 #
 # ==============================================================================
 
@@ -99,6 +100,38 @@ changeMenuIcon()
     echo "$NEW_FILE" > $JSON_FILE
 }
 
+removeAMPM()
+{
+    # world clock calendar applet updates
+    JSON_FILE=/usr/share/cinnamon/applets/calendar@simonwiles.net/settings-schema.json
+    # remove AM / PM from worldclock time panel format
+    echo "Removing AM / PM from clock format in file JSON_FILE:"
+    echo "      $JSON_FILE"
+    # updates:
+    # - use-custom-format: custom panel clock format
+    # - custom-format: set to "%l:%M" (remove %p: AM / PM)
+    # note: jq can't do "sed -i" inplace update, so need to re-create file
+    NEW_FILE=$(jq '.["use-custom-format"].default=true | .["custom-format"].default="%l:%M"' \
+        < $JSON_FILE)
+    echo "$NEW_FILE" > $JSON_FILE
+}
+
+restoreAMPM()
+{
+    # world clock calendar applet updates
+    JSON_FILE=/usr/share/cinnamon/applets/calendar@simonwiles.net/settings-schema.json
+    # restore AM / PM to worldclock time panel format
+    echo "Restoring AM / PM to clock format in file JSON_FILE:"
+    echo "      $JSON_FILE"
+    # updates:
+    # - use-custom-format: custom panel clock format
+    # - custom-format: set to "%l:%M %p" (add %p: AM / PM)
+    # note: jq can't do "sed -i" inplace update, so need to re-create file
+    NEW_FILE=$(jq '.["use-custom-format"].default=true | .["custom-format"].default="%l:%M %p"' \
+        < $JSON_FILE)
+    echo "$NEW_FILE" > $JSON_FILE
+}
+
 # ------------------------------------------------------------------------------
 # Main Processing
 # ------------------------------------------------------------------------------
@@ -140,6 +173,9 @@ redmond7)
     # reset Main Menu
     resetMenu
 
+    # make sure AM/PM in clock display
+    restoreAMPM
+
     echo
     echo " *** finished setting layout to $1"
     echo
@@ -153,8 +189,12 @@ unity)
 
     # remove Favorites and Session options from Main Menu
     removeMenuFavs
+
     # set bfb icon and no label for Main Menu
     changeMenuIcon
+
+    # make sure AM/PM in clock display
+    restoreAMPM
 
     echo
     echo " *** finished setting layout to $1"
@@ -169,6 +209,10 @@ cupertino)
 
     # reset Main Menu
     resetMenu
+
+    # make sure AM/PM in clock display
+    restoreAMPM
+
     # remove Favorites and Session options from Main Menu
     # rik: not enabling for now so as to not confuse users... but it is
     # "cleaner looking" with favorties removed
@@ -183,6 +227,26 @@ cupertino)
     fi
     desktop-file-edit --set-key="X-GNOME-Autostart-enabled" --set-value=true \
         $PLANK_FILE
+
+    echo
+    echo " *** finished setting layout to $1"
+    echo
+;;
+
+widescreen)
+    # Set wasta-layout to widescreen layout
+    rm -rf $SCHEMA_DIR/z_15_wasta-layout*.gschema.override
+    ln -s $DIR/resources/z_15_wasta-layout-widescreen.gschema.override \
+        $SCHEMA_DIR/
+
+    # reset menu applet:
+    resetMenu
+
+    # set bfb icon and no label for Main Menu
+    changeMenuIcon
+
+    # remove AM/PM from clock display
+    removeAMPM
 
     echo
     echo " *** finished setting layout to $1"
