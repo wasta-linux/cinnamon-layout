@@ -5,7 +5,7 @@
 #       wasta-layout-unity uses a "z_15_*" filename, to override the
 #       z12_cinnamon-layout-default file.
 #
-# enabled-applets wasta numbers:
+# enabled-applets numbers:
 #   (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
 #
 #   menu@cinnamon.org:101

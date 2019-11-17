@@ -5,7 +5,7 @@
 #       cinnamon-layout-redmond7 uses a "z_15_*" filename, to override the
 #       z12_cinnamon-layout-default file.
 #
-# enabled-applet wasta numbers:
+# enabled-applet numbers:
 #   (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
 #
 #   menu@cinnamon.org:101

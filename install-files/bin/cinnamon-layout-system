@@ -96,7 +96,7 @@ changeMenuIcon()
     echo "    $JSON_FILE"
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["menu-custom"].default=true | .["menu-icon"].default="'$DIR/resources/cinnamon_launcher.png'" | .["menu-label"].default=""' \
+    NEW_FILE=$(jq '.["menu-custom"].default=true | .["menu-icon"].default="'$DIR/resources/cinnamon-launcher.png'" | .["menu-label"].default=""' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }

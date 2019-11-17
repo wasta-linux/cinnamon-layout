@@ -1,4 +1,4 @@
-cinnamon-layout-4-2: binary-without-manpage
-cinnamon-layout-4-2: executable-not-elf-or-script
-cinnamon-layout-4-2: extra-license-file
-cinnamon-layout-4-2: script-not-executable
+cinnamon-layout: binary-without-manpage
+cinnamon-layout: executable-not-elf-or-script
+cinnamon-layout: extra-license-file
+cinnamon-layout: script-not-executable
