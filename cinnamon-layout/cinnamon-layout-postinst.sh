@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # ==============================================================================
-# wasta-cinnamon-layout-postinst.sh
+# cinnamon-layout-postinst.sh
 #
 #   This script is automatically run by the postinst configure step on
-#       installation of wasta-cinnamon-*. It can be manually re-run, but
+#       installation of cinnamon-layout. It can be manually re-run, but
 #       is only intended to be run at package installation.
 #
 #   2018-01-05 rik: initial release
@@ -16,6 +16,7 @@
 #   2018-05-23 rik: correcting transparent-panels adjustment
 #   2018-09-19 rik: adjusting default ITM pinned-apps
 #   2019-07-28 rik: adding collapsible-systray@feuerfuchs.eu tweaks
+#   2019-11-17 rik: updating name to cinnamon-layout
 #
 # ==============================================================================
 
@@ -37,11 +38,11 @@ fi
 # ------------------------------------------------------------------------------
 
 echo
-echo "*** Script Entry: wasta-cinnamon-layout-postinst.sh"
+echo "*** Script Entry: cinnamon-layout-postinst.sh"
 echo
 
-# Setup Diretory for later reference
-DIR=/usr/share/wasta-cinnamon-layout
+# Setup Directory for later reference
+DIR=/usr/share/cinnamon-layout
 
 # ------------------------------------------------------------------------------
 # Applet / Extension adjustments
@@ -69,7 +70,7 @@ JSON_FILE=/usr/share/cinnamon/applets/IcingTaskManager@json/3.8/settings-schema.
 echo "updating JSON_FILE: $JSON_FILE"
 # updates:
 # - number-display: for "all open apps" (rather than only showing number if more than 1)
-# - pinned-apps: wasta defaults
+# - pinned-apps: set defaults
 # - cycleMenusHotkey: disable (wast defaulted to super+space which is for ibus)
 # - enable-hover-peek: disable (so no "flashing" on screen when hovering previews)
 # - icon-spacing: spread out a bit (too crowded by default) and set max a bit bigger
@@ -80,7 +81,7 @@ echo "updating JSON_FILE: $JSON_FILE"
 # - disable deprecation notice
 # - note: jq can't do "sed -i" inplace update, so need to re-create file, then
 #     update ownership (in case run as root)
-NEW_FILE=$(jq '.["number-display"].default=2 | .["pinned-apps"].default=["firefox.desktop", "nemo.desktop", "libreoffice-writer.desktop", "wasta-backup.desktop", "wasta-resources.desktop"] | .["cycleMenusHotkey"].default="" | .["enable-hover-peek"].default=false | .["icon-spacing"].default=15 | .["icon-spacing"].max=21 | .["icon-padding"].default=11 | .["include-all-windows"].default=false | .["thumbnail-padding"].default=5 | .["thumbnail-size"].default=8 | .["deprecationNoticeRun"].default=true' \
+NEW_FILE=$(jq '.["number-display"].default=2 | .["pinned-apps"].default=["firefox.desktop", "nemo.desktop", "libreoffice-writer.desktop"] | .["cycleMenusHotkey"].default="" | .["enable-hover-peek"].default=false | .["icon-spacing"].default=15 | .["icon-spacing"].max=21 | .["icon-padding"].default=11 | .["include-all-windows"].default=false | .["thumbnail-padding"].default=5 | .["thumbnail-size"].default=8 | .["deprecationNoticeRun"].default=true' \
     < $JSON_FILE)
 echo "$NEW_FILE" > $JSON_FILE
 
@@ -122,7 +123,7 @@ glib-compile-schemas /usr/share/glib-2.0/schemas/ > /dev/null 2>&1 || true;
 # Finished
 # ------------------------------------------------------------------------------
 echo
-echo "*** Script Exit: wasta-cinnamon-layout-postinst.sh"
+echo "*** Script Exit: cinnamon-layout-postinst.sh"
 echo
 
 exit 0
