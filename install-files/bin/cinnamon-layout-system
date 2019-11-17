@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ==============================================================================
-# wasta-layout-system
+# cinnamon-layout-system
 #
 # moves around gschema.override files and then recompiles schemas
 #
@@ -11,6 +11,7 @@
 #   - adding changeMenuIcon function for unity
 #   2019-02-23 rik: updating for cinnamon 4.0 compatibility
 #   2019-07-28 rik: adding widescreen layout
+#   2019-11-17 rik: renaming to cinnamon-layout-system
 #
 # ==============================================================================
 
@@ -31,7 +32,7 @@ fi
 # Setup
 # ------------------------------------------------------------------------------
 echo
-echo " *** Script Entry: wasta-layout-system"
+echo " *** Script Entry: cinnamon-layout-system"
 echo
 # Check for input parameter: required
 
@@ -44,7 +45,7 @@ then
     exit 2
 fi
 
-DIR=/usr/share/wasta-cinnamon-layout
+DIR=/usr/share/cinnamon-layout
 SCHEMA_DIR=/usr/share/glib-2.0/schemas
 
 # ------------------------------------------------------------------------------
@@ -139,7 +140,7 @@ restoreAMPM()
 # system level can't be enabling / disabling plank since it should be user specific.....
 # all layouts: disable plank autostart (cupertino will later re-enable)
 
-PLANK_FILE=/etc/xdg/autostart/plank-wasta-layout.desktop
+PLANK_FILE=/etc/xdg/autostart/plank-cinnamon-layout.desktop
 if [ -e $PLANK_FILE ];
 then
     desktop-file-edit --set-key="X-GNOME-Autostart-enabled" --set-value=false \
@@ -153,8 +154,8 @@ echo
 case "$1" in
 
 default)
-    # Set wasta-layout to default layout
-    rm -rf $SCHEMA_DIR/z_15_wasta-layout*.gschema.override
+    # Set cinnamon-layout to default layout
+    rm -rf $SCHEMA_DIR/z_15_cinnamon-layout*.gschema.override
 
     # reset menu applet:
     resetMenu
@@ -165,9 +166,9 @@ default)
 ;;
 
 redmond7)
-    # Set wasta-layout to redmond7 layout
-    rm -rf $SCHEMA_DIR/z_15_wasta-layout*.gschema.override
-    ln -s $DIR/resources/z_15_wasta-layout-redmond7.gschema.override \
+    # Set cinnamon-layout to redmond7 layout
+    rm -rf $SCHEMA_DIR/z_15_cinnamon-layout*.gschema.override
+    ln -s $DIR/resources/z_15_cinnamon-layout-redmond7.gschema.override \
         $SCHEMA_DIR/
 
     # reset Main Menu
@@ -182,9 +183,9 @@ redmond7)
 ;;
 
 unity)
-    # Set wasta-layout to unity layout
-    rm -rf $SCHEMA_DIR/z_15_wasta-layout*.gschema.override
-    ln -s $DIR/resources/z_15_wasta-layout-unity.gschema.override \
+    # Set cinnamon-layout to unity layout
+    rm -rf $SCHEMA_DIR/z_15_cinnamon-layout*.gschema.override
+    ln -s $DIR/resources/z_15_cinnamon-layout-unity.gschema.override \
         $SCHEMA_DIR/
 
     # remove Favorites and Session options from Main Menu
@@ -202,9 +203,9 @@ unity)
 ;;
 
 cupertino)
-    # Set wasta-layout to cupertino layout
-    rm -rf $SCHEMA_DIR/z_15_wasta-layout*.gschema.override
-    ln -s $DIR/resources/z_15_wasta-layout-cupertino.gschema.override \
+    # Set cinnamon-layout to cupertino layout
+    rm -rf $SCHEMA_DIR/z_15_cinnamon-layout*.gschema.override
+    ln -s $DIR/resources/z_15_cinnamon-layout-cupertino.gschema.override \
         $SCHEMA_DIR/
 
     # reset Main Menu
@@ -223,7 +224,7 @@ cupertino)
     then
         $RUN_AS_USER cp /usr/share/applications/plank.desktop $PLANK_FILE $CLOSE
         desktop-file-edit --add-only-show-in="X-Cinnamon" $PLANK_FILE
-        desktop-file-edit --set-name="Plank (Wasta-Layout)" $PLANK_FILE
+        desktop-file-edit --set-name="Plank (Cinnamon-Layout)" $PLANK_FILE
     fi
     desktop-file-edit --set-key="X-GNOME-Autostart-enabled" --set-value=true \
         $PLANK_FILE
@@ -234,9 +235,9 @@ cupertino)
 ;;
 
 widescreen)
-    # Set wasta-layout to widescreen layout
-    rm -rf $SCHEMA_DIR/z_15_wasta-layout*.gschema.override
-    ln -s $DIR/resources/z_15_wasta-layout-widescreen.gschema.override \
+    # Set cinnamon-layout to widescreen layout
+    rm -rf $SCHEMA_DIR/z_15_cinnamon-layout*.gschema.override
+    ln -s $DIR/resources/z_15_cinnamon-layout-widescreen.gschema.override \
         $SCHEMA_DIR/
 
     # reset menu applet:
@@ -265,7 +266,7 @@ widescreen)
 esac
 
 # --------------------------------------------------------------------------
-# Compile schemas affected by wasta-layout
+# Compile schemas affected by cinnamon-layout
 # --------------------------------------------------------------------------
 
 # MAIN System schemas: Sending any output to null (if any key not found)
@@ -273,7 +274,7 @@ glib-compile-schemas /usr/share/glib-2.0/schemas/ || true;
 sleep 1
 
 echo
-echo " *** Script Exit: wasta-layout-system"
+echo " *** Script Exit: cinnamon-layout-system"
 echo
 
 exit 0

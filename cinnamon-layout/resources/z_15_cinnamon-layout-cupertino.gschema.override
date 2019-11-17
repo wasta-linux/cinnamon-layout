@@ -1,10 +1,9 @@
 # ==============================================================================
-# z_15_wasta-layout-cupertino.gschema.override
+# z_15_cinnamon-layout-cupertino.gschema.override
 #
 #   If same key overridden in 2 files, "last wins" regarding filenames.
-#       wasta-layout-cupertino uses a "z_15_*" filename, to override the
-#       wasta-core "z_10_*" files.  Regional customizations
-#       use "z_20_*" filenames to override the "z_10_*" through "z_19_*" files.
+#       cinnamon-layout-cupertino uses a "z_15_*" filename, to override the
+#       z12_cinnamon-layout-default file.
 #
 # enabled-applet wasta numbers:
 #   (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
@@ -38,6 +37,7 @@
 #       get corrupted.
 #   2018-05-22 rik: setting window controls to left side
 #   2019-02-23 rik: updates for cinnamon 4.0
+#   2019-11-17 rik: renaming to cinnamon-layout
 #
 # ==============================================================================
 

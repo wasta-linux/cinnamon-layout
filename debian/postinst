@@ -1,5 +1,5 @@
 #!/bin/sh
-# postinst script for wasta-cinnamon-layout
+# postinst script for cinnamon-layout
 #
 # see: dh_installdeb(1)
 
@@ -13,7 +13,7 @@ case "$1" in
         #   If not, later updates to package won't install either because
         #   the broken version will attempt to keep installing until manually
         #   uninstalled.
-        bash /usr/share/wasta-cinnamon-layout/wasta-cinnamon-layout-postinst.sh
+        bash /usr/share/cinnamon-layout/cinnamon-layout-postinst.sh
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

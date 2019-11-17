@@ -1,5 +1,5 @@
 # ==============================================================================
-# z_12_wasta-layout-default.gschema.override
+# z_12_cinnamon-layout-default.gschema.override
 #
 #   If same key overridden in 2 files, "last wins" regarding filenames
 #       (so a "z_10_*" filename would win over a "10_*" filename)
@@ -79,6 +79,7 @@
 #   2019-02-28 rik: setting enable-indicators = false since cinnamon 4.0
 #       diodon and skypeforlinux indicators are duplicated each time the status
 #       changes (leading to many duplicate diodon indicators, for example).
+#   2019-02-28 rik: renaming to cinnamon-layout-default
 #
 # ==============================================================================
 

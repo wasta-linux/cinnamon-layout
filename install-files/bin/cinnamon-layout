@@ -6,7 +6,7 @@
 # This script can be run at any time to "toggle" cinnamon default settings
 #   to provide different layout defaults for the system
 #
-# enabled-applets wasta numbers
+# enabled-applets numbers
 #   (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
 #
 #   menu@cinnamon.org:101
@@ -43,10 +43,11 @@
 #   2019-02-23 rik: updating for cinnamon 4.0: migrate ITM to GWL
 #   2019-03-12 rik: correcting prompt for wasta-layout-system
 #   2019-07-28 rik: adding widescreen
+#   2019-11-17 rik: renaming to cinnamon-layout
 #
 # ==============================================================================
 
-# ****TODO: need to reset configs (menu icon, label, etc.) depending on layout, since no longer relying on wasta-layout-system to set the default for the current user.
+# ****TODO: need to reset configs (menu icon, label, etc.) depending on layout, since no longer relying on cinnamon-layout-system to set the default for the current user.
 
 # ------------------------------------------------------------------------------
 # Ensure script running as regular user
@@ -63,7 +64,7 @@ fi
 # Setup
 # ------------------------------------------------------------------------------
 echo
-echo " *** Script Entry: wasta-layout for user: $USER"
+echo " *** Script Entry: cinnamon-layout for user: $USER"
 echo
 # Check for input parameter
 CHOICE=$1
@@ -74,26 +75,26 @@ then
     case "$CHOICE" in
     default|redmond7|cupertino|unity|widescreen)
         echo
-        echo "*** wasta-layout called with valid layout: $CHOICE"
+        echo "*** cinnamon-layout called with valid layout: $CHOICE"
         echo
         AUTO="auto"
     ;;
 
     *)
         echo
-        echo "*** wasta-layout called with invalid layout $CHOICE"
+        echo "*** cinnamon-layout called with invalid layout $CHOICE"
         echo
         CHOICE=""
     ;;
     esac
 fi
 
-DIR=/usr/share/wasta-cinnamon-layout
-CONFIG_DIR=/home/$USER/.config/wasta-layout
+DIR=/usr/share/cinnamon-layout
+CONFIG_DIR=/home/$USER/.config/cinnamon-layout
 mkdir -p $CONFIG_DIR
 
 PREV_LAUNCHERS=""
-PREV_LAUNCHERS_FILE=$CONFIG_DIR/wasta-layout-launchers.txt
+PREV_LAUNCHERS_FILE=$CONFIG_DIR/cinnamon-layout-launchers.txt
 if [ -e $PREV_LAUNCHERS_FILE ];
 then
     PREV_LAUNCHERS=$(cat $PREV_LAUNCHERS_FILE)
@@ -461,7 +462,7 @@ fi
 # prompt user if $CHOICE not yet set
 if ! [ "$AUTO" ];
 then
-    CHOICE=$(zenity --list --title="wasta [Layout]" \
+    CHOICE=$(zenity --list --title="Cinnamon-Layout" \
         --window-icon=/usr/share/icons/hicolor/64x64/apps/wasta-linux.png \
         --height=300 --text \
 "This utility <i><b>changes</b></i> the layout of the <i>panel</i> (taskbar) and other
@@ -489,7 +490,7 @@ fi
 # autostart (cupertino will later re-enable)
 killall plank > /dev/null 2>&1 || true;
 
-PLANK_FILE=/home/$USER/.config/autostart/plank-wasta-layout.desktop
+PLANK_FILE=/home/$USER/.config/autostart/plank-cinnamon-layout.desktop
 if [ -e $PLANK_FILE ];
 then
     desktop-file-edit --set-key="X-GNOME-Autostart-enabled" --set-value=false \
@@ -707,7 +708,7 @@ case "$CHOICE" in
         echo
         cp /usr/share/applications/plank.desktop $PLANK_FILE
         desktop-file-edit --add-only-show-in="X-Cinnamon" $PLANK_FILE
-        desktop-file-edit --set-name="Plank (Wasta-Layout)" $PLANK_FILE
+        desktop-file-edit --set-name="Plank (Cinnamon-Layout)" $PLANK_FILE
     fi
     # ensure plank will autostart for user
     desktop-file-edit --set-key="X-GNOME-Autostart-enabled" --set-value=true \
@@ -795,10 +796,10 @@ esac
 RETURN=$?
 if [ $RETURN == 0 ];
 then
-    MSG+="Wasta-Layout user interface updated to: $CHOICE\n\n"
-    echo "$CHOICE" > $CONFIG_DIR/current-wasta-layout.txt
+    MSG+="Cinnamon-Layout user interface updated to: $CHOICE\n\n"
+    echo "$CHOICE" > $CONFIG_DIR/current-cinnamon-layout.txt
 else
-    MSG+="Error: Wasta-Layout user interface not updated\n\n"
+    MSG+="Error: Cinnamon-Layout user interface not updated\n\n"
 fi
 
 sleep 1s
@@ -826,32 +827,32 @@ else
 fi
 
 # ------------------------------------------------------------------------------
-# Optionally run wasta-system-layout
+# Optionally run cinnamon-layout-system
 # ------------------------------------------------------------------------------
 
-# prompt for running wasta-layout-system
+# prompt for running cinnamon-layout-system
 if ! [ "$AUTO" ];
 then
-    zenity --question --title "wasta [Layout]: Update System Default?" \
+    zenity --question --title "Cinnamon-Layout: Update System Default?" \
         --no-wrap --height=150 --width=450 \
-        --window-icon=/usr/share/icons/hicolor/64x64/apps/wasta-linux.png \
-        --text="<b>Update Wasta-Layout system default to $CHOICE?</b>
+        --window-icon=/usr/share/icons/hicolor/64x64/apps/cinnamon-layout.png \
+        --text="<b>Update Cinnamon-Layout system default to $CHOICE?</b>
 
 <i>NOTE: you will need to provide an administrative password</i>"
     SET_DEFAULT=$?
 
     if [ "$SET_DEFAULT" == 0 ];
     then
-        pkexec /usr/bin/wasta-layout-system $CHOICE
+        pkexec /usr/bin/cinnamon-layout-system $CHOICE
         RETURN=$?
         if [ "$RETURN" -ne 0 ];
         then
-            # didn't return clean from wasta-layout-system: get outta here!
+            # didn't return clean from cinnamon-layout-system: get outta here!
             exit 1
         fi
-        MSG+="Wasta-Layout system default updated to: $CHOICE\n\n"
+        MSG+="Cinnamon-Layout system default updated to: $CHOICE\n\n"
     else
-        MSG+="Wasta-Layout system default not updated\n\n"
+        MSG+="Cinnamon-Layout system default not updated\n\n"
     fi
 fi
 
@@ -864,14 +865,14 @@ MSG+="<b>Please reboot your computer if you have any trouble</b>\n\n"
 echo
 echo "*** output messages:"
 echo "$MSG"
-echo "*** wasta-layout finished"
+echo "*** cinnamon-layout finished"
 echo
 
 # prompt user
 if ! [ "$AUTO" ];
 then
-    zenity --info --title "wasta [Layout]: Finished" --no-wrap --height=150 --width=450 \
-        --window-icon=/usr/share/icons/hicolor/64x64/apps/wasta-linux.png \
+    zenity --info --title "Cinnamon-Layout: Finished" --no-wrap --height=150 --width=450 \
+        --window-icon=/usr/share/icons/hicolor/64x64/apps/cinnamon-layout.png \
         --text="$MSG"
 fi
 

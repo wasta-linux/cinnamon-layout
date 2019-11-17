@@ -1,4 +1,4 @@
-wasta-cinnamon-layout-4-2: binary-without-manpage
-wasta-cinnamon-layout-4-2: executable-not-elf-or-script
-wasta-cinnamon-layout-4-2: extra-license-file
-wasta-cinnamon-layout-4-2: script-not-executable
+cinnamon-layout-4-4: binary-without-manpage
+cinnamon-layout-4-4: executable-not-elf-or-script
+cinnamon-layout-4-4: extra-license-file
+cinnamon-layout-4-4: script-not-executable

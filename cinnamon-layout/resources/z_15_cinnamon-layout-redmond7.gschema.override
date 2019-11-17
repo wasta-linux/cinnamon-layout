@@ -1,10 +1,9 @@
 # ==============================================================================
-# z_15_wasta-layout-redmond7.gschema.override
+# z_15_cinnamon-layout-redmond7.gschema.override
 #
 #   If same key overridden in 2 files, "last wins" regarding filenames.
-#       wasta-layout-redmond7 uses a "z_15_*" filename, to override the
-#       wasta-core "z_10_*" files.  Regional customizations
-#       use "z_20_*" filenames to override the "z_10_*" through "z_19_*" files.
+#       cinnamon-layout-redmond7 uses a "z_15_*" filename, to override the
+#       z12_cinnamon-layout-default file.
 #
 # enabled-applet wasta numbers:
 #   (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
