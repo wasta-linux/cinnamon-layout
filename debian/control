@@ -1,4 +1,4 @@
-Source: cinnamon-layout
+Source: cinnamon-layout-4-2
 Section: utils
 Priority: optional
 Maintainer: Rik Shaw <rikshaw76@gmail.com>
@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.7
 Homepage: https://github.com/wasta-linux/cinnamon-layout
 
-Package: cinnamon-layout
+Package: cinnamon-layout-4-2
 Architecture: all
 Depends: arc-theme (>=20181023-1), cinnamon (>= 4.2), cinnamon-common (>= 4.2), cinnamon-control-center (>= 4.2), cinnamon-desktop-data (>= 4.2), cinnamon-l10n (>= 4.2), cinnamon-screensaver (>= 4.2), cinnamon-session (>= 4.2), cinnamon-settings-daemon (>= 4.2), cjs (>= 4.2), jq, muffin (>= 4.2), nemo (>= 4.2), papirus-icon-theme, plank, python:any, python3, wasta-papirus, ${shlibs:Depends}, ${misc:Depends}
 Recommends: arc-solid-theme, wasta-vertex-ubuntu
