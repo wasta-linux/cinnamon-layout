@@ -3,10 +3,8 @@
 #
 #   If same key overridden in 2 files, "last wins" regarding filenames
 #       (so a "z_10_*" filename would win over a "10_*" filename)
-#       wasta-core uses "z_10_*" filenames, regional customizations
-#       use "z_20_*" filenames.
 #
-# enabled-applets wasta numbers:
+# enabled-applets numbers:
 #   (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder)
 #
 #   menu@cinnamon.org:101
