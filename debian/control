@@ -1,4 +1,4 @@
-Source: cinnamon-layout-4-2
+Source: cinnamon-layout-4-0
 Section: utils
 Priority: optional
 Maintainer: Rik Shaw <rikshaw76@gmail.com>
@@ -6,9 +6,9 @@ Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 4.4.0
 Homepage: https://github.com/wasta-linux/cinnamon-layout
 
-Package: cinnamon-layout-4-2
+Package: cinnamon-layout-4-0
 Architecture: all
-Depends: arc-theme (>=20181023-1), cinnamon (>= 4.2), cinnamon-common (>= 4.2), cinnamon-control-center (>= 4.2), cinnamon-desktop-data (>= 4.2), cinnamon-l10n (>= 4.2), cinnamon-screensaver (>= 4.2), cinnamon-session (>= 4.2), cinnamon-settings-daemon (>= 4.2), cjs (>= 4.2), jq, muffin (>= 4.2), nemo (>= 4.2), papirus-icon-theme, plank, python:any, python3, wasta-papirus, ${shlibs:Depends}, ${misc:Depends}
+Depends: arc-theme (>=20181023-1), cinnamon (>= 4.0), cinnamon-common (>= 4.0), cinnamon-control-center (>= 4.0), cinnamon-desktop-data (>= 4.0), cinnamon-l10n (>= 4.0), cinnamon-screensaver (>= 4.0), cinnamon-session (>= 4.0), cinnamon-settings-daemon (>= 4.0), cjs (>= 4.0), jq, muffin (>= 4.0), nemo (>= 4.0), papirus-icon-theme, plank, python:any, python3, wasta-papirus, ${shlibs:Depends}, ${misc:Depends}
 Recommends: arc-solid-theme, wasta-vertex-ubuntu
 Description: Cinnamon Layout Switcher
  Layout switcher for Cinnamon Desktop

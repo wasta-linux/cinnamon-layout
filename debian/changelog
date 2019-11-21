@@ -1,38 +1,8 @@
-cinnamon-layout-4-2 (4.2.4) bionic; urgency=medium
+cinnamon-layout-4-0 (4.0.9) bionic; urgency=medium
 
-  * removing ITM applet plus lintian cleanup
+  * branched from cinnamon-layout-4-2
 
- -- Rik Shaw <rikshaw76@gmail.com>  Thu, 21 Nov 2019 16:27:31 +0300
-
-cinnamon-layout-4-2 (4.2.3) bionic; urgency=medium
-
-  * renaming to cinnamon-layout
-
- -- Rik Shaw <rikshaw76@gmail.com>  Sun, 17 Nov 2019 16:19:55 +0300
-
-wasta-cinnamon-layout-4-2 (4.2.2) bionic; urgency=medium
-
-  * adding new applet files to git
-
- -- Rik Shaw <rikshaw76@gmail.com>  Sun, 11 Aug 2019 20:36:03 +0300
-
-wasta-cinnamon-layout-4-2 (4.2.1) bionic; urgency=medium
-
-  * correcting package name in debian/control, etc.
-
- -- Rik Shaw <rikshaw76@gmail.com>  Fri, 09 Aug 2019 10:56:43 +0300
-
-wasta-cinnamon-layout-4-2 (4.2.0) bionic; urgency=medium
-
-  * Initial Cinnamon 4.2 compatibility
-
- -- Rik Shaw <rikshaw76@gmail.com>  Fri, 09 Aug 2019 09:55:13 +0300
-
-wasta-cinnamon-layout-4-0 (4.0.9) bionic; urgency=medium
-
-  * adding 'widescreen' layout
-
- -- Rik Shaw <rikshaw76@gmail.com>  Sun, 28 Jul 2019 17:32:03 +0300
+ -- Rik Shaw <rikshaw76@gmail.com>  Thu, 21 Nov 2019 16:34:32 +0300
 
 wasta-cinnamon-layout-4-0 (4.0.8) bionic; urgency=medium
 
