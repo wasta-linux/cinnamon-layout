@@ -17,6 +17,7 @@
 #   2018-09-19 rik: adjusting default ITM pinned-apps
 #   2019-07-28 rik: adding collapsible-systray@feuerfuchs.eu tweaks
 #   2019-11-17 rik: updating name to cinnamon-layout
+#   2019-11-21 rik: removing ITM adjustments
 #
 # ==============================================================================
 
@@ -48,7 +49,7 @@ DIR=/usr/share/cinnamon-layout
 # Applet / Extension adjustments
 # ------------------------------------------------------------------------------
 
-# Making adjustments here (instead of login script) since only we place these
+# Making adjustments here since only we place these
 #   applets at the system level so don't need to be concerned they will be
 #   overridden by any updates to cinnamon, etc.
 
@@ -61,27 +62,6 @@ echo "updating JSON_FILE: $JSON_FILE"
 # - note: jq can't do "sed -i" inplace update, so need to re-create file, then
 #     update ownership (in case run as root)
 NEW_FILE=$(jq '.["use-custom-format"].default=true | .["custom-format"].default="%l:%M %p"' \
-    < $JSON_FILE)
-echo "$NEW_FILE" > $JSON_FILE
-
-# legacy: remove for 20.04
-# applet: IcingTaskManager@json
-JSON_FILE=/usr/share/cinnamon/applets/IcingTaskManager@json/3.8/settings-schema.json
-echo "updating JSON_FILE: $JSON_FILE"
-# updates:
-# - number-display: for "all open apps" (rather than only showing number if more than 1)
-# - pinned-apps: set defaults
-# - cycleMenusHotkey: disable (wast defaulted to super+space which is for ibus)
-# - enable-hover-peek: disable (so no "flashing" on screen when hovering previews)
-# - icon-spacing: spread out a bit (too crowded by default) and set max a bit bigger
-# - icon-padding: increase a bit again for a bit of padding between items
-# - include-all-windows: set to "false" so child windows aren't shown
-# - thumbnail-padding: set to 5 (for space around thumbnails)
-# - thumbnail-size: set to 8
-# - disable deprecation notice
-# - note: jq can't do "sed -i" inplace update, so need to re-create file, then
-#     update ownership (in case run as root)
-NEW_FILE=$(jq '.["number-display"].default=2 | .["pinned-apps"].default=["firefox.desktop", "nemo.desktop", "libreoffice-writer.desktop"] | .["cycleMenusHotkey"].default="" | .["enable-hover-peek"].default=false | .["icon-spacing"].default=15 | .["icon-spacing"].max=21 | .["icon-padding"].default=11 | .["include-all-windows"].default=false | .["thumbnail-padding"].default=5 | .["thumbnail-size"].default=8 | .["deprecationNoticeRun"].default=true' \
     < $JSON_FILE)
 echo "$NEW_FILE" > $JSON_FILE
 

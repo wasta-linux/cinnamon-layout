@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Rik Shaw <rikshaw76@gmail.com>
 Build-Depends: debhelper (>= 8.0.0)
-Standards-Version: 3.9.7
+Standards-Version: 4.4.0
 Homepage: https://github.com/wasta-linux/cinnamon-layout
 
 Package: cinnamon-layout-4-2

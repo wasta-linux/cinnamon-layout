@@ -1,3 +1,9 @@
+cinnamon-layout-4-2 (4.2.4) bionic; urgency=medium
+
+  * removing ITM applet plus lintian cleanup
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Thu, 21 Nov 2019 16:27:31 +0300
+
 cinnamon-layout-4-2 (4.2.3) bionic; urgency=medium
 
   * renaming to cinnamon-layout
