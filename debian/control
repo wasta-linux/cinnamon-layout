@@ -10,5 +10,7 @@ Package: cinnamon-layout-4-0
 Architecture: all
 Depends: arc-theme (>=20181023-1), cinnamon (>= 4.0), cinnamon-common (>= 4.0), cinnamon-control-center (>= 4.0), cinnamon-desktop-data (>= 4.0), cinnamon-l10n (>= 4.0), cinnamon-screensaver (>= 4.0), cinnamon-session (>= 4.0), cinnamon-settings-daemon (>= 4.0), cjs (>= 4.0), jq, muffin (>= 4.0), nemo (>= 4.0), papirus-icon-theme, plank, python:any, python3, wasta-papirus, ${shlibs:Depends}, ${misc:Depends}
 Recommends: arc-solid-theme, wasta-vertex-ubuntu
+Breaks: cinnamon-layout-4-2
+Replaces: cinnamon-layout-4-2
 Description: Cinnamon Layout Switcher
  Layout switcher for Cinnamon Desktop
