@@ -44,6 +44,7 @@
 #   2019-03-12 rik: correcting prompt for wasta-layout-system
 #   2019-07-28 rik: adding widescreen
 #   2019-11-17 rik: renaming to cinnamon-layout
+#   2019-11-24 rik: removing legacy ITM settings
 #
 # ==============================================================================
 
@@ -106,34 +107,6 @@ fi
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
-
-#updateITMPinned()
-#{
-#    #if SAVED_LAUNCHERS set pinned-apps
-#    if [ "$SAVED_LAUNCHERS" ];
-#    then
-#        # ITM has different configs for different cinnamon versions
-#        # 2018-04: Identical for 3.4 and 3.8
-#        DEFAULT_CONFIG=/usr/share/cinnamon/applets/IcingTaskManager@json/3.8/settings-schema.json
-#        JSON_DIR=/home/$USER/.cinnamon/configs/IcingTaskManager@json
-#        # NOTE: #.json has to match enabled-applets number!!
-#        JSON_FILE=$JSON_DIR/115.json
-#
-#        if ! [ -e "$JSON_FILE" ];
-#        then
-#            echo "copying in default json config: $DEFAULT_CONFIG"
-#            mkdir -p $JSON_DIR 
-#            cp $DEFAULT_CONFIG $JSON_FILE
-#        fi
-#
-#        #now update saved launchers for ALL instances (hopefully not going to make anyone angry...)
-#        echo "updating config for JSON_FILE: $JSON_FILE"
-#        #jq can't do "sed -i" inplace update, so need to re-create file, then
-#        # update ownership (in case run as root)
-#        NEW_FILE=$(jq '.["pinned-apps"].value='"$SAVED_LAUNCHERS" < $JSON_FILE)
-#        echo "$NEW_FILE" > $JSON_FILE
-#    fi
-#}
 
 updateGWLPinned()
 {
@@ -358,31 +331,10 @@ then
     PL_LAUNCHERS=$(jq -c '.["launcherList"].value' < $PL_FILE)
 fi
 
-# legacy: remove for 20.04
-ITM_FILE=/home/$USER/.cinnamon/configs/IcingTaskManager@json/115.json
-if [ -e "$ITM_FILE" ];
-then
-    ITM_PINNED_APPS=$(jq -c '.["pinned-apps"].value' < $ITM_FILE)
-fi
-
-
 GWL_FILE=/home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org/120.json
 if [ -e "$GWL_FILE" ];
 then
     GWL_PINNED_APPS=$(jq -c '.["pinned-apps"].value' < $GWL_FILE)
-fi
-
-# legacy: remove for 20.04
-# migration from ITM to GWL
-if [ "$ITM_FILE" -nt "$GWL_FILE" ];
-then
-    echo
-    echo "*** Migrating ITM Pinned Apps to GWL"
-    echo
-    mkdir -p "/home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org"
-    # copy ITM to GWL, preserving date/time
-    cp -p $ITM_FILE $GWL_FILE
-    GWL_PINNED_APPS=$ITM_PINNED_APPS
 fi
 
 if [ "$PL_FILE" -nt "$GWL_FILE" ];
@@ -410,20 +362,6 @@ else
     fi
     echo
 fi
-
-#if [ "$PL_FILE" -nt "$ITM_FILE" ];
-#then
-#    echo "*** PL newest"
-#    SAVED_LAUNCHERS=$PL_LAUNCHERS
-#    echo "*** SAVED_LAUNCHERS set to: $PL_LAUNCHERS"
-#elif [ "$ITM_FILE" -nt "$PL_FILE" ];
-#then
-#    echo "*** ITM newest"
-#    SAVED_LAUNCHERS=$ITM_PINNED_APPS
-#    echo "*** SAVED_LAUNCHERS set to: $ITM_PINNED_APPS"
-#else
-#    echo "*** PL and ITM don't exist..... both equal implying only at default"
-#fi
 
 echo
 echo "*** SAVED_LAUNCHERS final value: $SAVED_LAUNCHERS"
