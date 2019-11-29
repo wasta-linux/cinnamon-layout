@@ -41,14 +41,16 @@
 #   2018-05-20 rik: UpdateITMPinned adjusted for Cinnamon 3.8 schema location
 #   2018-05-22 rik: resetting button-layout for window controls
 #   2019-02-23 rik: updating for cinnamon 4.0: migrate ITM to GWL
-#   2019-03-12 rik: correcting prompt for wasta-layout-system
+#   2019-03-12 rik: correcting prompt for cinnamon-layout-system
 #   2019-07-28 rik: adding widescreen
 #   2019-11-17 rik: renaming to cinnamon-layout
 #   2019-11-24 rik: removing legacy ITM settings
 #
 # ==============================================================================
 
-# ****TODO: need to reset configs (menu icon, label, etc.) depending on layout, since no longer relying on cinnamon-layout-system to set the default for the current user.
+# ****TODO: need to reset configs (menu icon, label, etc.) depending on layout,
+#   since no longer relying on cinnamon-layout-system to set the default for
+#   the current user.
 
 # ------------------------------------------------------------------------------
 # Ensure script running as regular user

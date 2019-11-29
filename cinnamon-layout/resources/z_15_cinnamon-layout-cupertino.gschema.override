@@ -2,10 +2,12 @@
 # z_15_cinnamon-layout-cupertino.gschema.override
 #
 #   If same key overridden in 2 files, "last wins" regarding filenames.
-#       cinnamon-layout-cupertino uses a "z_15_*" filename, to override the
-#       z12_cinnamon-layout-default file.
+#       cinnamon-layout gschema.override files begin with "z_15_*", to override
+#       any distribution-specific gschema.override files.
 #
-# enabled-applet numbers:
+#   cinnamon-layout enabled-applets numbers: standardized to ensure applets
+#       always get the same applet number to help any settings migration when
+#       using different layouts:
 #   (will show as #.json in user's ~/.cinnamon/configs/applet-name/ folder):
 #
 #   menu@cinnamon.org:101
