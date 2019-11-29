@@ -1,3 +1,9 @@
+cinnamon-layout-4-2 (4.2.7) bionic; urgency=medium
+
+  * correct debian/install-files for updated policy filename
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Fri, 29 Nov 2019 17:29:46 +0300
+
 cinnamon-layout-4-2 (4.2.6) bionic; urgency=medium
 
   * minor comments cleanup
