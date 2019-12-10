@@ -1,3 +1,10 @@
+cinnamon-layout-4-2 (4.2.8) bionic; urgency=medium
+
+  * resources/z_15_widescreen: panel-zone-icons-sizes needs right:24, previous
+    right:22 causes issues with ibus interface when clicking.
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Tue, 10 Dec 2019 11:14:06 +0300
+
 cinnamon-layout-4-2 (4.2.7) bionic; urgency=medium
 
   * correct debian/install-files for updated policy filename
