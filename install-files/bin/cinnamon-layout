@@ -45,6 +45,7 @@
 #   2019-07-28 rik: adding widescreen
 #   2019-11-17 rik: renaming to cinnamon-layout
 #   2019-11-24 rik: removing legacy ITM settings
+#   2019-12-10 rik: panel-zone-icon-sizes needs right:24 for ibus compatibility
 #
 # ==============================================================================
 
@@ -527,6 +528,8 @@ case "$CHOICE" in
     # make sure AM/PM in clock display
     restoreAMPM
 
+    # TODO: why manually set the below items rather than just resetting them? I suspect because these are user level and the system level may be different. There should be a better way rather than duplicating the code here however.
+
     # need to set keys associated with panel layouts
     gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:101', 'panel1:left:1:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:windows-quick-list@cinnamon.org:114']"
     gsettings set org.cinnamon enabled-extensions "[]"
@@ -719,7 +722,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
     # all "panels" items need reset since number of panels could have changed
-    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22}]'
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:left']"
     gsettings set org.cinnamon panels-height "['1:40']"
