@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-4-2 (4.2.3) bionic; urgency=medium
+
+  * widescreen: needs panel-zone-icon-sizes right:24 for ibus compatibility
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Tue, 10 Dec 2019 11:20:22 +0300
+
 wasta-cinnamon-layout-4-2 (4.2.2) bionic; urgency=medium
 
   * adding new applet files to git
