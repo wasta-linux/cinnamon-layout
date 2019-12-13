@@ -8,10 +8,12 @@
 #   2017-12-24 rik: initial script
 #   2018-01-18 rik: only killall plank if plank process detected
 #   2018-03-26 rik: adding removeMenuFavs function for unity
-#   - adding changeMenuIcon function for unity
+#     - adding changeMenuIcon function for unity
 #   2019-02-23 rik: updating for cinnamon 4.0 compatibility
 #   2019-07-28 rik: adding widescreen layout
 #   2019-11-17 rik: renaming to cinnamon-layout-system
+#   2019-12-13 rik: adding 'traditional' layout ('default' now not specified
+#       in cinnamon-layout, but depends on system defaults)
 #
 # ==============================================================================
 
@@ -165,6 +167,23 @@ default)
     echo
 ;;
 
+traditional)
+    # Set cinnamon-layout to traditional layout
+    rm -rf $SCHEMA_DIR/z_15_cinnamon-layout*.gschema.override
+    ln -s $DIR/resources/z_15_cinnamon-layout-traditional.gschema.override \
+        $SCHEMA_DIR/
+
+    # reset Main Menu
+    resetMenu
+
+    # make sure AM/PM in clock display
+    restoreAMPM
+
+    echo
+    echo " *** finished setting layout to $1"
+    echo
+;;
+
 redmond7)
     # Set cinnamon-layout to redmond7 layout
     rm -rf $SCHEMA_DIR/z_15_cinnamon-layout*.gschema.override
@@ -266,7 +285,7 @@ widescreen)
 esac
 
 # --------------------------------------------------------------------------
-# Compile schemas affected by cinnamon-layout
+# Compile schemas affected by cinnamon-layout-system
 # --------------------------------------------------------------------------
 
 # MAIN System schemas: Sending any output to null (if any key not found)

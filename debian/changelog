@@ -1,3 +1,10 @@
+cinnamon-layout-4-2 (4.2.9) focal; urgency=medium
+
+  * adding 'traditional' layout, and making sure 'default'
+    will reset back to system default rather than being hardcoded
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Fri, 13 Dec 2019 12:26:49 +0300
+
 cinnamon-layout-4-2 (4.2.8) bionic; urgency=medium
 
   * resources/z_15_widescreen: panel-zone-icons-sizes needs right:24, previous

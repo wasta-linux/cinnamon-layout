@@ -46,6 +46,8 @@
 #   2019-11-17 rik: renaming to cinnamon-layout
 #   2019-11-24 rik: removing legacy ITM settings
 #   2019-12-10 rik: panel-zone-icon-sizes needs right:24 for ibus compatibility
+#   2019-12-13 rik: adding 'traditional' layout, and making sure 'default'
+#       will reset back to system default rather than being hardcoded
 #
 # ==============================================================================
 
@@ -110,6 +112,36 @@ fi
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
+
+updatePanelLaunchers()
+{
+    #if SAVED_LAUNCHERS set panel-launchers
+    if [ "$SAVED_LAUNCHERS" ];
+    then
+        DEFAULT_CONFIG=/usr/share/cinnamon/applets/panel-launchers@cinnamon.org/settings-schema.json
+        JSON_DIR=/home/$USER/.cinnamon/configs/panel-launchers@cinnamon.org
+        # NOTE: #.json has to match enabled-applets number!!
+        JSON_FILE=$JSON_DIR/103.json
+
+        if ! [ -e "$JSON_FILE" ];
+        then
+            echo
+            echo "*** copying in default json config: $DEFAULT_CONFIG"
+            echo
+            mkdir -p $JSON_DIR
+            cp $DEFAULT_CONFIG $JSON_FILE
+        fi
+
+        #update saved launchers
+        echo
+        echo "*** updating JSON_FILE: $JSON_FILE"
+        echo
+        #jq can't do "sed -i" inplace update, so need to re-create file, then
+        # update ownership (in case run as root)
+        NEW_FILE=$(jq '.["launcherList"].value='"$SAVED_LAUNCHERS" < $JSON_FILE)
+        echo "$NEW_FILE" > $JSON_FILE
+    fi
+}
 
 updateGWLPinned()
 {
@@ -325,7 +357,7 @@ changeMenuIcon()
 # Main Processing
 # ------------------------------------------------------------------------------
 
-# SAVE current GWL OR panel-launcher apps to restore later....
+# SAVE current GWL OR panel-launcher list to restore later....
 SAVED_LAUNCHERS=""
 
 PL_FILE=/home/$USER/.cinnamon/configs/panel-launchers@cinnamon.org/103.json
@@ -411,8 +443,9 @@ items of the Cinnamon Desktop Interface.
 
 <b><i>Choose your preferred layout:</i></b>" --radiolist \
         --column "" --column "Layout" --column "Description" \
-        TRUE        default           "Default Cinnamon layout" \
-        FALSE       redmond7          "Windows 7 inspired layout" \
+        TRUE        default           "System default Cinnamon layout" \
+        TRUE        traditional       "Traditional Cinnamon layout with non-grouped window list" \
+        FALSE       redmond7          "Windows 7 inspired layout with grouped window list" \
         FALSE       cupertino         "MacOS/OSX insipired layout" \
         FALSE       unity             "Ubuntu Unity inspired layout" \
         FALSE       widescreen        "Left panel widescreen layout")
@@ -428,7 +461,7 @@ then
 fi
 
 # all layouts: stop plank and disable any user-level plank
-# autostart (cupertino will later re-enable)
+# autostart (cupertino layout will later re-enable)
 killall plank > /dev/null 2>&1 || true;
 
 PLANK_FILE=/home/$USER/.config/autostart/plank-cinnamon-layout.desktop
@@ -454,37 +487,48 @@ case "$CHOICE" in
     rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@cinnamon.org
     rm -rf /home/$USER/.cinnamon/configs/calendar@cinnamon.org
 
+    # System default could either use panel-launchers OR GWL, so need to make
+    #   sure both updated
     # if SAVED_LAUNCHERS set panel-launchers
-    if [ "$SAVED_LAUNCHERS" ];
-    then
-        DEFAULT_CONFIG=/usr/share/cinnamon/applets/panel-launchers@cinnamon.org/settings-schema.json
-        JSON_DIR=/home/$USER/.cinnamon/configs/panel-launchers@cinnamon.org
-        # NOTE: #.json has to match enabled-applets number!!
-        JSON_FILE=$JSON_DIR/103.json
+    updatePanelLaunchers
 
-        if ! [ -e "$JSON_FILE" ];
-        then
-            echo
-            echo "*** copying in default json config: $DEFAULT_CONFIG"
-            echo
-            mkdir -p $JSON_DIR
-            cp $DEFAULT_CONFIG $JSON_FILE
-        fi
+    # if SAVED_LAUNCHERS set GWL pinned-apps
+    updateGWLPinned
 
-        #update saved launchers
-        echo
-        echo "*** updating JSON_FILE: $JSON_FILE"
-        echo
-        #jq can't do "sed -i" inplace update, so need to re-create file, then
-        # update ownership (in case run as root)
-        NEW_FILE=$(jq '.["launcherList"].value='"$SAVED_LAUNCHERS" < $JSON_FILE)
-        echo "$NEW_FILE" > $JSON_FILE
-    fi
+    # need to reset keys associated with panel layouts
+    gsettings reset org.cinnamon enabled-applets
+    gsettings reset org.cinnamon enabled-extensions
+    # all "panels" items need reset since number of panels could have changed
+    gsettings reset org.cinnamon panel-zone-icon-sizes
+    gsettings reset org.cinnamon panels-autohide
+    gsettings reset org.cinnamon panels-enabled
+    gsettings reset org.cinnamon panels-height
+    gsettings reset org.cinnamon panels-hide-delay
+    gsettings reset org.cinnamon panels-show-delay
+
+    gsettings reset org.cinnamon.desktop.wm.preferences button-layout
+;;
+
+"traditional")
+    # menu@cinnamon.org:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+
+    # reset menu applet to default:
+    resetMenu
+
+    # calendar@cinnamon.org:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@cinnamon.org
+    rm -rf /home/$USER/.cinnamon/configs/calendar@cinnamon.org
+
+    # if SAVED_LAUNCHERS set panel-launchers
+    updatePanelLaunchers
 
     # need to set keys associated with panel layouts
     gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:101', 'panel1:left:1:show-desktop@cinnamon.org:102', 'panel1:left:2:panel-launchers@cinnamon.org:103', 'panel1:left:3:window-list@cinnamon.org:105', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@cinnamon.org:118', 'panel1:right:9:windows-quick-list@cinnamon.org:114']"
     gsettings set org.cinnamon enabled-extensions "[]"
-    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
@@ -492,6 +536,8 @@ case "$CHOICE" in
     gsettings set org.cinnamon panels-height "['1:28']"
     gsettings set org.cinnamon panels-hide-delay "['1:0']"
     gsettings set org.cinnamon panels-show-delay "['1:0']"
+
+    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
 ;;
 
 "redmond7")
@@ -528,12 +574,9 @@ case "$CHOICE" in
     # make sure AM/PM in clock display
     restoreAMPM
 
-    # TODO: why manually set the below items rather than just resetting them? I suspect because these are user level and the system level may be different. There should be a better way rather than duplicating the code here however.
-
     # need to set keys associated with panel layouts
     gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:101', 'panel1:left:1:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:windows-quick-list@cinnamon.org:114']"
     gsettings set org.cinnamon enabled-extensions "[]"
-    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
@@ -541,6 +584,8 @@ case "$CHOICE" in
     gsettings set org.cinnamon panels-height "['1:35']"
     gsettings set org.cinnamon panels-hide-delay "['1:0']"
     gsettings set org.cinnamon panels-show-delay "['1:0']"
+
+    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
 ;;
 
 "unity")
@@ -589,7 +634,6 @@ case "$CHOICE" in
     # need to set keys associated with panel layouts
     gsettings set org.cinnamon enabled-applets "['panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116', 'panel2:left:0:menu@cinnamon.org:101', 'panel2:left:1:show-desktop@cinnamon.org:102', 'panel2:left:2:grouped-window-list@cinnamon.org:120', 'panel2:right:1:trash@cinnamon.org:117']"
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
-    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
     gsettings set org.cinnamon panels-autohide "['1:false', '2:false']"
@@ -597,6 +641,8 @@ case "$CHOICE" in
     gsettings set org.cinnamon panels-height "['1:28', '2:40']"
     gsettings set org.cinnamon panels-hide-delay "['1:0', '2:0']"
     gsettings set org.cinnamon panels-show-delay "['1:0', '2:0']"
+
+    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
 ;;
 
 "cupertino")
@@ -666,7 +712,6 @@ case "$CHOICE" in
     # need to set keys associated with panel layouts
     gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:101', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116']"
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
-    gsettings set org.cinnamon.desktop.wm.preferences button-layout 'close,minimize,maximize:'
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
@@ -674,6 +719,8 @@ case "$CHOICE" in
     gsettings set org.cinnamon panels-height "['1:28']"
     gsettings set org.cinnamon panels-hide-delay "['1:0']"
     gsettings set org.cinnamon panels-show-delay "['1:0']"
+
+    gsettings set org.cinnamon.desktop.wm.preferences button-layout 'close,minimize,maximize:'
 ;;
 
 "widescreen")
@@ -720,7 +767,6 @@ case "$CHOICE" in
     #   panel.
     gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:collapsible-systray@feuerfuchs.eu:121', 'panel1:right:4:inhibit@cinnamon.org:107', 'panel1:right:5:sound@cinnamon.org:111', 'panel1:right:6:network@cinnamon.org:110', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:spacer@cinnamon.org:150', 'panel1:right:9:calendar@simonwiles.net:113:orient', 'panel1:right:10:spacer@cinnamon.org:151']"
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
-    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
@@ -728,6 +774,8 @@ case "$CHOICE" in
     gsettings set org.cinnamon panels-height "['1:40']"
     gsettings set org.cinnamon panels-hide-delay "['1:0']"
     gsettings set org.cinnamon panels-show-delay "['1:0']"
+
+    gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
 ;;
 
 *)
