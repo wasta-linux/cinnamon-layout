@@ -159,8 +159,11 @@ default)
     # Set cinnamon-layout to default layout
     rm -rf $SCHEMA_DIR/z_15_cinnamon-layout*.gschema.override
 
-    # reset menu applet:
+    # reset Main Menu:
     resetMenu
+
+    # make sure AM/PM in clock display
+    restoreAMPM
 
     echo
     echo " *** finished setting layout to $1"
