@@ -17,3 +17,16 @@ Similarly, Cinnamon-Layout-System can be run at the system level (to change syst
 ```
 cinnamon-layout-system redmond7
 ```
+
+For customizers, the Cinnamon Main Menu icon has been registered with the Debian update-alternatives system. This means that the menu icon is set to the symlink /usr/share/cinnamon-layout/menu-icon which in turn is set by whatever is registered as the current target. You can register your own icon as an alternative file with this command:
+
+```
+update-alternatives --install /usr/share/cinnamon-layout/menu-icon menu-icon \
+    /path/to/your/icon.png 100
+```
+
+You then need to set menu-icon to your update-alternative selection:
+
+```
+update-alternatives --set menu-icon /path/to/your/icon.png
+```
