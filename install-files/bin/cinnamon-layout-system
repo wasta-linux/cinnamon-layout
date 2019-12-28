@@ -14,6 +14,8 @@
 #   2019-11-17 rik: renaming to cinnamon-layout-system
 #   2019-12-13 rik: adding 'traditional' layout ('default' now not specified
 #       in cinnamon-layout, but depends on system defaults)
+#   2019-12-28 rik: updating menu-icon to use update-alternatives locations
+#     - using single standare menu-icon for all layouts
 #
 # ==============================================================================
 
@@ -59,14 +61,13 @@ resetMenu()
     JSON_FILE=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
 
     # reset to show favorite / shutdown options
-    # reset to not use custom menu icon
-    # reset menu icon value
+    # set menu icon to standard icon: menu-icon
     # reset label to "Menu"
     echo "Resetting JSON_FILE:"
     echo "    $JSON_FILE"
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["favbox-show"].default=true | .["menu-custom"].default=true | .["menu-icon"].default="'/usr/share/cinnamon/theme/menu-symbolic.svg'" | .["menu-label"].default="Menu"' \
+    NEW_FILE=$(jq '.["favbox-show"].default=true | .["menu-custom"].default=true | .["menu-icon"].default="'$DIR/menu-icon'" | .["menu-label"].default="Menu"' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }
@@ -76,8 +77,6 @@ removeMenuFavs()
     # menu applet updates
     JSON_FILE=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
     # hide favorite / shutdown options
-    # use custom menu icon
-    # remove label
     echo "Removing Favorites and Session options from JSON_FILE:"
     echo "    $JSON_FILE"
     #jq can't do "sed -i" inplace update, so need to re-create file, then
@@ -87,18 +86,17 @@ removeMenuFavs()
     echo "$NEW_FILE" > $JSON_FILE
 }
 
-changeMenuIcon()
+removeMenuLabel()
 {
     # menu applet updates
     JSON_FILE=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
-    # hide favorite / shutdown options
-    # use custom menu icon
+    # set menu icon to standard icon: menu-icon
     # remove label
     echo "Changing Menu Icon for JSON_FILE:"
     echo "    $JSON_FILE"
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["menu-custom"].default=true | .["menu-icon"].default="'$DIR/resources/cinnamon-launcher.png'" | .["menu-label"].default=""' \
+    NEW_FILE=$(jq '.["menu-custom"].default=true | .["menu-icon"].default="'$DIR/menu-icon'" | .["menu-label"].default=""' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }
@@ -213,8 +211,8 @@ unity)
     # remove Favorites and Session options from Main Menu
     removeMenuFavs
 
-    # set launcher icon and no label for Main Menu
-    changeMenuIcon
+    # remove label for Main Menu
+    removeMenuLabel
 
     # make sure AM/PM in clock display
     restoreAMPM
@@ -265,8 +263,8 @@ widescreen)
     # reset menu applet:
     resetMenu
 
-    # set launcher icon and no label for Main Menu
-    changeMenuIcon
+    # remove label for Main Menu
+    removeMenuLabel
 
     # remove AM/PM from clock display
     removeAMPM

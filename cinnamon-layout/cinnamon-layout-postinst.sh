@@ -18,6 +18,7 @@
 #   2019-07-28 rik: adding collapsible-systray@feuerfuchs.eu tweaks
 #   2019-11-17 rik: updating name to cinnamon-layout
 #   2019-11-21 rik: removing ITM adjustments
+#   2019-12-28 rik: installing menu-icon to update-alternatives
 #
 # ==============================================================================
 
@@ -87,6 +88,15 @@ echo "updating JSON_FILE: $JSON_FILE"
 NEW_FILE=$(jq '.["transparency-type"].default="panel-semi-transparent" | .["first-launch"].default=false' \
     < $JSON_FILE)
 echo "$NEW_FILE" > $JSON_FILE
+
+# ------------------------------------------------------------------------------
+# install menu-icons using update-alternatives
+# ------------------------------------------------------------------------------
+echo
+echo "*** Installing default menu-icon to update-alternatives system"
+echo
+update-alternatives --install $DIR/menu-icon menu-icon \
+    $DIR/resources/menu-icon.png 100
 
 # ------------------------------------------------------------------------------
 # Dconf / Gsettings Default Value adjustments
