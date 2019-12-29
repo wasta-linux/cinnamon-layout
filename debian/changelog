@@ -1,3 +1,9 @@
+cinnamon-layout-4-2 (4.2.11) focal; urgency=medium
+
+  * debian/control: removing ${shlibs:Depends}
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sun, 29 Dec 2019 20:45:11 +0300
+
 cinnamon-layout-4-2 (4.2.10) focal; urgency=medium
 
   * installing menu-icon to update-alternatives system so distros
