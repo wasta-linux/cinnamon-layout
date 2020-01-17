@@ -77,6 +77,17 @@ NEW_FILE=$(jq '.["tray-icon-padding"].default=2' \
     < $JSON_FILE)
 echo "$NEW_FILE" > $JSON_FILE
 
+# applet: places-bookmarks@dmo60.de
+JSON_FILE=/usr/share/cinnamon/applets/places-bookmarks@dmo60.de/settings-schema.json
+echo "updating JSON_FILE: $JSON_FILE"
+# updates:
+# - pref_applet_icon: set to user-home-symbolic
+# - note: jq can't do "sed -i" inplace update, so need to re-create file, then
+#     update ownership (in case run as root)
+NEW_FILE=$(jq '.["pref_applet_icon"].default="user-home-symbolic"' \
+    < $JSON_FILE)
+echo "$NEW_FILE" > $JSON_FILE
+
 # extension: transparent-panels@germanfr
 JSON_FILE=/usr/share/cinnamon/extensions/transparent-panels@germanfr/settings-schema.json
 echo "updating JSON_FILE: $JSON_FILE"

@@ -30,6 +30,9 @@
 #   calendar@cinnamon.org:118
 #   notifications@cinnamon.org:119
 #   grouped-window-list@cinnamon.org:120
+#   collapsible-systray@feuerfuchs.eu:121
+#   places-bookmarks@dmo60.de:122
+#   workspace-switcher@cinnamon.org:123
 #
 #   After modifying these .override files, reload with:
 #       glib-compile-schemas /usr/share/glib-2.0/schemas/

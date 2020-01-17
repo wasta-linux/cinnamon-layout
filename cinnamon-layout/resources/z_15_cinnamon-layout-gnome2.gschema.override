@@ -1,5 +1,5 @@
 # ==============================================================================
-# z_15_cinnamon-layout-redmond7.gschema.override
+# z_15_cinnamon-layout-gnome2.gschema.override
 #
 #   If same key overridden in 2 files, "last wins" regarding filenames.
 #       cinnamon-layout gschema.override files begin with "z_15_*", to override
@@ -37,19 +37,16 @@
 #   After modifying these .override files, reload with:
 #       glib-compile-schemas /usr/share/glib-2.0/schemas/
 #
-#   2017-12-24 rik: initial script
-#   2018-02-28 rik: set panels-scale-text-icons to false or else ibus menus
-#       get corrupted.
-#   2019-02-23 rik: updates for cinnamon 4.0
+#   2020-01-15 rik: initial script
 #
 # ==============================================================================
 
 [org.cinnamon]
-enabled-applets = ['panel1:left:0:menu@cinnamon.org:101', 'panel1:left:1:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:windows-quick-list@cinnamon.org:114']
+enabled-applets = ['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:places-bookmarks@dmo60.de:122', 'panel1:left:3:panel-launchers@cinnamon.org:103', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:inhibit@cinnamon.org:107', 'panel1:right:4:systray@cinnamon.org:108', 'panel1:right:5:bluetooth@cinnamon.org:109', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:network@cinnamon.org:110', 'panel1:right:8:power@cinnamon.org:112', 'panel1:right:9:calendar@simonwiles.net:113', 'panel1:right:10:user@cinnamon.org:116', 'panel2:left:1:show-desktop@cinnamon.org:102', 'panel2:left:2:window-list@cinnamon.org:105', 'panel2:right:1:workspace-switcher@cinnamon.org:123', 'panel2:right:2:trash@cinnamon.org:117']
 enabled-extensions = []
-panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24}]'
-panels-autohide = ['1:false']
-panels-enabled = ['1:0:bottom']
-panels-height = ['1:35']
-panels-hide-delay = ['1:0']
-panels-show-delay = ['1:0']
+panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
+panels-autohide = ['1:false', '2:false']
+panels-enabled = ['1:0:top', '2:0:bottom']
+panels-height = ['1:28', '2:28']
+panels-hide-delay = ['1:0', '2:0']
+panels-show-delay = ['1:0', '2:0']

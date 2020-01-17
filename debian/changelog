@@ -1,3 +1,10 @@
+cinnamon-layout-4-2 (4.2.12) focal; urgency=medium
+
+  * adding 'gnome2' layout
+  * replacing cinnamon-layout icon
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Fri, 17 Jan 2020 14:55:06 +0300
+
 cinnamon-layout-4-2 (4.2.11) focal; urgency=medium
 
   * debian/control: removing ${shlibs:Depends}
