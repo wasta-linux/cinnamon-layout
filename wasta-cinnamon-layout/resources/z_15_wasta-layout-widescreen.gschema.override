@@ -30,17 +30,19 @@
 #   notifications@cinnamon.org:119
 #   grouped-window-list@cinnamon.org:120
 #   collapsible-systray@feuerfuchs.eu:121
+#   keyboard@cinnamon.org:122
 #
 #   After modifying these .override files, reload with:
 #       glib-compile-schemas /usr/share/glib-2.0/schemas/
 #
 #   2019-07-28 rik: initial script
 #   2019-12-10 rik: panel-zone-icon-sizes needs right:24 for ibus compatibility
+#   2020-03-24 rik: added keyboard@cinnamon.org:122
 #
 # ==============================================================================
 
 [org.cinnamon]
-enabled-applets = ['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:collapsible-systray@feuerfuchs.eu:121', 'panel1:right:4:inhibit@cinnamon.org:107', 'panel1:right:5:sound@cinnamon.org:111', 'panel1:right:6:network@cinnamon.org:110', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:spacer@cinnamon.org:150', 'panel1:right:9:calendar@simonwiles.net:113:orient', 'panel1:right:10:spacer@cinnamon.org:151']
+enabled-applets = ['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:0:keyboard@cinnamon.org:122', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:collapsible-systray@feuerfuchs.eu:121', 'panel1:right:4:inhibit@cinnamon.org:107', 'panel1:right:5:sound@cinnamon.org:111', 'panel1:right:6:network@cinnamon.org:110', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:spacer@cinnamon.org:150', 'panel1:right:9:calendar@simonwiles.net:113:orient', 'panel1:right:10:spacer@cinnamon.org:151']
 enabled-extensions = ['transparent-panels@germanfr']
 panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24}]'
 panels-autohide = ['1:false']
