@@ -1,3 +1,9 @@
+wasta-cinnamon-layout-4-2 (4.2.5) bionic; urgency=medium
+
+  * wasta-layout: slight adjustment panel widths
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Wed, 25 Mar 2020 11:07:48 +0300
+
 wasta-cinnamon-layout-4-2 (4.2.4) bionic; urgency=medium
 
   * adding keyboard@cinnamon.org:122
