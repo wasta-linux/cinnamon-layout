@@ -33,16 +33,21 @@
 #   collapsible-systray@feuerfuchs.eu:121
 #   places-bookmarks@dmo60.de:122
 #   workspace-switcher@cinnamon.org:123
+#   keyboard@cinnamon.org:124
+#   spacer@cinnamon.org:125
+#   spacer-thin@wastalinux.org:126
 #
 #   After modifying these .override files, reload with:
 #       glib-compile-schemas /usr/share/glib-2.0/schemas/
 #
 #   2019-12-13 rik: initial script
+#   2020-03-25 rik: added keyboard@cinnamon.org:124
+#       - adding spacer@cinnamon.org instances
 #
 # ==============================================================================
 
 [org.cinnamon]
-enabled-applets = ['panel1:left:0:menu@cinnamon.org:101', 'panel1:left:1:show-desktop@cinnamon.org:102', 'panel1:left:2:panel-launchers@cinnamon.org:103', 'panel1:left:3:window-list@cinnamon.org:105', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:systray@cinnamon.org:108', 'panel1:right:3:bluetooth@cinnamon.org:109', 'panel1:right:4:network@cinnamon.org:110', 'panel1:right:5:sound@cinnamon.org:111', 'panel1:right:6:power@cinnamon.org:112', 'panel1:right:7:calendar@simonwiles.net:113']
+enabled-applets = ['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:spacer-thin@wastalinux.org:126', 'panel1:left:4:panel-launchers@cinnamon.org:103', 'panel1:left:5:window-list@cinnamon.org:105', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:systray@cinnamon.org:108', 'panel1:right:3:bluetooth@cinnamon.org:109', 'panel1:right:4:network@cinnamon.org:110', 'panel1:right:5:sound@cinnamon.org:111', 'panel1:right:6:power@cinnamon.org:112', 'panel1:right:7:calendar@simonwiles.net:113']
 enabled-extensions = []
 panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24}]'
 panels-autohide = ['1:false']

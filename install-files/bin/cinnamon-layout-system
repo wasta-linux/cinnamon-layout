@@ -211,6 +211,9 @@ redmond7)
     # reset Main Menu
     resetMenu
 
+    # remove Menu Label
+    removeMenuLabel
+
     # Set clock to standard format
     setClockStandard
 

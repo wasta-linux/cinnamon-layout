@@ -1,3 +1,12 @@
+cinnamon-layout-4-2 (4.2.13) focal; urgency=medium
+
+  * adding alternative logos to "menu-icon-resources"
+  * correcting panel heights
+  * keyboard@cinnamon.org: adding to all layouts
+  * redmond7: padding added to main menu icon applet
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Wed, 25 Mar 2020 11:24:52 +0300
+
 cinnamon-layout-4-2 (4.2.12) focal; urgency=medium
 
   * adding 'gnome2' layout
