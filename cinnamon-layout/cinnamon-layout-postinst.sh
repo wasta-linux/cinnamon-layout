@@ -118,8 +118,8 @@ echo "$NEW_FILE" > $JSON_FILE
 echo
 echo "*** Installing default menu-icon to update-alternatives system"
 echo
-update-alternatives --install $DIR/menu-icon menu-icon \
-    $DIR/resources/menu-icon.svg 100
+update-alternatives --install $DIR/menu-icon.svg menu-icon \
+    $DIR/resources/menu-icons/cinnamon-mono.svg 100
 
 # ------------------------------------------------------------------------------
 # Dconf / Gsettings Default Value adjustments

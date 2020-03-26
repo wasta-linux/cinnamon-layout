@@ -1,1 +1,0 @@
-files/transparent-panels@germanfr/README.md

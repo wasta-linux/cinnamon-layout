@@ -68,7 +68,7 @@ resetMenu()
     echo "    $JSON_FILE"
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["favbox-show"].default=true | .["menu-custom"].default=true | .["menu-icon"].default="'$DIR/menu-icon'" | .["menu-label"].default="Menu"' \
+    NEW_FILE=$(jq '.["favbox-show"].default=true | .["menu-custom"].default=true | .["menu-icon"].default="'$DIR/menu-icon.svg'" | .["menu-label"].default="Menu"' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }
@@ -91,13 +91,12 @@ removeMenuLabel()
 {
     # menu applet updates
     JSON_FILE=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
-    # set menu icon to standard icon: menu-icon
     # remove label
-    echo "*** Changing Menu Icon for JSON_FILE:"
+    echo "*** Removing 'Menu' Label for JSON_FILE:"
     echo "    $JSON_FILE"
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["menu-custom"].default=true | .["menu-icon"].default="'$DIR/menu-icon'" | .["menu-label"].default=""' \
+    NEW_FILE=$(jq '.["menu-label"].default=""' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }

@@ -346,7 +346,7 @@ resetMenu()
     echo
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["favbox-show"].value=true | .["menu-custom"].value=true | .["menu-icon"].value="'$DIR/menu-icon'" | .["menu-label"].value="Menu"' \
+    NEW_FILE=$(jq '.["favbox-show"].value=true | .["menu-custom"].value=true | .["menu-icon"].value="'$DIR/menu-icon.svg'" | .["menu-label"].value="Menu"' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }
@@ -373,7 +373,6 @@ removeMenuLabel()
     JSON_DIR=/home/$USER/.cinnamon/configs/menu@cinnamon.org
     # NOTE: #.json has to match enabled-applets number!!
     JSON_FILE=$JSON_DIR/101.json
-    # set menu icon to standard icon: menu-icon
     # remove menu label
     echo
     echo "*** Removing 'Menu' label for JSON_FILE:"
