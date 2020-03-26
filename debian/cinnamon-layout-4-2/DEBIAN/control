@@ -1,16 +1,14 @@
-Source: cinnamon-layout-4-2
-Section: utils
-Priority: optional
-Maintainer: Rik Shaw <rikshaw76@gmail.com>
-Build-Depends: debhelper (>= 8.0.0)
-Standards-Version: 4.4.0
-Homepage: https://github.com/wasta-linux/cinnamon-layout
-
 Package: cinnamon-layout-4-2
+Version: 4.2.13
 Architecture: all
-Depends: cinnamon (>= 4.2), cinnamon-common (>= 4.2), cinnamon-control-center (>= 4.2), cinnamon-desktop-data (>= 4.2), cinnamon-l10n (>= 4.2), cinnamon-screensaver (>= 4.2), cinnamon-session (>= 4.2), cinnamon-settings-daemon (>= 4.2), cjs (>= 4.2), jq, muffin (>= 4.2), nemo (>= 4.2), plank, python2 | python:any, python-gi, zenity, ${misc:Depends}
+Maintainer: Rik Shaw <rikshaw76@gmail.com>
+Installed-Size: 1542
+Depends: cinnamon (>= 4.2), cinnamon-common (>= 4.2), cinnamon-control-center (>= 4.2), cinnamon-desktop-data (>= 4.2), cinnamon-l10n (>= 4.2), cinnamon-screensaver (>= 4.2), cinnamon-session (>= 4.2), cinnamon-settings-daemon (>= 4.2), cjs (>= 4.2), jq, muffin (>= 4.2), nemo (>= 4.2), plank, python2 | python:any, python-gi, zenity
 Breaks: cinnamon-layout-4-0
 Replaces: cinnamon-layout-4-0
+Section: utils
+Priority: optional
+Homepage: https://github.com/wasta-linux/cinnamon-layout
 Description: Cinnamon Layout Switcher
  Layout switcher for Cinnamon Desktop. Current layout options include:
    - Traditional (30px bottom panel, non-grouped window list)

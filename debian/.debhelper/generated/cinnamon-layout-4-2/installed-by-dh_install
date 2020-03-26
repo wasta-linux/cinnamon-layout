@@ -1,0 +1,7 @@
+./install-files/applications
+./install-files/applets
+./install-files/bin
+./install-files/extensions
+./install-files/icons
+./install-files/org.wastalinux.cinnamon-layout-system.policy
+./cinnamon-layout
