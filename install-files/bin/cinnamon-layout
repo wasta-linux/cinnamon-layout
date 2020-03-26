@@ -541,6 +541,7 @@ case "$CHOICE" in
     gsettings reset org.cinnamon enabled-extensions
     # all "panels" items need reset since number of panels could have changed
     gsettings reset org.cinnamon panel-zone-icon-sizes
+    gsettings reset org.cinnamon panel-zone-symbolic-icon-sizes
     gsettings reset org.cinnamon panels-autohide
     gsettings reset org.cinnamon panels-enabled
     gsettings reset org.cinnamon panels-height
@@ -578,6 +579,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
+    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:bottom']"
     gsettings set org.cinnamon panels-height "['1:28']"
@@ -628,6 +630,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
+    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:bottom']"
     gsettings set org.cinnamon panels-height "['1:36']"
@@ -685,6 +688,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
+    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":28,"center":28,"right":16},{"panelId":2,left":28,"center":28,"right":28}]'
     gsettings set org.cinnamon panels-autohide "['1:false', '2:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:top', '2:0:left']"
     gsettings set org.cinnamon panels-height "['1:28', '2:40']"
@@ -764,6 +768,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
+    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:top']"
     gsettings set org.cinnamon panels-height "['1:28']"
@@ -819,6 +824,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
+    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:left']"
     gsettings set org.cinnamon panels-height "['1:40']"
@@ -852,10 +858,11 @@ case "$CHOICE" in
     updatePanelLaunchers
 
     # need to set keys associated with panel layouts
-    gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:places-bookmarks@dmo60.de:122', 'panel1:left:3:panel-launchers@cinnamon.org:103', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:inhibit@cinnamon.org:107', 'panel1:right:4:systray@cinnamon.org:108', 'panel1:right:5:bluetooth@cinnamon.org:109', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:network@cinnamon.org:110', 'panel1:right:8:power@cinnamon.org:112', 'panel1:right:9:calendar@simonwiles.net:113', 'panel1:right:10:user@cinnamon.org:116', panel2:left:0:spacer-thin@wastalinux.org:126', 'panel2:left:1:show-desktop@cinnamon.org:102', 'panel2:left:2:window-list@cinnamon.org:105', 'panel2:right:1:workspace-switcher@cinnamon.org:123', 'panel2:right:2:trash@cinnamon.org:117']"
+    gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:places-bookmarks@dmo60.de:122', 'panel1:left:3:panel-launchers@cinnamon.org:103', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:inhibit@cinnamon.org:107', 'panel1:right:4:systray@cinnamon.org:108', 'panel1:right:5:bluetooth@cinnamon.org:109', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:network@cinnamon.org:110', 'panel1:right:8:power@cinnamon.org:112', 'panel1:right:9:calendar@simonwiles.net:113', 'panel1:right:10:user@cinnamon.org:116', 'panel2:left:0:spacer-thin@wastalinux.org:126', 'panel2:left:1:show-desktop@cinnamon.org:102', 'panel2:left:2:window-list@cinnamon.org:105', 'panel2:right:1:workspace-switcher@cinnamon.org:123', 'panel2:right:2:trash@cinnamon.org:117']"
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":24}]'
+    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":22,"center":0,"right":16},{"panelId":2,"left":0,"center":0,"right":22}]'
     gsettings set org.cinnamon panels-autohide "['1:false', '2:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:top', '2:0:bottom']"
     gsettings set org.cinnamon panels-height "['1:28', '2:28']"

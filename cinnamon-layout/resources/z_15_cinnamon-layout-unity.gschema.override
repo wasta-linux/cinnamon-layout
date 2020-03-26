@@ -57,6 +57,7 @@ enabled-applets = ['panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:r
 enabled-extensions = ['transparent-panels@germanfr']
 no-adjacent-panel-barriers = true
 panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
+panel-zone-symbolic-icon-sizes = '[{"panelId":1,"left":28,"center":28,"right":16},{"panelId":2,left":28,"center":28,"right":28}]'
 panels-autohide = ['1:false', '2:false']
 panels-enabled = ['1:0:top', '2:0:left']
 panels-height = ['1:28', '2:40']

@@ -1,3 +1,10 @@
+cinnamon-layout-4-4 (4.4.0) focal; urgency=medium
+
+  * initial cinnamon 4.4 release
+  * adding panel-zone-symbolic-icon-sizes keys
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Thu, 26 Mar 2020 12:15:21 +0300
+
 cinnamon-layout-4-2 (4.2.13) focal; urgency=medium
 
   * adding alternative logos to "menu-icon-resources"
