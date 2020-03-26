@@ -53,7 +53,7 @@
 # ==============================================================================
 
 [org.cinnamon]
-enabled-applets = ['panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116', 'panel2:left:0:menu@cinnamon.org:101', 'panel2:left:1:spacer-thin@wastalinux.org:126', 'panel2:left:2:show-desktop@cinnamon.org:102', 'panel2:left:3:spacer-thin@wastalinux.org:126', 'panel2:left:4:grouped-window-list@cinnamon.org:120', 'panel2:right:1:trash@cinnamon.org:117']
+enabled-applets = ['panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116', 'panel2:left:0:menu@cinnamon.org:101', 'panel2:left:1:show-desktop@cinnamon.org:102', 'panel2:left:2:grouped-window-list@cinnamon.org:120', 'panel2:right:3:trash@cinnamon.org:117']
 enabled-extensions = ['transparent-panels@germanfr']
 no-adjacent-panel-barriers = true
 panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
