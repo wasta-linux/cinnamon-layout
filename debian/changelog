@@ -1,3 +1,10 @@
+cinnamon-layout-4-2 (4.2.15) bionic; urgency=medium
+
+  * applied cherry-pick from cinnamon-layout-4-4 removing
+    spacer-thin since handled by themes
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sat, 28 Mar 2020 19:51:12 +0300
+
 cinnamon-layout-4-2 (4.2.14) bionic; urgency=medium
 
   * gnome2: fix missing '
