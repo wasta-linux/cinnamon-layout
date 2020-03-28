@@ -54,6 +54,6 @@ enabled-extensions = ['transparent-panels@germanfr']
 panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24}]'
 panels-autohide = ['1:false']
 panels-enabled = ['1:0:left']
-panels-height = ['1:40']
+panels-height = ['1:42']
 panels-hide-delay = ['1:0']
 panels-show-delay = ['1:0']
