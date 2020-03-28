@@ -1,3 +1,9 @@
+cinnamon-layout-4-4 (4.4.3) focal; urgency=medium
+
+  * cinnamon-layout: reset places-bookmarks applet for gnome2
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sat, 28 Mar 2020 22:30:53 +0300
+
 cinnamon-layout-4-4 (4.4.2) focal; urgency=medium
 
   * setting vertical panel widths to 42px
