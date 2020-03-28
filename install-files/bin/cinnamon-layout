@@ -60,6 +60,7 @@
 #   2020-03-27 rik: added resetMenu to default layout
 #     - sync'd applets (removing spacer-thin in many cases since theme addresses
 #       width issues.
+#     - set vertical panel to 42px (or else Arc-Dark-Wasta will 'squish it')
 #
 # ==============================================================================
 
@@ -697,7 +698,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":28,"center":28,"right":16},{"panelId":2,left":28,"center":28,"right":28}]'
     gsettings set org.cinnamon panels-autohide "['1:false', '2:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:top', '2:0:left']"
-    gsettings set org.cinnamon panels-height "['1:28', '2:40']"
+    gsettings set org.cinnamon panels-height "['1:28', '2:42']"
     gsettings set org.cinnamon panels-hide-delay "['1:0', '2:0']"
     gsettings set org.cinnamon panels-show-delay "['1:0', '2:0']"
 
@@ -833,7 +834,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:left']"
-    gsettings set org.cinnamon panels-height "['1:40']"
+    gsettings set org.cinnamon panels-height "['1:42']"
     gsettings set org.cinnamon panels-hide-delay "['1:0']"
     gsettings set org.cinnamon panels-show-delay "['1:0']"
 
