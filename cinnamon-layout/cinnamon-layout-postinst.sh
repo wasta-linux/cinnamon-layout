@@ -19,7 +19,6 @@
 #   2019-11-17 rik: updating name to cinnamon-layout
 #   2019-11-21 rik: removing ITM adjustments
 #   2019-12-28 rik: installing menu-icon to update-alternatives
-#   2020-03-25 rik: set spacer@cinnamon.org default width to 2.0 pixels
 #
 # ==============================================================================
 
@@ -86,17 +85,6 @@ echo "updating JSON_FILE: $JSON_FILE"
 # - note: jq can't do "sed -i" inplace update, so need to re-create file, then
 #     update ownership (in case run as root)
 NEW_FILE=$(jq '.["pref_applet_icon"].default="user-home-symbolic"' \
-    < $JSON_FILE)
-echo "$NEW_FILE" > $JSON_FILE
-
-# applet: spacer@cinnamon.org
-JSON_FILE=/usr/share/cinnamon/applets/spacer@cinnamon.org/settings-schema.json
-echo "updating JSON_FILE: $JSON_FILE"
-# updates:
-# - width: set to 8.0px
-# - note: jq can't do "sed -i" inplace update, so need to re-create file, then
-#     update ownership (in case run as root)
-NEW_FILE=$(jq '.["width"].default=8.0' \
     < $JSON_FILE)
 echo "$NEW_FILE" > $JSON_FILE
 

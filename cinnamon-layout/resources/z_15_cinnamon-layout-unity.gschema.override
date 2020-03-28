@@ -60,6 +60,6 @@ panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId
 panel-zone-symbolic-icon-sizes = '[{"panelId":1,"left":28,"center":28,"right":16},{"panelId":2,left":28,"center":28,"right":28}]'
 panels-autohide = ['1:false', '2:false']
 panels-enabled = ['1:0:top', '2:0:left']
-panels-height = ['1:28', '2:40']
+panels-height = ['1:28', '2:42']
 panels-hide-delay = ['1:0', '2:0']
 panels-show-delay = ['1:0', '2:0']
