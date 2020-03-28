@@ -45,13 +45,11 @@
 #       get corrupted.
 #   2019-02-23 rik: updates for cinnamon 4.0
 #   2020-03-25 rik: added keyboard@cinnamon.org:124
-#       added spacer@cinnamon.org:125
-#       added spacer-thin@wastalinux.org:126
 #
 # ==============================================================================
 
 [org.cinnamon]
-enabled-applets = ['panel1:left:0:spacer@cinnamon.org:125', 'panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:spacer-thin@wastalinux.org:126', 'panel1:left:3:show-desktop@cinnamon.org:102', 'panel1:left:4:spacer-thin@wastalinux.org:126', 'panel1:left:5:grouped-window-list@cinnamon.org:120', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:windows-quick-list@cinnamon.org:114']
+enabled-applets = ['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:windows-quick-list@cinnamon.org:114']
 enabled-extensions = []
 panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24}]'
 panels-autohide = ['1:false']

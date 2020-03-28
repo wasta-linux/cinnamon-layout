@@ -57,6 +57,9 @@
 #     - using single standare menu-icon for all layouts
 #   2020-01-17 rik: adding gnome2 layout
 #   2020-03-25 rik: added keyboard@cinnamon.org:124
+#   2020-03-27 rik: added resetMenu to default layout
+#     - sync'd applets (removing spacer-thin in many cases since theme addresses
+#       width issues.
 #
 # ==============================================================================
 
@@ -528,6 +531,9 @@ case "$CHOICE" in
     # Set clock to standard format
     setClockStandard
 
+    # reset Main Menu
+    resetMenu
+
     # System default could either use panel-launchers OR GWL, so need to make
     #   sure both updated
     # if SAVED_LAUNCHERS set panel-launchers
@@ -624,7 +630,7 @@ case "$CHOICE" in
     setClockStandard
 
     # need to set keys associated with panel layouts
-    gsettings set org.cinnamon enabled-applets "['panel1:left:0:spacer@cinnamon.org:125', 'panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:spacer-thin@wastalinux.org:126', 'panel1:left:3:show-desktop@cinnamon.org:102', 'panel1:left:4:spacer-thin@wastalinux.org:126', 'panel1:left:5:grouped-window-list@cinnamon.org:120', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:windows-quick-list@cinnamon.org:114']"
+    gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:windows-quick-list@cinnamon.org:114']"
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
@@ -815,7 +821,7 @@ case "$CHOICE" in
     # NOTE: "orient" needed at end of world clock calendar (simonwiles) to NOT
     #   have a prompt for confirming if this applet should be used in vertical
     #   panel.
-    gsettings set org.cinnamon enabled-applets "['panel1:left:0:spacer-thin@wastalinux.org:126', 'panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:collapsible-systray@feuerfuchs.eu:121', 'panel1:right:4:inhibit@cinnamon.org:107', 'panel1:right:5:spacer-thin@wastalinux.org:126', 'panel1:right:6:calendar@simonwiles.net:113:orient', 'panel1:right:7:spacer-thin@wastalinux.org:126', 'panel1:right:8:sound@cinnamon.org:111', 'panel1:right:9:network@cinnamon.org:110', 'panel1:right:10:power@cinnamon.org:112', 'panel1:right:11:spacer-thin@wastalinux.org:126']"
+    gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:collapsible-systray@feuerfuchs.eu:121', 'panel1:right:4:inhibit@cinnamon.org:107', 'panel1:right:5:spacer-thin@wastalinux.org:126', 'panel1:right:6:calendar@simonwiles.net:113:orient', 'panel1:right:7:spacer-thin@wastalinux.org:126', 'panel1:right:8:sound@cinnamon.org:111', 'panel1:right:9:network@cinnamon.org:110', 'panel1:right:10:power@cinnamon.org:112', 'panel1:right:11:spacer-thin@wastalinux.org:126']"
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
@@ -852,7 +858,7 @@ case "$CHOICE" in
     updatePanelLaunchers
 
     # need to set keys associated with panel layouts
-    gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:places-bookmarks@dmo60.de:122', 'panel1:left:3:panel-launchers@cinnamon.org:103', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:inhibit@cinnamon.org:107', 'panel1:right:4:systray@cinnamon.org:108', 'panel1:right:5:bluetooth@cinnamon.org:109', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:network@cinnamon.org:110', 'panel1:right:8:power@cinnamon.org:112', 'panel1:right:9:calendar@simonwiles.net:113', 'panel1:right:10:user@cinnamon.org:116', 'panel2:left:0:spacer-thin@wastalinux.org:126', 'panel2:left:1:show-desktop@cinnamon.org:102', 'panel2:left:2:window-list@cinnamon.org:105', 'panel2:right:1:workspace-switcher@cinnamon.org:123', 'panel2:right:2:trash@cinnamon.org:117']"
+    gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:places-bookmarks@dmo60.de:122', 'panel1:left:3:panel-launchers@cinnamon.org:103', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:inhibit@cinnamon.org:107', 'panel1:right:4:systray@cinnamon.org:108', 'panel1:right:5:bluetooth@cinnamon.org:109', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:network@cinnamon.org:110', 'panel1:right:8:power@cinnamon.org:112', 'panel1:right:9:calendar@simonwiles.net:113', 'panel1:right:10:user@cinnamon.org:116', 'panel2:left:1:show-desktop@cinnamon.org:102', 'panel2:left:2:window-list@cinnamon.org:105', 'panel2:right:1:workspace-switcher@cinnamon.org:123', 'panel2:right:2:trash@cinnamon.org:117']"
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":24}]'
