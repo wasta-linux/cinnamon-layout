@@ -849,6 +849,11 @@ case "$CHOICE" in
     rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
     rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
 
+    # places-bookmarks@dmo60.de:
+    #   - remove any local applet and configs (will be re-created from defaults)
+    rm -rf /home/$USER/.local/share/cinnamon/applets/places-bookmarks@dmo60.de
+    rm -rf /home/$USER/.cinnamon/configs/places-bookmarks@dmo60.de
+
     # if SAVED_WC set worldclocks
     updateWorldClocks
 
