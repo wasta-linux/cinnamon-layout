@@ -1,7 +1,7 @@
 {
  "width": {
     "type": "scale",
-    "default" : 2,
+    "default" : 4,
     "min" : 1,
     "max" : 400,
     "step" : 1,
