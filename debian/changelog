@@ -1,3 +1,9 @@
+cinnamon-layout-4-2 (4.2.16) bionic; urgency=medium
+
+  * setting vertical panel widths to 42px
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sat, 28 Mar 2020 21:42:29 +0300
+
 cinnamon-layout-4-2 (4.2.15) bionic; urgency=medium
 
   * applied cherry-pick from cinnamon-layout-4-4 removing
