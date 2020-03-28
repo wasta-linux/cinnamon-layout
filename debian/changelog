@@ -1,3 +1,9 @@
+cinnamon-layout-4-4 (4.4.2) focal; urgency=medium
+
+  * setting vertical panel widths to 42px
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sat, 28 Mar 2020 21:41:31 +0300
+
 cinnamon-layout-4-4 (4.4.1) focal; urgency=medium
 
   * removing spacer-thin since now handled by themes
