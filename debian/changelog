@@ -1,3 +1,9 @@
+cinnamon-layout-4-4 (4.4.1) focal; urgency=medium
+
+  * removing spacer-thin since now handled by themes
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sat, 28 Mar 2020 19:53:49 +0300
+
 cinnamon-layout-4-4 (4.4.0) focal; urgency=medium
 
   * initial cinnamon 4.4 release
