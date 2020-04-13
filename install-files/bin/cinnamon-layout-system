@@ -16,7 +16,7 @@
 #       in cinnamon-layout, but depends on system defaults)
 #   2019-12-28 rik: updating menu-icon to use update-alternatives locations
 #     - using single standare menu-icon for all layouts
-#   2020-01-17 rik: adding gnome2 layout
+#   2020-04-12 rik: removing menu-label logic
 #
 # ==============================================================================
 
@@ -58,6 +58,7 @@ SCHEMA_DIR=/usr/share/glib-2.0/schemas
 # ------------------------------------------------------------------------------
 resetMenu()
 {
+    # Do I need to GET org.cinnamon app-menu-label and re-apply it here??? since I don't want to CHANGE that key or else won't be localized well....
     # menu applet resets
     JSON_FILE=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
 
@@ -68,7 +69,7 @@ resetMenu()
     echo "    $JSON_FILE"
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["favbox-show"].default=true | .["menu-custom"].default=true | .["menu-icon"].default="'$DIR/menu-icon.svg'" | .["menu-label"].default="Menu"' \
+    NEW_FILE=$(jq '.["favbox-show"].default=true | .["menu-custom"].default=true' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }
@@ -227,10 +228,13 @@ unity)
     ln -s $DIR/resources/z_15_cinnamon-layout-unity.gschema.override \
         $SCHEMA_DIR/
 
+    # reset Main Menu
+    resetMenu
+
     # remove Favorites and Session options from Main Menu
     removeMenuFavs
 
-    # remove label for Main Menu
+    # remove Menu Label
     removeMenuLabel
 
     # set clock to full format (date, time)
@@ -279,10 +283,10 @@ widescreen)
     ln -s $DIR/resources/z_15_cinnamon-layout-widescreen.gschema.override \
         $SCHEMA_DIR/
 
-    # reset menu applet:
+    # reset Main Menu
     resetMenu
 
-    # remove label for Main Menu
+    # remove Menu Label
     removeMenuLabel
 
     # set clock to short format (no AM/PM)
