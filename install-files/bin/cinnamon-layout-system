@@ -64,8 +64,7 @@ resetMenu()
     JSON_FILE=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
 
     # reset to show favorite / shutdown options
-    # set menu icon to standard icon: menu-icon
-    # reset label to "Menu"
+    # set menu-custom false so label and icon controlled by gsettings
     echo "*** Resetting JSON_FILE:"
     echo "    $JSON_FILE"
     #jq can't do "sed -i" inplace update, so need to re-create file, then
@@ -95,7 +94,7 @@ removeMenuFavs()
 
 removeMenuLabel()
 {
-    REMOVE_LABEL_GSCHEMA=$DIR/resources/z_90_cinnamon-layout-remove-menu-label.gschema.override
+    REMOVE_LABEL_GSCHEMA="$DIR/resources/z_90_cinnamon-layout-remove-menu-label.gschema.override"
     if ! [ -e $REMOVE_LABEL_GSCHEMA= ];
     then
         echo "*** Adding override to blank app-menu-label"

@@ -62,8 +62,7 @@
 #       width issues.
 #     - set vertical panel to 42px (or else Arc-Dark-Wasta will 'squish it')
 #   2020-04-12 rik: re-work app-menu-label logic: some layouts only remove
-#       menu label, non provide it because that comes from the vendor
-#       gschema.override file.
+#       menu label, none provide it because that comes from the vendor.
 #
 # ==============================================================================
 
@@ -108,6 +107,7 @@ then
 fi
 
 DIR=/usr/share/cinnamon-layout
+SCHEMA_DIR=/usr/share/glib-2.0/schemas
 CONFIG_DIR=/home/$USER/.config/cinnamon-layout
 mkdir -p $CONFIG_DIR
 
@@ -335,14 +335,19 @@ updateIconList()
 
 resetMenu()
 {
-    # menu applet reset
     DEFAULT_CONFIG=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
     JSON_DIR=/home/$USER/.cinnamon/configs/menu@cinnamon.org
     # NOTE: #.json has to match enabled-applets number!!
     JSON_FILE=$JSON_DIR/101.json
 
-    mkdir -p $JSON_DIR
-    cp $DEFAULT_CONFIG $JSON_FILE
+    if ! [ -e "$JSON_FILE" ];
+    then
+        echo
+        echo "*** Copying in default json config: $DEFAULT_CONFIG"
+        echo
+        mkdir -p $JSON_DIR
+        cp $DEFAULT_CONFIG $JSON_FILE
+    fi
 
     # reset to show favorite / shutdown options
     # set menu icon value back to system default: menu-icon
@@ -371,23 +376,6 @@ removeMenuFavs()
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
     NEW_FILE=$(jq '.["favbox-show"].value=false' \
-        < $JSON_FILE)
-    echo "$NEW_FILE" > $JSON_FILE
-}
-
-removeMenuLabel()
-{
-    JSON_DIR=/home/$USER/.cinnamon/configs/menu@cinnamon.org
-    # NOTE: #.json has to match enabled-applets number!!
-    JSON_FILE=$JSON_DIR/101.json
-    # remove menu label
-    echo
-    echo "*** Removing 'Menu' label for JSON_FILE:"
-    echo "      $JSON_FILE"
-    echo
-    #jq can't do "sed -i" inplace update, so need to re-create file, then
-    # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["menu-label"].value=""' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }
@@ -500,6 +488,21 @@ then
     exit 0
 fi
 
+# app-menu-label could be '' IF a system cinnamon-layout is enabled that blanks
+#   the label. So, the system label default is found by finding the LAST
+#   reference to app-menu-label that is NOT blank
+MENU_LABEL=""
+MENU_LABEL_1=$(grep -ioh "app-menu-label = ['\"]*.*\w['\"]*" $SCHEMA_DIR/* | tail -1)
+
+# get substring AFTER "="
+MENU_LABEL_2=${MENU_LABEL_1#*=}
+
+# remove any quotes
+MENU_LABEL=$(echo $MENU_LABEL_2 | sed -r "s@['\"]+@@g")
+echo
+echo "*** app-menu-label (for layouts using a label): \'$MENU_LABEL\'"
+echo
+
 # all layouts: stop plank and disable any user-level plank
 # autostart (cupertino layout will later re-enable)
 killall plank > /dev/null 2>&1 || true;
@@ -585,7 +588,7 @@ case "$CHOICE" in
     updatePanelLaunchers
 
     # need to set keys associated with panel layouts
-    gsettings reset org.cinnamon app-menu-label
+    gsettings set org.cinnamon app-menu-label "$MENU_LABEL"
     gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:panel-launchers@cinnamon.org:103', 'panel1:left:4:window-list@cinnamon.org:105', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:systray@cinnamon.org:108', 'panel1:right:3:bluetooth@cinnamon.org:109', 'panel1:right:4:network@cinnamon.org:110', 'panel1:right:5:sound@cinnamon.org:111', 'panel1:right:6:power@cinnamon.org:112', 'panel1:right:7:calendar@simonwiles.net:113']"
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
@@ -771,7 +774,7 @@ case "$CHOICE" in
     setClockFull
 
     # need to set keys associated with panel layouts
-    gsettings reset org.cinnamon app-menu-label
+    gsettings set org.cinnamon app-menu-label "$MENU_LABEL"
     gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:101', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116']"
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     # all "panels" items need reset since number of panels could have changed
@@ -868,7 +871,7 @@ case "$CHOICE" in
     updatePanelLaunchers
 
     # need to set keys associated with panel layouts
-    gsettings reset org.cinnamon app-menu-label
+    gsettings set org.cinnamon app-menu-label "$MENU_LABEL"
     gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:places-bookmarks@dmo60.de:122', 'panel1:left:3:panel-launchers@cinnamon.org:103', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:inhibit@cinnamon.org:107', 'panel1:right:4:systray@cinnamon.org:108', 'panel1:right:5:bluetooth@cinnamon.org:109', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:network@cinnamon.org:110', 'panel1:right:8:power@cinnamon.org:112', 'panel1:right:9:calendar@simonwiles.net:113', 'panel1:right:10:user@cinnamon.org:116', 'panel2:left:1:show-desktop@cinnamon.org:102', 'panel2:left:2:window-list@cinnamon.org:105', 'panel2:right:1:workspace-switcher@cinnamon.org:123', 'panel2:right:2:trash@cinnamon.org:117']"
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
