@@ -299,7 +299,7 @@ setClockFull()
     # - use-custom-format: custom panel clock format
     # - custom-format: set to "%a %b %d,%l:%M %p" (date, time)
     # note: jq can't do "sed -i" inplace update, so need to re-create file
-    NEW_FILE=$(jq '.["use-custom-format"].value=true | .["custom-format"].value="%a %b %d,%l:%M %p"' \
+    NEW_FILE=$(jq '.["use-custom-format"].value=true | .["custom-format"].value="%a %b %d, %l:%M %p"' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }
@@ -353,7 +353,7 @@ resetMenu()
     echo
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["favbox-show"].value=true | .["menu-custom"].value=true' \
+    NEW_FILE=$(jq '.["favbox-show"].value=true | .["menu-custom"].value=false' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }

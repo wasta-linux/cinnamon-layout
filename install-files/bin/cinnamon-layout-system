@@ -20,6 +20,8 @@
 #
 # ==============================================================================
 
+# ***TODO: instead of mucking with menu-label in applet, instead put a "z-90-cinnamon-layout-menu-label.gschema.override" file in place to blank out label. Then remove it at the beginning of every menu reset, and add it back only in the layouts that need to blank the label.
+
 # ------------------------------------------------------------------------------
 # Check to ensure running as root
 # ------------------------------------------------------------------------------
@@ -58,7 +60,6 @@ SCHEMA_DIR=/usr/share/glib-2.0/schemas
 # ------------------------------------------------------------------------------
 resetMenu()
 {
-    # Do I need to GET org.cinnamon app-menu-label and re-apply it here??? since I don't want to CHANGE that key or else won't be localized well....
     # menu applet resets
     JSON_FILE=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
 
@@ -69,9 +70,13 @@ resetMenu()
     echo "    $JSON_FILE"
     #jq can't do "sed -i" inplace update, so need to re-create file, then
     # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["favbox-show"].default=true | .["menu-custom"].default=true' \
+    NEW_FILE=$(jq '.["favbox-show"].default=true | .["menu-custom"].default=false' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
+
+    # Remove any symlinked gschema.override that blanks the app-menu-label
+    # (effectively making the label come from the distro or regional customizer)
+    rm -rf $SCHEMA_DIR/z_90_cinnamon-layout-remove-menu-label.gschema.override
 }
 
 removeMenuFavs()
@@ -90,16 +95,12 @@ removeMenuFavs()
 
 removeMenuLabel()
 {
-    # menu applet updates
-    JSON_FILE=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
-    # remove label
-    echo "*** Removing 'Menu' Label for JSON_FILE:"
-    echo "    $JSON_FILE"
-    #jq can't do "sed -i" inplace update, so need to re-create file, then
-    # update ownership (in case run as root)
-    NEW_FILE=$(jq '.["menu-label"].default=""' \
-        < $JSON_FILE)
-    echo "$NEW_FILE" > $JSON_FILE
+    REMOVE_LABEL_GSCHEMA=$DIR/resources/z_90_cinnamon-layout-remove-menu-label.gschema.override
+    if ! [ -e $REMOVE_LABEL_GSCHEMA= ];
+    then
+        echo "*** Adding override to blank app-menu-label"
+        ln -s $REMOVE_LABEL_GSCHEMA $SCHEMA_DIR/
+    fi
 }
 
 setClockShort()
@@ -145,7 +146,7 @@ setClockFull()
     # - use-custom-format: custom panel clock format
     # - custom-format: set to "%a %b %d,%l:%M %p" (date, time)
     # note: jq can't do "sed -i" inplace update, so need to re-create file
-    NEW_FILE=$(jq '.["use-custom-format"].value=true | .["custom-format"].value="%a %b %d,%l:%M %p"' \
+    NEW_FILE=$(jq '.["use-custom-format"].value=true | .["custom-format"].value="%a %b %d, %l:%M %p"' \
         < $JSON_FILE)
     echo "$NEW_FILE" > $JSON_FILE
 }
