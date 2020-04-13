@@ -101,15 +101,6 @@ NEW_FILE=$(jq '.["transparency-type"].default="panel-semi-transparent" | .["firs
 echo "$NEW_FILE" > $JSON_FILE
 
 # ------------------------------------------------------------------------------
-# install menu-icons using update-alternatives
-# ------------------------------------------------------------------------------
-echo
-echo "*** Installing default menu-icon to update-alternatives system"
-echo
-update-alternatives --install $DIR/menu-icon.svg menu-icon \
-    $DIR/resources/menu-icons/cinnamon-mono.svg 100
-
-# ------------------------------------------------------------------------------
 # Dconf / Gsettings Default Value adjustments
 # ------------------------------------------------------------------------------
 echo

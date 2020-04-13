@@ -4,7 +4,7 @@ Cinnamon-Layout is a utility to switch between different Cinnamon desktop layout
 
 There are different branches of Cinnamon-Layout depending on the version of Cinnamon. Check the different branches for the source.
 
-The default layout does not depend on any additional Cinnamon applets or extensions. However, other layouts may depend on them. The additional applets or extensions that are used by different Cinnamon-Layouts are bundled as part of Cinnamon-Layout to ensure that they will be found.
+Applets or extensions that are used by different Cinnamon-Layouts that are not part of the core Cinnamon applets or extensions are bundled as part of Cinnamon-Layout to ensure that they will be found.
 
 Cinnamon-Layout can be run at the user level non-interactively from a terminal by supplying a layout such as:
 
@@ -12,21 +12,16 @@ Cinnamon-Layout can be run at the user level non-interactively from a terminal b
 cinnamon-layout redmond7
 ```
 
-Similarly, Cinnamon-Layout-System can be run at the system level (to change system defaults) non-interactively in this way:
+Similarly, Cinnamon-Layout-System can be run at the system level (to change system defaults for a new user, for example) non-interactively in this way:
 
 ```
 cinnamon-layout-system redmond7
 ```
 
-For customizers, the Cinnamon Main Menu icon has been registered with the Debian update-alternatives system. This means that the menu icon is set to the symlink /usr/share/cinnamon-layout/menu-icon which in turn is set by whatever is registered as the current target. You can register your own icon as an alternative file with this command:
+For customizers, Cinnamon allows customizing the Main App Menu icon and label. Here are examples that could be included in your own `gschema.override` file and added to `/usr/share/glib-2.0/schemas`:
+```
+app-menu-icon-name = 'wasta-linux-squircle'
+app-menu-label = 'Menu'
+```
 
-```
-update-alternatives --install /usr/share/cinnamon-layout/menu-icon menu-icon \
-    /path/to/your/icon.png 100
-```
-
-You then need to set menu-icon to your update-alternative selection:
-
-```
-update-alternatives --set menu-icon /path/to/your/icon.png
-```
+***NOTE:*** some Cinnamon-Layouts will remove the app-menu-label, but you should still specify an `app-menu-label` in your `gschema.override` file for localization purposes for the layouts that will use a descriptive label for the Application Menu.
