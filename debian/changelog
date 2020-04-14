@@ -1,3 +1,9 @@
+cinnamon-layout-4-4 (4.4.5) focal; urgency=medium
+
+  * change panel right icon sizes to 22px
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Mon, 13 Apr 2020 19:17:53 -0500
+
 cinnamon-layout-4-4 (4.4.4) focal; urgency=medium
 
   * re-work menu logic to incorporate gsettings values for 
