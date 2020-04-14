@@ -63,6 +63,8 @@
 #     - set vertical panel to 42px (or else Arc-Dark-Wasta will 'squish it')
 #   2020-04-12 rik: re-work app-menu-label logic: some layouts only remove
 #       menu label, none provide it because that comes from the vendor.
+#   2020-04-14 rik: do NOT remove applet configs, instead we will need to make
+#       sure the relevant settings are adjusted if needed for the layout
 #
 # ==============================================================================
 
@@ -368,6 +370,16 @@ removeMenuFavs()
     JSON_DIR=/home/$USER/.cinnamon/configs/menu@cinnamon.org
     # NOTE: #.json has to match enabled-applets number!!
     JSON_FILE=$JSON_DIR/101.json
+
+    if ! [ -e "$JSON_FILE" ];
+    then
+        echo
+        echo "*** Copying in default json config: $DEFAULT_CONFIG"
+        echo
+        mkdir -p $JSON_DIR
+        cp $DEFAULT_CONFIG $JSON_FILE
+    fi
+
     # hide favorite / shutdown options
     echo
     echo "*** Removing Favorites and Session options from JSON_FILE:"
@@ -500,7 +512,7 @@ MENU_LABEL_2=${MENU_LABEL_1#*=}
 # remove any quotes
 MENU_LABEL=$(echo $MENU_LABEL_2 | sed -r "s@['\"]+@@g")
 echo
-echo "*** app-menu-label (for layouts using a label): \'$MENU_LABEL\'"
+echo "*** app-menu-label (for layouts using a label): '$MENU_LABEL'"
 echo
 
 # all layouts: stop plank and disable any user-level plank
@@ -517,20 +529,20 @@ fi
 case "$CHOICE" in
 
 "default")
-    # menu@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    # menu@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
 
-    # calendar@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@cinnamon.org
-    rm -rf /home/$USER/.cinnamon/configs/calendar@cinnamon.org
+#    # calendar@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@cinnamon.org
+#    rm -rf /home/$USER/.cinnamon/configs/calendar@cinnamon.org
 
-    # calendar@simonwiles.net:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    # calendar@simonwiles.net:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
+#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
 
     # if SAVED_WC set worldclocks
     updateWorldClocks
@@ -565,18 +577,18 @@ case "$CHOICE" in
 ;;
 
 "traditional")
-    # menu@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    # menu@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
 
     # reset menu applet to default:
     resetMenu
 
-    # calendar@simonwiles.net:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    # calendar@simonwiles.net:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
+#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
 
     # if SAVED_WC set worldclocks
     updateWorldClocks
@@ -603,10 +615,10 @@ case "$CHOICE" in
 ;;
 
 "redmond7")
-    # menu@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    # menu@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
 
     # reset Main Menu
     resetMenu
@@ -617,15 +629,15 @@ case "$CHOICE" in
     rm -rf /home/$USER/.local/share/cinnamon/applets/IcingTaskManager@json
     rm -rf /home/$USER/.cinnamon/configs/IcingTaskManager@json
 
-    # grouped-window-list@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
-    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
+#    # grouped-window-list@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
+#    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
 
-    # calendar@simonwiles.net:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    # calendar@simonwiles.net:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
+#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
 
     # if SAVED_LAUNCHERS set pinned-apps
     updateGWLPinned
@@ -652,10 +664,10 @@ case "$CHOICE" in
 ;;
 
 "unity")
-    # menu@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    # menu@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
 
     # reset Main Menu
     resetMenu
@@ -669,20 +681,20 @@ case "$CHOICE" in
     rm -rf /home/$USER/.local/share/cinnamon/applets/IcingTaskManager@json
     rm -rf /home/$USER/.cinnamon/configs/IcingTaskManager@json
 
-    # grouped-window-list@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
-    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
+#    # grouped-window-list@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
+#    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
 
-    # calendar@simonwiles.net:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    # calendar@simonwiles.net:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
+#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
 
-    # transparent-panels@germanfr
-    #   - remove any local extension and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
-    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
+#    # transparent-panels@germanfr
+#    #   - remove any local extension and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
+#    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
 
     # if SAVED_LAUNCHERS set pinned-apps
     updateGWLPinned
@@ -709,10 +721,10 @@ case "$CHOICE" in
 ;;
 
 "cupertino")
-    # menu@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    # menu@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
 
     # reset Main Menu
     resetMenu
@@ -722,15 +734,15 @@ case "$CHOICE" in
     # "cleaner looking" matching macOS with favorties removed
     # removeMenuFavs
 
-    # calendar@simonwiles.net:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    # calendar@simonwiles.net:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
+#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
 
-    # transparent-panels@germanfr
-    #   - remove any local extension and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
-    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
+#    # transparent-panels@germanfr
+#    #   - remove any local extension and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
+#    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
 
     PLANK_FOLDER=/home/$USER/.config/plank/dock1/launchers
     if ! [ -e "$PLANK_FOLDER" ];
@@ -789,28 +801,28 @@ case "$CHOICE" in
 ;;
 
 "widescreen")
-    # menu@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    # menu@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
 
     # reset Main Menu
     resetMenu
 
-    # grouped-window-list@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
-    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
+#    # grouped-window-list@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
+#    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
 
-    # calendar@simonwiles.net:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    # calendar@simonwiles.net:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
+#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
 
-    # transparent-panels@germanfr
-    #   - remove any local extension and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
-    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
+#    # transparent-panels@germanfr
+#    #   - remove any local extension and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
+#    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
 
     # if SAVED_LAUNCHERS set pinned-apps
     updateGWLPinned
@@ -843,23 +855,23 @@ case "$CHOICE" in
 ;;
 
 "gnome2")
-    # menu@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    # menu@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
+#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
 
     # reset menu applet to default:
     resetMenu
 
-    # calendar@cinnamon.org:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    # calendar@cinnamon.org:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
+#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
 
-    # places-bookmarks@dmo60.de:
-    #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/places-bookmarks@dmo60.de
-    rm -rf /home/$USER/.cinnamon/configs/places-bookmarks@dmo60.de
+#    # places-bookmarks@dmo60.de:
+#    #   - remove any local applet and configs (will be re-created from defaults)
+#    rm -rf /home/$USER/.local/share/cinnamon/applets/places-bookmarks@dmo60.de
+#    rm -rf /home/$USER/.cinnamon/configs/places-bookmarks@dmo60.de
 
     # if SAVED_WC set worldclocks
     updateWorldClocks
