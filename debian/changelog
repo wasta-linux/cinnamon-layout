@@ -1,3 +1,9 @@
+cinnamon-layout-4-2 (4.2.20) bionic; urgency=medium
+
+  * cinnamon-layout: do NOT delete local applet configs
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Tue, 14 Apr 2020 17:41:36 -0500
+
 cinnamon-layout-4-2 (4.2.19) bionic; urgency=medium
 
   * change right panel icon size to 22px
