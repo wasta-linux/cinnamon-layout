@@ -1,3 +1,9 @@
+cinnamon-layout-4-2 (4.2.19) bionic; urgency=medium
+
+  * change right panel icon size to 22px
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Mon, 13 Apr 2020 19:16:59 -0500
+
 cinnamon-layout-4-2 (4.2.18) bionic; urgency=medium
 
   * re-work menu logic to incorporate gsettings values for
