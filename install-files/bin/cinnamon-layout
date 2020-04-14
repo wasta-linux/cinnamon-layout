@@ -593,8 +593,11 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
 <<<<<<< HEAD
+<<<<<<< HEAD
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
 =======
+=======
+>>>>>>> 4a585c3... adjust right panel icon sizes to 22px
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22}]'
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
 >>>>>>> 4a585c3... adjust right panel icon sizes to 22px
@@ -647,8 +650,11 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
 <<<<<<< HEAD
+<<<<<<< HEAD
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
 =======
+=======
+>>>>>>> 4a585c3... adjust right panel icon sizes to 22px
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22}]'
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
 >>>>>>> 4a585c3... adjust right panel icon sizes to 22px
@@ -709,8 +715,11 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     # all "panels" items need reset since number of panels could have changed
 <<<<<<< HEAD
+<<<<<<< HEAD
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
 =======
+=======
+>>>>>>> 4a585c3... adjust right panel icon sizes to 22px
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22},{"panelId":2,"left":0,"center":0,"right":0}]'
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":28,"center":28,"right":16},{"panelId":2,left":28,"center":28,"right":28}]'
 >>>>>>> 4a585c3... adjust right panel icon sizes to 22px
@@ -794,8 +803,11 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     # all "panels" items need reset since number of panels could have changed
 <<<<<<< HEAD
+<<<<<<< HEAD
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
 =======
+=======
+>>>>>>> 4a585c3... adjust right panel icon sizes to 22px
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22}]'
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
 >>>>>>> 4a585c3... adjust right panel icon sizes to 22px
@@ -853,8 +865,11 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     # all "panels" items need reset since number of panels could have changed
 <<<<<<< HEAD
+<<<<<<< HEAD
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
 =======
+=======
+>>>>>>> 4a585c3... adjust right panel icon sizes to 22px
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22}]'
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
 >>>>>>> 4a585c3... adjust right panel icon sizes to 22px
@@ -901,8 +916,11 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
 <<<<<<< HEAD
+<<<<<<< HEAD
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":24}]'
 =======
+=======
+>>>>>>> 4a585c3... adjust right panel icon sizes to 22px
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22},{"panelId":2,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":22,"center":0,"right":16},{"panelId":2,"left":0,"center":0,"right":22}]'
 >>>>>>> 4a585c3... adjust right panel icon sizes to 22px

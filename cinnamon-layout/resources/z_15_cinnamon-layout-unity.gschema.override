@@ -57,8 +57,11 @@ enabled-applets = ['panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:r
 enabled-extensions = ['transparent-panels@germanfr']
 no-adjacent-panel-barriers = true
 <<<<<<< HEAD
+<<<<<<< HEAD
 panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
 =======
+=======
+>>>>>>> 4a585c3... adjust right panel icon sizes to 22px
 panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":22},{"panelId":2,"left":0,"center":0,"right":0}]'
 panel-zone-symbolic-icon-sizes = '[{"panelId":1,"left":28,"center":28,"right":16},{"panelId":2,left":28,"center":28,"right":28}]'
 >>>>>>> 4a585c3... adjust right panel icon sizes to 22px
