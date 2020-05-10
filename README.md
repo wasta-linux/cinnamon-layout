@@ -20,8 +20,15 @@ cinnamon-layout-system redmond7
 
 For customizers, Cinnamon allows customizing the Main App Menu icon and label. Here are examples that could be included in your own `gschema.override` file and added to `/usr/share/glib-2.0/schemas`:
 ```
+[org.cinnamon]
 app-menu-icon-name = 'wasta-linux-squircle'
 app-menu-label = 'Menu'
 ```
 
 ***NOTE:*** some Cinnamon-Layouts will remove the app-menu-label, but you should still specify an `app-menu-label` in your `gschema.override` file for localization purposes for the layouts that will use a descriptive label for the Application Menu.
+
+***NOTE:*** To use a `gschema.override` file, place it in the `/usr/share/glib-2.0/schemas/` folder and then compile the schemas with the new overrides this way:
+```
+glib-compile-schemas /usr/share/glib-2.0/schemas/
+```
+After that, the updated schemas will now be system defaults, so if you reset your gsettings using something like `gsettings reset-recursively org.cinnamon`, or create a new user they will use these settings.
