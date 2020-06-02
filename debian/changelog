@@ -1,3 +1,9 @@
+cinnamon-layout-4-2 (4.2.22) bionic; urgency=medium
+
+  * cinnamon-layout: re-order when enabled-applets applied
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Tue, 02 Jun 2020 14:33:34 -0500
+
 cinnamon-layout-4-2 (4.2.21) bionic; urgency=medium
 
   * changing icon to stock 'user-desktop' so other distros able to
