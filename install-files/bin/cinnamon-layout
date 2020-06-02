@@ -108,7 +108,14 @@ then
     esac
 fi
 
+
 DIR=/usr/share/cinnamon-layout
+# NOTE: zenity does not support standard icon names, but needs a FULL path. So
+#   for now am duplicating the ePapirus 'user-desktop.svg' locally, and
+#   naming it 'cinnamon-layout.svg' If people really want their own icon to
+#   show here, they could use update-alternatives to register their own logo
+#   (or just replace this file).
+DIALOG_ICON="$DIR/resources/cinnamon-layout.svg"
 SCHEMA_DIR=/usr/share/glib-2.0/schemas
 CONFIG_DIR=/home/$USER/.config/cinnamon-layout
 mkdir -p $CONFIG_DIR
@@ -475,7 +482,7 @@ fi
 if ! [ "$AUTO" ];
 then
     CHOICE=$(zenity --list --title="Cinnamon-Layout" \
-        --window-icon=/usr/share/icons/hicolor/scalable/apps/cinnamon-layout.svg \
+        --window-icon=$DIALOG_ICON \
         --height=350 --width=550 --text \
 "This utility <i><b>changes</b></i> the layout of the <i>panel</i> (taskbar) and other
 items of the Cinnamon Desktop Interface.
@@ -605,7 +612,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:panel-launchers@cinnamon.org:103', 'panel1:left:4:window-list@cinnamon.org:105', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:systray@cinnamon.org:108', 'panel1:right:3:bluetooth@cinnamon.org:109', 'panel1:right:4:network@cinnamon.org:110', 'panel1:right:5:sound@cinnamon.org:111', 'panel1:right:6:power@cinnamon.org:112', 'panel1:right:7:calendar@simonwiles.net:113']"
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
-    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22}]'
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:bottom']"
@@ -655,7 +662,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:windows-quick-list@cinnamon.org:114']"
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
-    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22}]'
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:bottom']"
@@ -713,7 +720,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-applets "['panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116', 'panel2:left:0:menu@cinnamon.org:101', 'panel2:left:1:show-desktop@cinnamon.org:102', 'panel2:left:2:grouped-window-list@cinnamon.org:120', 'panel2:right:3:trash@cinnamon.org:117']"
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     # all "panels" items need reset since number of panels could have changed
-    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22},{"panelId":2,"left":0,"center":0,"right":0}]'
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":28,"center":28,"right":16},{"panelId":2,left":28,"center":28,"right":28}]'
     gsettings set org.cinnamon panels-autohide "['1:false', '2:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:top', '2:0:left']"
@@ -794,7 +801,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:101', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116']"
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     # all "panels" items need reset since number of panels could have changed
-    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22}]'
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:top']"
@@ -849,7 +856,7 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:grouped-window-list@cinnamon.org:120', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:collapsible-systray@feuerfuchs.eu:121', 'panel1:right:4:inhibit@cinnamon.org:107', 'panel1:right:5:spacer-thin@wastalinux.org:126', 'panel1:right:6:calendar@simonwiles.net:113:orient', 'panel1:right:7:spacer-thin@wastalinux.org:126', 'panel1:right:8:sound@cinnamon.org:111', 'panel1:right:9:network@cinnamon.org:110', 'panel1:right:10:power@cinnamon.org:112', 'panel1:right:11:spacer-thin@wastalinux.org:126']"
     gsettings set org.cinnamon enabled-extensions "['transparent-panels@germanfr']"
     # all "panels" items need reset since number of panels could have changed
-    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22}]'
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":16}]'
     gsettings set org.cinnamon panels-autohide "['1:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:left']"
@@ -893,8 +900,8 @@ case "$CHOICE" in
     gsettings set org.cinnamon enabled-applets "['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:places-bookmarks@dmo60.de:122', 'panel1:left:3:panel-launchers@cinnamon.org:103', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:notifications@cinnamon.org:119', 'panel1:right:2:removable-drives@cinnamon.org:106', 'panel1:right:3:inhibit@cinnamon.org:107', 'panel1:right:4:systray@cinnamon.org:108', 'panel1:right:5:bluetooth@cinnamon.org:109', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:network@cinnamon.org:110', 'panel1:right:8:power@cinnamon.org:112', 'panel1:right:9:calendar@simonwiles.net:113', 'panel1:right:10:user@cinnamon.org:116', 'panel2:left:1:show-desktop@cinnamon.org:102', 'panel2:left:2:window-list@cinnamon.org:105', 'panel2:right:1:workspace-switcher@cinnamon.org:123', 'panel2:right:2:trash@cinnamon.org:117']"
     gsettings set org.cinnamon enabled-extensions "[]"
     # all "panels" items need reset since number of panels could have changed
-    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":22},{"panelId":2,"left":0,"center":0,"right":24}]'
-    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":22,"center":0,"right":16},{"panelId":2,"left":0,"center":0,"right":22}]'
+    gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":24}]'
+    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":24,"center":0,"right":16},{"panelId":2,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panels-autohide "['1:false', '2:false']"
     gsettings set org.cinnamon panels-enabled "['1:0:top', '2:0:bottom']"
     gsettings set org.cinnamon panels-height "['1:28', '2:28']"
@@ -930,7 +937,7 @@ if ! [ "$AUTO" ];
 then
     zenity --question --title "Cinnamon-Layout: Update System Default?" \
         --no-wrap --height=150 --width=450 \
-        --window-icon=/usr/share/icons/hicolor/scalable/apps/cinnamon-layout.svg \
+        --window-icon=$DIALOG_ICON \
         --text="<b>Update Cinnamon-Layout system default to $CHOICE?</b>
 
 <i>NOTE: you will need to provide an administrative password</i>"
@@ -993,7 +1000,7 @@ echo
 if ! [ "$AUTO" ];
 then
     zenity --info --title "Cinnamon-Layout: Finished" --no-wrap --height=150 --width=450 \
-        --window-icon=/usr/share/icons/hicolor/scalable/apps/cinnamon-layout.svg \
+        --window-icon=$DIALOG_ICON \
         --text="$MSG"
 fi
 
