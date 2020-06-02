@@ -1,3 +1,9 @@
+cinnamon-layout-4-4 (4.4.9) focal; urgency=medium
+
+  * cinnamon-layout: re-order when enabled-applets applied
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Tue, 02 Jun 2020 14:32:35 -0500
+
 cinnamon-layout-4-4 (4.4.8) focal; urgency=medium
 
   * Accommodate distros not wanting to use cinnamon-layout icon:
