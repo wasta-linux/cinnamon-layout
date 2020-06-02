@@ -1,6 +1,6 @@
 cinnamon-layout-4-4 (4.4.8) focal; urgency=medium
 
-  * Accomodate distros not wanting to use cinnamon-layout icon:
+  * Accommodate distros not wanting to use cinnamon-layout icon:
   - setting zenity icon to local icon since zenity doesn't support
     standard icon names :-(
   - setting launcher icon to 'user-desktop'
