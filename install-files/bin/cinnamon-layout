@@ -65,6 +65,12 @@
 #       menu label, none provide it because that comes from the vendor.
 #   2020-04-14 rik: do NOT remove applet configs, instead we will need to make
 #       sure the relevant settings are adjusted if needed for the layout
+#   2020-06-02 rik: setting taskbar panel icon sizes to 16, 24 (previous size
+#       of 22 caused cinnamon to need to re-sample the icons, making ibus icon,
+#       for example, to need 'double clicks' to select a keyboard before the
+#       selection menu would disappear).
+#     - Updating zenity icon to local icon (zenity doesn't support standard
+#       icon names).
 #
 # ==============================================================================
 
