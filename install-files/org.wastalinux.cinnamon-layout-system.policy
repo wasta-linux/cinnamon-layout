@@ -3,7 +3,7 @@
  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
 <policyconfig>
-  <icon_name>cinnamon-layout</icon_name>
+  <icon_name>user-desktop</icon_name>
   <action id="org.wastalinux.cinnamon-layout-system">
     <description>Cinnamon-Layout Authentication Needed</description>
     <message>Authentication is needed to run Cinnamon-Layout</message>
