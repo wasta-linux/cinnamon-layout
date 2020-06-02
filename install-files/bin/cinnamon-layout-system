@@ -20,8 +20,6 @@
 #
 # ==============================================================================
 
-# ***TODO: instead of mucking with menu-label in applet, instead put a "z-90-cinnamon-layout-menu-label.gschema.override" file in place to blank out label. Then remove it at the beginning of every menu reset, and add it back only in the layouts that need to blank the label.
-
 # ------------------------------------------------------------------------------
 # Check to ensure running as root
 # ------------------------------------------------------------------------------
