@@ -2,6 +2,5 @@ install-files/applications                                  usr/share
 install-files/applets                                       usr/share/cinnamon
 install-files/bin                                           usr
 install-files/extensions                                    usr/share/cinnamon
-install-files/icons                                         usr/share
 install-files/org.wastalinux.cinnamon-layout-system.policy  usr/share/polkit-1/actions
 cinnamon-layout                                             usr/share
