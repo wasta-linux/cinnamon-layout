@@ -1,3 +1,14 @@
+cinnamon-layout-4-2 (4.2.21) bionic; urgency=medium
+
+  * changing icon to stock 'user-desktop' so other distros able to
+    have look to cinnamon-layout they prefer.
+  * setting system tray icons to 16 / 24 px. If at 22 px (previous
+    default) then they get re-sampled and things like the ibus icon
+    are "broken" so that it needs a double-click to ge the menu
+    to disappear. 
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Tue, 02 Jun 2020 12:30:09 -0500
+
 cinnamon-layout-4-2 (4.2.20) bionic; urgency=medium
 
   * cinnamon-layout: do NOT delete local applet configs
