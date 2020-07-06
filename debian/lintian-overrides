@@ -1,2 +1,2 @@
-cinnamon-layout-4-4: binary-without-manpage
-cinnamon-layout-4-4: missing-dep-for-interpreter
+cinnamon-layout-4-6: binary-without-manpage
+cinnamon-layout-4-6: missing-dep-for-interpreter

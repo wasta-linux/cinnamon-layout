@@ -1,6 +1,6 @@
-cinnamon-layout-4-4 (4.4.9) focal; urgency=medium
+cinnamon-layout-4-6 (4.6.0) focal; urgency=medium
 
-  * cinnamon-layout: re-order when enabled-applets applied
+  * initial cinnamon 4.6 release
 
  -- Rik Shaw <rikshaw76@gmail.com>  Tue, 02 Jun 2020 14:32:35 -0500
 
