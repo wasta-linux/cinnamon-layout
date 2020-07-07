@@ -1,3 +1,9 @@
+cinnamon-layout-4-6 (4.6.1) focal; urgency=medium
+
+  * transparent-panels extension: add cinnamon 4.6 compatibility
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Tue, 07 Jul 2020 14:59:18 -0500
+
 cinnamon-layout-4-6 (4.6.0) focal; urgency=medium
 
   * initial cinnamon 4.6 release
