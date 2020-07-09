@@ -1,3 +1,9 @@
+cinnamon-layout-4-6 (4.6.2) focal; urgency=medium
+
+  * transparent-panels metadata json: remove errant comma
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Thu, 09 Jul 2020 09:56:05 -0500
+
 cinnamon-layout-4-6 (4.6.1) focal; urgency=medium
 
   * transparent-panels extension: add cinnamon 4.6 compatibility
