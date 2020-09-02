@@ -1,3 +1,14 @@
+cinnamon-layout-4-6 (4.6.3) focal; urgency=medium
+
+  * correcting panel-zone-icon-sizes to 24px for zone containing
+    ibus icon: or else will need to "click 2 times". This was 
+    correct in cinnamon-layout but was incorrect in the
+    gschema.override files (but it was changed wrongly from 24px
+    to 22px on 14 Apr 2020, not sure why?? Effectively reverting
+    this commit)
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Wed, 02 Sep 2020 17:01:28 +0300
+
 cinnamon-layout-4-6 (4.6.2) focal; urgency=medium
 
   * transparent-panels metadata json: remove errant comma

@@ -937,7 +937,7 @@ case "$CHOICE" in
 
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":24}]'
-    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":24,"center":0,"right":16},{"panelId":2,"left":0,"center":0,"right":24}]'
+    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":22,"center":0,"right":16},{"panelId":2,"left":0,"center":0,"right":24}]'
     gsettings set org.cinnamon panels-autohide "['1:false', '2:false']"
     gsettings set org.cinnamon panels-height "['1:28', '2:28']"
     gsettings set org.cinnamon panels-hide-delay "['1:0', '2:0']"

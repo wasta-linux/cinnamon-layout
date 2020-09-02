@@ -42,13 +42,14 @@
 #
 #   2019-12-13 rik: initial script
 #   2020-03-25 rik: added keyboard@cinnamon.org:124
+#   2020-09-02 rik: correct panel-zone-icon-sizes for ibus (24px)
 #
 # ==============================================================================
 
 [org.cinnamon]
 enabled-applets = ['panel1:left:1:menu@cinnamon.org:101', 'panel1:left:2:show-desktop@cinnamon.org:102', 'panel1:left:3:panel-launchers@cinnamon.org:103', 'panel1:left:4:window-list@cinnamon.org:105', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:systray@cinnamon.org:108', 'panel1:right:3:bluetooth@cinnamon.org:109', 'panel1:right:4:network@cinnamon.org:110', 'panel1:right:5:sound@cinnamon.org:111', 'panel1:right:6:power@cinnamon.org:112', 'panel1:right:7:calendar@simonwiles.net:113']
 enabled-extensions = []
-panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":22}]'
+panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24}]'
 panel-zone-symbolic-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":16}]'
 panels-autohide = ['1:false']
 panels-enabled = ['1:0:bottom']

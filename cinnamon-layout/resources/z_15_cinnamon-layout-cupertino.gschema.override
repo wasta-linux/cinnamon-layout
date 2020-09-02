@@ -47,13 +47,14 @@
 #   2019-02-23 rik: updates for cinnamon 4.0
 #   2019-11-17 rik: renaming to cinnamon-layout
 #   2020-03-25 rik: added keyboard@cinnamon.org:124
+#   2020-09-02 rik: correct panel-zone-icon-sizes for ibus (24px)
 #
 # ==============================================================================
 
 [org.cinnamon]
 enabled-applets = ['panel1:left:0:menu@cinnamon.org:101', 'panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:removable-drives@cinnamon.org:106', 'panel1:right:2:inhibit@cinnamon.org:107', 'panel1:right:3:systray@cinnamon.org:108', 'panel1:right:4:bluetooth@cinnamon.org:109', 'panel1:right:5:network@cinnamon.org:110', 'panel1:right:6:sound@cinnamon.org:111', 'panel1:right:7:power@cinnamon.org:112', 'panel1:right:8:calendar@simonwiles.net:113', 'panel1:right:9:user@cinnamon.org:116']
 enabled-extensions = ['transparent-panels@germanfr']
-panel-zone-icon-sizes = '[{"panelId":1,"left":20,"center":0,"right":22}]'
+panel-zone-icon-sizes = '[{"panelId":1,"left":20,"center":0,"right":24}]'
 panel-zone-symbolic-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":16}]'
 panels-enabled = ['1:0:top']
 panels-height = ['1:28']
