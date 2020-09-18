@@ -1,3 +1,11 @@
+cinnamon-layout-4-6 (4.6.4) focal; urgency=medium
+
+  * cinnamon-layout: adding ability to save and restore custom
+    clock formats (for supported layouts - widescreen doesn't
+    support custom formats however)
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Fri, 18 Sep 2020 10:51:37 +0300
+
 cinnamon-layout-4-6 (4.6.3) focal; urgency=medium
 
   * correcting panel-zone-icon-sizes to 24px for zone containing

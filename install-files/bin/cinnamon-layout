@@ -89,7 +89,7 @@ fi
 # Setup
 # ------------------------------------------------------------------------------
 echo
-echo " *** Script Entry: cinnamon-layout for user: $USER"
+echo "*** Script Entry: cinnamon-layout for user: $USER"
 echo
 # Check for input parameter
 CHOICE=$1
@@ -133,6 +133,26 @@ then
     PREV_LAUNCHERS=$(cat $PREV_LAUNCHERS_FILE)
     echo
     echo "*** PREV_LAUNCHERS: $PREV_LAUNCHERS"
+    echo
+fi
+
+PREV_CLOCK_FORMAT=""
+PREV_CLOCK_FILE=$CONFIG_DIR/cinnamon-layout-clock-format.txt
+if [ -e $PREV_CLOCK_FILE ];
+then
+    PREV_CLOCK_FORMAT=$(cat $PREV_CLOCK_FILE)
+    echo
+    echo "*** PREV_CLOCK_FORMAT: $PREV_CLOCK_FORMAT"
+    echo
+fi
+
+PREV_LAYOUT=""
+PREV_LAYOUT_FILE=$CONFIG_DIR/current-cinnamon-layout.txt
+if [ -e $PREV_LAYOUT_FILE ];
+then
+    PREV_LAYOUT=$(cat $PREV_LAYOUT_FILE)
+    echo
+    echo "*** PREV_LAYOUT: $PREV_LAYOUT"
     echo
 fi
 
@@ -217,7 +237,7 @@ updateWorldClocks()
             cp $DEFAULT_CONFIG $JSON_FILE
         fi
 
-        #update saved launchers
+        #update world clocks
         echo
         echo "*** Updating JSON_FILE: $JSON_FILE"
         echo
@@ -226,6 +246,36 @@ updateWorldClocks()
         # read -p "$NEW_FILE"
         echo "$NEW_FILE" > $JSON_FILE
     fi
+}
+
+setClockSaved()
+{
+    DEFAULT_CONFIG=/usr/share/cinnamon/applets/calendar@simonwiles.net/settings-schema.json
+    JSON_DIR=/home/$USER/.cinnamon/configs/calendar@simonwiles.net
+    # NOTE: #.json has to match enabled-applets number!!
+    JSON_FILE=$JSON_DIR/113.json
+
+    if ! [ -e "$JSON_FILE" ];
+    then
+        echo
+        echo "*** Copying in default json config: $DEFAULT_CONFIG"
+        echo
+        mkdir -p $JSON_DIR
+        cp $DEFAULT_CONFIG $JSON_FILE
+    fi
+
+    # restore clock format from saved file
+    echo
+    echo "*** Restoring clock format to '$SAVED_CLOCK_FORMAT' in JSON_FILE:"
+    echo "      $JSON_FILE"
+    echo
+    # updates:
+    # - use-custom-format: custom panel clock format
+    # - custom-format: set to saved format
+    # note: jq can't do "sed -i" inplace update, so need to re-create file
+    NEW_FILE=$(jq '.["use-custom-format"].value=true | .["custom-format"].value='"$SAVED_CLOCK_FORMAT" \
+        < $JSON_FILE)
+    echo "$NEW_FILE" > $JSON_FILE
 }
 
 setClockShort()
@@ -245,7 +295,7 @@ setClockShort()
         cp $DEFAULT_CONFIG $JSON_FILE
     fi
 
-    # remove AM / PM from worldclock time display
+    # set clock format to short layout
     echo
     echo "*** Setting clock format to 'HH:MM' in JSON_FILE:"
     echo "      $JSON_FILE"
@@ -275,7 +325,7 @@ setClockStandard()
         cp $DEFAULT_CONFIG $JSON_FILE
     fi
 
-    # restore AM / PM from worldclock time display
+    # set clock format to standard layout
     echo
     echo "*** Setting clock format to 'HH:MM AM/PM' in JSON_FILE:"
     echo "      $JSON_FILE"
@@ -305,9 +355,9 @@ setClockFull()
         cp $DEFAULT_CONFIG $JSON_FILE
     fi
 
-    # restore AM / PM from worldclock time display
+    # set clock format to full layout
     echo
-    echo "Setting clock format to 'Day Mon DD, HH:MM AM/PM' in JSON_FILE:"
+    echo "*** Setting clock format to 'Day Mon DD, HH:MM AM/PM' in JSON_FILE:"
     echo "      $JSON_FILE"
     echo
     # updates:
@@ -424,6 +474,8 @@ then
     GWL_PINNED_APPS=$(jq -c '.["pinned-apps"].value' < $GWL_FILE)
 fi
 
+
+
 if [ "$PL_FILE" -nt "$GWL_FILE" ];
 then
     echo
@@ -460,8 +512,9 @@ then
     echo "$SAVED_LAUNCHERS" > $PREV_LAUNCHERS_FILE
 fi
 
-# SAVE current world clocks
+# SAVE current world clocks and clock format
 SAVED_WC=""
+SAVED_CLOCK_FORMAT=""
 
 WC_FILE=/home/$USER/.cinnamon/configs/calendar@simonwiles.net/113.json
 if [ -e "$WC_FILE" ];
@@ -469,6 +522,59 @@ then
     SAVED_WC=$(jq -c '.["worldclocks"].value' < $WC_FILE)
     echo
     echo "*** SAVED_WC set to: $SAVED_WC"
+    echo
+
+    SAVED_CLOCK_FORMAT=""
+    CURRENT_CLOCK_FORMAT=$(jq -c '.["custom-format"].value' < $WC_FILE)
+    echo
+    echo "*** CURRENT_CLOCK_FORMAT: $CURRENT_CLOCK_FORMAT"
+    echo
+
+    # only save current clock format if NOT default for prev layout
+    case "$PREV_LAYOUT" in
+
+    "redmond7"|"traditional")
+        # default: standard clock format "%l:%M %p"
+        if [[ "$CURRENT_CLOCK_FORMAT" != '"%l:%M %p"' ]];
+        then
+            echo
+            echo "*** Saving clock format: $CURRENT_CLOCK_FORMAT"
+            echo
+            # update PREV_CLOCK_FORMAT for next time
+            echo "$CURRENT_CLOCK_FORMAT" > $PREV_CLOCK_FILE
+            SAVED_CLOCK_FORMAT="$CURRENT_CLOCK_FORMAT"
+        fi
+    ;;
+
+    "unity"|"cupertino"|"gnome2")
+        # default: full clock format "%a %b %d, %l:%M %p"
+        if [[ "$CURRENT_CLOCK_FORMAT" != '"%a %b %d, %l:%M %p"' ]];
+        then
+            echo
+            echo "*** Saving clock format: $CURRENT_CLOCK_FORMAT"
+            echo
+            # update PREV_CLOCK_FORMAT for next time
+            echo "$CURRENT_CLOCK_FORMAT" > $PREV_CLOCK_FILE
+            SAVED_CLOCK_FORMAT="$CURRENT_CLOCK_FORMAT"
+        fi
+    ;;
+
+    "widescreen")
+        # restore previous clock format, since doesn't support custom formats
+        echo
+        echo "*** SAVED_CLOCK_FORMAT being restored from PREV_CLOCK_FORMAT"
+        echo
+        SAVED_CLOCK_FORMAT=$PREV_CLOCK_FORMAT
+    ;;
+
+    *)
+        #do nothing
+    ;;
+
+    esac
+
+    echo
+    echo "*** SAVED_CLOCK_FORMAT set to: $SAVED_CLOCK_FORMAT"
     echo
 fi
 
@@ -560,8 +666,13 @@ case "$CHOICE" in
     # if SAVED_WC set worldclocks
     updateWorldClocks
 
-    # Set clock to standard format
-    setClockStandard
+    # if SAVED_CLOCK_FORMAT use it, else set clock to standard format
+    if [ "$SAVED_CLOCK_FORMAT" ];
+    then
+        setClockSaved
+    else
+        setClockStandard
+    fi
 
     # reset Main Menu
     resetMenu
@@ -611,8 +722,13 @@ case "$CHOICE" in
     # if SAVED_WC set worldclocks
     updateWorldClocks
 
-    # set clock to standard format
-    setClockStandard
+    # if SAVED_CLOCK_FORMAT use it, else set clock to standard format
+    if [ "$SAVED_CLOCK_FORMAT" ];
+    then
+        setClockSaved
+    else
+        setClockStandard
+    fi
 
     # if SAVED_LAUNCHERS set panel-launchers
     updatePanelLaunchers
@@ -668,8 +784,13 @@ case "$CHOICE" in
     # if SAVED_WC set worldclocks
     updateWorldClocks
 
-    # set clock to standard format
-    setClockStandard
+    # if SAVED_CLOCK_FORMAT use it, else set clock to standard format
+    if [ "$SAVED_CLOCK_FORMAT" ];
+    then
+        setClockSaved
+    else
+        setClockStandard
+    fi
 
     # first setup panels for layout
     gsettings set org.cinnamon panels-enabled "['1:0:bottom']"
@@ -730,8 +851,13 @@ case "$CHOICE" in
     # if SAVED_WC set worldclocks
     updateWorldClocks
 
-    # set clock to full format (date, time)
-    setClockFull
+    # if SAVED_CLOCK_FORMAT use it, else set clock to FULL format
+    if [ "$SAVED_CLOCK_FORMAT" ];
+    then
+        setClockSaved
+    else
+        setClockFull
+    fi
 
     # first setup panels for layout
     gsettings set org.cinnamon panels-enabled "['1:0:top', '2:0:left']"
@@ -815,8 +941,13 @@ case "$CHOICE" in
     # if SAVED_WC set worldclocks
     updateWorldClocks
 
-    # set clock to full format (date, time)
-    setClockFull
+    # if SAVED_CLOCK_FORMAT use it, else set clock to FULL format
+    if [ "$SAVED_CLOCK_FORMAT" ];
+    then
+        setClockSaved
+    else
+        setClockFull
+    fi
 
     # first setup panels for layout
     gsettings set org.cinnamon panels-enabled "['1:0:top']"
@@ -869,6 +1000,7 @@ case "$CHOICE" in
     updateWorldClocks
 
     # set clock to short format (NO AM/PM)
+    # CAN'T use saved format because would overflow the panel
     setClockShort
 
     # if SAVED_CS_ICON_LIST set icon-visiblity-list
@@ -920,8 +1052,13 @@ case "$CHOICE" in
     # if SAVED_WC set worldclocks
     updateWorldClocks
 
-    # set clock to full format (date, time)
-    setClockFull
+    # if SAVED_CLOCK_FORMAT use it, else set clock to FULL format
+    if [ "$SAVED_CLOCK_FORMAT" ];
+    then
+        setClockSaved
+    else
+        setClockFull
+    fi
 
     # if SAVED_LAUNCHERS set panel-launchers
     updatePanelLaunchers
@@ -956,7 +1093,7 @@ RETURN=$?
 if [ $RETURN == 0 ];
 then
     MSG+="Cinnamon-Layout user interface updated to: $CHOICE\n\n"
-    echo "$CHOICE" > $CONFIG_DIR/current-cinnamon-layout.txt
+    echo "$CHOICE" > $PREV_LAYOUT_FILE
 else
     MSG+="Error: Cinnamon-Layout user interface not updated\n\n"
 fi
