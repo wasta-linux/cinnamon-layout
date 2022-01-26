@@ -1,2 +1,3 @@
-cinnamon-layout-4-6: binary-without-manpage
-cinnamon-layout-4-6: missing-dep-for-interpreter
+cinnamon-layout-5-2: binary-without-manpage
+cinnamon-layout-5-2: missing-dep-for-interpreter
+cinnamon-layout-5-2: python-script-but-no-python-dep
