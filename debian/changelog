@@ -1,3 +1,10 @@
+cinnamon-layout-5-2 (5.2.0.2) jammy; urgency=medium
+
+  * removing python depends since naming changes between focal and
+    jammy (python-gi to python3-gi)
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Thu, 27 Jan 2022 09:25:51 -0600
+
 cinnamon-layout-5-2 (5.2.0.1) jammy; urgency=medium
 
   * initial jammy release

@@ -8,7 +8,7 @@ Homepage: https://github.com/wasta-linux/cinnamon-layout
 
 Package: cinnamon-layout-5-2
 Architecture: all
-Depends: cinnamon (>= 5.2), cinnamon-common (>= 5.2), cinnamon-control-center (>= 5.2), cinnamon-desktop-data (>= 5.2), cinnamon-l10n (>= 5.2), cinnamon-screensaver (>= 5.2), cinnamon-session (>= 5.2), cinnamon-settings-daemon (>= 5.2), cjs (>= 5.2), jq, muffin (>= 5.2), nemo (>= 5.2), plank, python2 | python:any, python-gi, zenity, ${misc:Depends}
+Depends: cinnamon (>= 5.2), cinnamon-common (>= 5.2), cinnamon-control-center (>= 5.2), cinnamon-desktop-data (>= 5.2), cinnamon-l10n (>= 5.2), cinnamon-screensaver (>= 5.2), cinnamon-session (>= 5.2), cinnamon-settings-daemon (>= 5.2), cjs (>= 5.2), jq, muffin (>= 5.2), nemo (>= 5.2), plank, zenity, ${misc:Depends}
 Provides: cinnamon-layout-4-6
 Conflicts: cinnamon-layout-4-6
 Replaces: cinnamon-layout-4-6
