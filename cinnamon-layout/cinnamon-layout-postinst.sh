@@ -19,6 +19,8 @@
 #   2019-11-17 rik: updating name to cinnamon-layout
 #   2019-11-21 rik: removing ITM adjustments
 #   2019-12-28 rik: installing menu-icon to update-alternatives
+#   2022-08-09 rik: making adjustments based on series so can support multiple
+#       series (focal and jaunty -- default, for example, in this case)
 #
 # ==============================================================================
 
@@ -99,6 +101,25 @@ echo "updating JSON_FILE: $JSON_FILE"
 NEW_FILE=$(jq '.["transparency-type"].default="panel-semi-transparent" | .["first-launch"].default=false' \
     < $JSON_FILE)
 echo "$NEW_FILE" > $JSON_FILE
+
+# ------------------------------------------------------------------------------
+# Series-based adjustments
+# ------------------------------------------------------------------------------
+SERIES=$(lsb_release -sc)
+case "$SERIES" in
+    focal|ulyana|ulyssa|uma|una)
+        echo
+        echo "*** making series-based adjustments for series: $SERIES"
+        echo
+        sed -i -e "s@firefox-esr.dockitem@firefox.dockitem@" \
+            $DIR/resources/launchers/firefox-esr.dockitem
+    ;;
+    *)
+        echo
+        echo "*** no series-based adjustments needed for series: $SERIES"
+        echo
+    ;;
+esac
 
 # ------------------------------------------------------------------------------
 # Dconf / Gsettings Default Value adjustments

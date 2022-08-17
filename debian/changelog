@@ -1,3 +1,11 @@
+cinnamon-layout-5-4 (5.4.0) jammy; urgency=medium
+
+  * initial 5.4 release: updated all applets
+    - transparent-panels extension still not updated but there is
+      an open pull request on github, hopefully soon!
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Thu, 04 Aug 2022 16:18:05 -0500
+
 cinnamon-layout-5-2 (5.2.0.3) jammy; urgency=medium
 
   * update plank dockitem to firefox-esr from firefox

@@ -1,60 +1,61 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Ukrainian translations for PACKAGE package
+# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Rutar <RutarAndriy@gmail.com>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-26 13:12+0200\n"
-"PO-Revision-Date: 2022-06-03 15:53+0200\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
-"Language-Team: \n"
-"Language: it\n"
+"PO-Revision-Date: 2022-01-06 09:38+0200\n"
+"Language-Team: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: Rutar <RutarAndriy@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: uk\n"
 
 #: applet.js:143
 msgid "Active applications"
-msgstr "Applicazioni attive"
+msgstr "Активні програми"
 
 #: applet.js:144
 msgid "Inactive applications"
-msgstr "Applicazioni inattive"
+msgstr "Неактивні програми"
 
 #: CSCollapseBtn.js:104
 msgid "Collapse"
-msgstr "Collassa"
+msgstr "Згорнути"
 
 #: CSCollapseBtn.js:110
 msgid "Expand"
-msgstr "Espandi"
+msgstr "Розгорнути"
 
 #: CSCollapseBtn.js:116
 msgid "No icons to hide/reveal"
-msgstr "Nessuna icona da nascondere/mostrare"
+msgstr "Немає іконок для приховування/відображення"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->name
 msgid "Collapsible Systray"
-msgstr "Collapsible Systray"
+msgstr "Покращений системний лоток"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->description
 msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
-msgstr ""
-"Un sostituto dell'applet di Cinnamon System Tray Collapsible abbandonata"
+msgstr "Альтернатива стандартному системному лотку від Cinnamon"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->expand-on-
 #. hover->description
 msgid "Expand on hover"
-msgstr "Espandi al passaggio del mouse"
+msgstr "Розгортати при наведенні курсору"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->animation-
 #. duration->description
 msgid "Animation duration"
-msgstr "Durata animazione"
+msgstr "Тривалість анімації"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->animation-
 #. duration->units
@@ -63,17 +64,17 @@ msgstr "Durata animazione"
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->expand-on-hover-
 #. delay->units
 msgid "milliseconds"
-msgstr "millisecondi"
+msgstr "мілісекунд"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->collapse-on-leave-
 #. delay->description
 msgid "Collapse on un-hover delay"
-msgstr "Ritardo del collasso dopo la rimozione del mouse"
+msgstr "Затримка згортання"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->vertical-collapse-
 #. icon-name->description
 msgid "Vertical collapse icon"
-msgstr "Icona collasso verticale"
+msgstr "Вертикальна іконка згортання"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->vertical-collapse-
 #. icon-name->tooltip
@@ -84,100 +85,100 @@ msgstr "Icona collasso verticale"
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->vertical-expand-
 #. icon-name->tooltip
 msgid "Enter either the icon's qualified name or it's full path"
-msgstr "Immettere il nome qualificato dell'icona o il percorso completo"
+msgstr "Введіть зарезервоване ім'я піктограми або шлях до неї"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->appearance->title
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->appearance-
 #. section->title
 msgid "Appearance"
-msgstr "Aspetto"
+msgstr "Зовнішній вигляд"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->behavior-
 #. section->title
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->behavior->title
 msgid "Behavior"
-msgstr "Comportamento"
+msgstr "Поведінка"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->horizontal-
 #. collapse-icon-name->description
 msgid "Horizontal collapse icon"
-msgstr "Icona collasso orizzontale"
+msgstr "Горизонтальна іконка згортання"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->horizontal-expand-
 #. icon-name->description
 msgid "Horizontal expand icon"
-msgstr "Icona espansione orizzontale"
+msgstr "Горизонтальна іконка розгортання"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->icon-visibility-
 #. list->description
 msgid "Internal use"
-msgstr "Uso interno"
+msgstr "Внутрішнє використання"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->sort-
 #. icons->description
 msgid "Sort icons by name"
-msgstr "Ordina icone per nome"
+msgstr "Сортувати іконки за іменем"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->sort-
 #. icons->tooltip
 msgid "If unchecked, the order of the icons will be pretty much random"
-msgstr "Se non selezionato, l'ordine delle icone sarà praticamente casuale"
+msgstr "Якщо вимкнено, порядок відображення іконок буде випадковим"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->animation-
 #. support->description
 msgid "Animation support (disable if icons stop updating)"
-msgstr ""
-"Supporto animazione (disabilita se le icone interrompono l'aggiornamento)"
+msgstr "Підтримка анімації (вимкніть, якщо іконки перестануть оновлюватися)"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->animation-
 #. support->tooltip
 msgid "Disable if you have issues with icons not updating themselves."
-msgstr ""
-"Disabilita se riscontri problemi con le icone che non si aggiornano da sole."
+msgstr "Вимкніть, якщо у вас виникли проблеми із оновленням іконок."
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->vertical-expand-
 #. icon-name->description
 msgid "Vertical expand icon"
-msgstr "Icona espansione verticale"
+msgstr "Вертикальна іконка розгортання"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->tray-icon-
 #. padding->description
 msgid "Padding of tray icons"
-msgstr "Padding delle icone in tray"
+msgstr "Відступ іконок системного лотка"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->tray-icon-
 #. padding->units
 msgid "px"
-msgstr "px"
+msgstr "пікселів"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->init-
 #. delay->description
 msgid "Startup collapse delay"
-msgstr "Ritardo del collasso all'avvio"
+msgstr "Затримка згортання при запуску"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->init-
 #. delay->tooltip
 msgid "The delay until the applet automatically collapses upon startup"
-msgstr "Il ritardo fino al collasso automatico dell'applet all'avvio"
+msgstr ""
+"Затримка, після якої аплет автоматично згорне системний лоток при включенні "
+"операційної системи"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->init-delay->units
 msgid "seconds"
-msgstr "secondi"
+msgstr "секунд"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->expand-on-hover-
 #. delay->description
 msgid "Expand on hover delay"
-msgstr "Ritardo espansione al passaggio del mouse"
+msgstr "Затримка розгортання при наведенні"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->collapse-on-
 #. leave->description
 msgid "Collapse on un-hover"
-msgstr "Collasso alla rimozione del mouse"
+msgstr "Згортати при відведенні курсору"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->no-hover-for-tray-
 #. icons->description
 msgid "Disable hover effect for tray icons"
-msgstr "Disabilita l'effetto hover per le icone della barra delle applicazioni"
+msgstr "Вимкнути ефект наведення для іконок системного лотка"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->no-hover-for-tray-
 #. icons->tooltip
@@ -185,5 +186,5 @@ msgid ""
 "If you have problems with the hover effect or it simply doesn't look good, "
 "you should enable this setting"
 msgstr ""
-"Se hai problemi con l'effetto hover o semplicemente non sembra bello, "
-"dovresti abilitare questa impostazione"
+"Якщо у вас виникають проблеми з ефектом наведення, або воно просто некрасиво "
+"виглядає, вам слід увімкнути це налаштування"

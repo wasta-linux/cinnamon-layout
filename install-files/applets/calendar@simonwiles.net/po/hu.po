@@ -8,15 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-20 01:51+0800\n"
-"PO-Revision-Date: 2022-06-03 15:34+0200\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
-"Language-Team: \n"
-"Language: it\n"
+"PO-Revision-Date: 2021-03-25 10:13+0100\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: applet.js:27
 msgid "%l:%M %p"
@@ -28,93 +27,94 @@ msgstr "%A %B %e, %Y"
 
 #: applet.js:277
 msgid "Edit World Clocks"
-msgstr "Modifica World Clocks"
+msgstr "Világórák szekesztése"
 
 #: applet.js:279
 msgid "Date and Time Settings"
-msgstr "Impostazioni Data e Ora"
+msgstr "Dátum és idő beállítások"
 
 #: world_clock_calendar_settings.py:76
 msgid "Display Name"
-msgstr "Nome Visualizzato"
+msgstr "Név megjelenítése"
 
 #: world_clock_calendar_settings.py:88
 msgid "Timezone"
-msgstr "Fuso Orario"
+msgstr "Időzóna"
 
 #: world_clock_calendar_settings.py:126
 msgid "Time format for World Clocks"
-msgstr "Formato orario di World Clocks"
+msgstr "Időformátum a világórákhoz"
 
 #: world_clock_calendar_settings.py:135
 msgid "Browse valid timezone values by country (online)"
-msgstr "Sfoglia valori di fuso orario validi per paese (online)"
+msgstr ""
+"Böngészés az országonkénti érvényes időzóna értékek szerint (online)"
 
 #: world_clock_calendar_settings.py:214
 msgid "Coordinated Universal Time"
-msgstr "Tempo Universale Coordinato"
+msgstr "Egyezményes koordinált világidő"
 
 #. calendar@simonwiles.net->metadata.json->name
 msgid "World Clock Calendar"
-msgstr "Calendario World Clock"
+msgstr "Világóra naptár"
 
 #. calendar@simonwiles.net->metadata.json->description
 msgid ""
 "Fork of the Cinnamon calendar applet with support for displaying multiple "
 "timezones"
 msgstr ""
-"Fork dell'applet calendario Cinnamon con supporto per la visualizzazione di "
-"più fusi orari"
+"A Cinnamon naptár kisalkalmazás egy változata több időzóna "
+"megjelenítésének támogatásával"
 
 #. calendar@simonwiles.net->settings-schema.json->custom-format->description
 msgid "Date format:"
-msgstr "Formato della data:"
+msgstr "Dátumformátum:"
 
 #. calendar@simonwiles.net->settings-schema.json->custom-format->tooltip
 msgid "Set your custom format here."
-msgstr "Imposta qui il tuo formato personalizzato."
+msgstr "Egyéni formátum megadása itt."
 
 #. calendar@simonwiles.net->settings-schema.json->header->description
 msgid "World-Clock Settings"
-msgstr "Impostazioni World Clock"
+msgstr "Világóra beállítások"
 
 #. calendar@simonwiles.net->settings-schema.json->show-week-
 #. numbers->description
 msgid "Show week numbers in calendar"
-msgstr "Mostra numeri della settimana nel calendario"
+msgstr "Hetek számának megjelenítése a naptárban"
 
 #. calendar@simonwiles.net->settings-schema.json->show-week-numbers->tooltip
 msgid "Check this to show week numbers in the calendar."
-msgstr "Seleziona questo per mostrare i numeri delle settimane nel calendario."
+msgstr "Válassza ki ezt a hetek számának megjelenítéséhez a naptárban."
 
 #. calendar@simonwiles.net->settings-schema.json->worldclock-setup-
 #. button->description
 msgid "Configure World-clocks"
-msgstr "Configura World Clocks"
+msgstr "Világórák szekesztése"
 
 #. calendar@simonwiles.net->settings-schema.json->worldclock-setup-
 #. button->tooltip
 msgid "Add, remove and configure additional clocks and format."
-msgstr "Aggiungi, rimuovi e configura orologi e formati aggiuntivi."
+msgstr "További órák és formátum hozzáadása, eltávolítása és konfigurálása."
 
 #. calendar@simonwiles.net->settings-schema.json->format-button->description
 msgid "Show information on date format syntax"
-msgstr "Mostra le informazioni sulla sintassi del formato della data"
+msgstr "Információk megjelenítése a dátumformátum szintaxisáról"
 
 #. calendar@simonwiles.net->settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
 msgstr ""
-"Fare clic su questo pulsante per saperne di più sulla sintassi per i formati "
-"di data."
+"A dátumformátumok szintaxisáról többet megtudhat, ha erre a gombra "
+"kattint."
 
 #. calendar@simonwiles.net->settings-schema.json->use-custom-
 #. format->description
 msgid "Use a custom date format"
-msgstr "Usa un formato data personalizzato"
+msgstr "Egyéni dátumformátum használata"
 
 #. calendar@simonwiles.net->settings-schema.json->use-custom-format->tooltip
 msgid ""
 "Check this to define a custom format for the date in the calendar applet."
 msgstr ""
-"Seleziona questa opzione per definire un formato personalizzato per la data "
-"nell'applet del calendario."
+"Válassza ki ezt a naptár kisalkalmazásban egyéni dátumformátum "
+"használatához."
