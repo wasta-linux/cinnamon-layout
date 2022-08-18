@@ -71,6 +71,7 @@
 #       selection menu would disappear).
 #     - Updating zenity icon to local icon (zenity doesn't support standard
 #       icon names).
+#   2022-08-18 rik: rework cinnamon restart logic
 #
 # ==============================================================================
 
@@ -1134,25 +1135,49 @@ fi
 # Restart Cinnamon
 # ------------------------------------------------------------------------------
 
-if [ "$XDG_SESSION_DESKTOP" == "cinnamon" ];
-then
-    echo
-    echo "*** Restarting Cinnamon ***"
-    echo
-    MSG+="Restarting Cinnamon to Apply Changes\n\n"
+CURR_SESSION_ID=""
+CURR_SESSION_ID=$(loginctl show-user $UID | grep Display= | sed s/Display=//)
+echo
+echo "*** current session id for $USER: $CURR_SESSION_ID"
+echo
 
-    # restart cinnamon
-    nohup cinnamon --replace &> /dev/null &
-
-    # give a few seconds for Cinnamon to finish restarting
-    sleep 3s
-
+# check session data
+if [[ "$CURR_SESSION_ID" ]]; then
+    CURR_SESSION=$(loginctl show-session $CURR_SESSION_ID | grep Desktop= | sed s/Desktop=//)
     echo
-    echo "*** Cinnamon restarted ***"
+    echo "*** current session for $USER: $CURR_SESSION"
     echo
-    MSG+="Cinnamon Restarted Successfully\n\n"
+    if [[ "$CURR_SESSION" == cinnamon* ]]; then
+        # cinnamon graphical session - restart - could be cinnamon or cinnamon2d
+        echo
+        echo "*** Restarting Cinnamon ***"
+        echo
+        MSG+="Restarting Cinnamon to Apply Changes\n\n"
+
+        # give a few seconds before restarting Cinnamon
+        sleep 2s
+
+        sudo -Hu $SUDO_USER DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$SUDO_UID/bus \
+            nohup cinnamon --replace &> /dev/null &
+
+        # give a few seconds for Cinnamon to finish restarting
+        sleep 2s
+
+        echo
+        echo "*** Cinnamon restarted ***"
+        echo
+        MSG+="Cinnamon Restarted Successfully\n\n"
+    else
+        # graphical session but NOT cinnamon, don't attempt restart
+        echo
+        echo "*** Active session is NOT Cinnamon, no need to restart it"
+        echo
+    fi
 else
-    # cinnamon NOT active, don't attempt restart
+    # no session id, so not graphical and don't need to restart cinnamon
+    echo
+    echo "*** No graphical session, no need to restart Cinnamon"
+    echo
     MSG+="Cinnamon not active so no need to restart\n\n"
 fi
 
@@ -1164,7 +1189,8 @@ MSG+="<b>Please reboot your computer if you have any trouble</b>\n\n"
 
 echo
 echo "*** output messages:"
-echo "$MSG"
+echo
+echo -e "$MSG"
 echo "*** cinnamon-layout finished"
 echo
 

@@ -1,3 +1,9 @@
+cinnamon-layout-5-4 (5.4.2) jammy; urgency=medium
+
+  * cinnamon-layout: rework cinnamon restart logic
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Thu, 18 Aug 2022 16:27:34 -0500
+
 cinnamon-layout-5-4 (5.4.1) jammy; urgency=medium
 
   * adding logic for cinnamon-layout-5-4 to provide/conflict/replace
