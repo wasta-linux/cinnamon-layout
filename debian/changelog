@@ -1,3 +1,10 @@
+cinnamon-layout-5-4 (5.4.1) jammy; urgency=medium
+
+  * adding logic for cinnamon-layout-5-4 to provide/conflict/replace
+    other prior cinnamon-layout-x-y versions
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Thu, 18 Aug 2022 10:27:42 -0500
+
 cinnamon-layout-5-4 (5.4.0) jammy; urgency=medium
 
   * initial 5.4 release: updated all applets

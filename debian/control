@@ -9,9 +9,9 @@ Homepage: https://github.com/wasta-linux/cinnamon-layout
 Package: cinnamon-layout-5-4
 Architecture: all
 Depends: cinnamon (>= 5.4), cinnamon-common (>= 5.4), cinnamon-control-center (>= 5.4), cinnamon-desktop-data (>= 5.4), cinnamon-l10n (>= 5.4), cinnamon-screensaver (>= 5.4), cinnamon-session (>= 5.4), cinnamon-settings-daemon (>= 5.4), cjs (>= 5.4), jq, muffin (>= 5.4), nemo (>= 5.4), plank, zenity, ${misc:Depends}
-Provides: cinnamon-layout-5-2
-Conflicts: cinnamon-layout-5-2
-Replaces: cinnamon-layout-5-2
+Provides: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2
+Conflicts: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2
+Replaces: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2
 Description: Cinnamon Layout Switcher
  Layout switcher for Cinnamon Desktop. Current layout options include:
    - Traditional (30px bottom panel, non-grouped window list)
