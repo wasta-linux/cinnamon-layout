@@ -7,11 +7,14 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="512"
-   height="512"
+   width="256"
+   height="256"
    version="1.1"
    id="svg12"
-   sodipodi:docname="cinnamon-layout.svg"
+   sodipodi:docname="cinnamon-layout-256.svg"
+   inkscape:export-filename="/home/akiverson/data/1-ai-data/dev/packages/cinnamon-layout/cinnamon-layout/resources/cinnamon-layout-256.png"
+   inkscape:export-xdpi="384"
+   inkscape:export-ydpi="384"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
   <metadata
      id="metadata18">
@@ -36,44 +39,48 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1878"
-     inkscape:window-height="1056"
+     inkscape:window-width="1462"
+     inkscape:window-height="1016"
      id="namedview14"
      showgrid="false"
-     inkscape:zoom="0.4609375"
-     inkscape:cx="534.95349"
-     inkscape:cy="-286.48245"
-     inkscape:window-x="42"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
+     inkscape:zoom="1.84375"
+     inkscape:cx="62.601746"
+     inkscape:cy="71.57291"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="0"
      inkscape:current-layer="svg12" />
-  <rect
-     style="opacity:0.2;stroke-width:8"
-     width="400"
-     height="360"
-     x="56"
-     y="88"
-     rx="20"
-     ry="20"
-     id="rect2" />
-  <path
-     style="fill:#5294e2;stroke-width:8"
-     d="M 56,119.2 V 420 c 0,11.08 8.92,20 20,20 h 360 c 11.08,0 20,-8.92 20,-20 V 119.2 Z"
-     id="path4"
-     inkscape:connector-curvature="0" />
-  <path
-     style="fill:#1d344f;stroke-width:8"
-     d="m 76,80 c -11.08,0 -20,8.92 -20,20 v 20 h 400 v -20 c 0,-11.08 -8.92,-20 -20,-20 z"
-     id="path6"
-     inkscape:connector-curvature="0" />
-  <path
-     style="fill:#1d344f;stroke-width:8"
-     d="m 172.8,400 c -11.52,0 -20.8,8.92 -20.8,20 v 20 h 208 v -20 c 0,-11.08 -9.28,-20 -20.8,-20 z"
-     id="path8"
-     inkscape:connector-curvature="0" />
-  <path
-     style="opacity:0.1;fill:#ffffff;stroke-width:8"
-     d="m 76,80 c -11.08,0 -20,8.92 -20,20 v 8 C 56,96.92 64.92,88 76,88 h 360 c 11.08,0 20,8.92 20,20 v -8 c 0,-11.08 -8.92,-20 -20,-20 z"
-     id="path10"
-     inkscape:connector-curvature="0" />
+  <g
+     id="g824"
+     transform="matrix(4.8,0,0,4.173913,-25.6,-812.07942)">
+    <rect
+       id="rect2"
+       ry="2.5"
+       rx="2.5"
+       y="203"
+       x="7"
+       height="45"
+       width="50"
+       style="opacity:0.2" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path4"
+       d="m 7,206.9 v 37.6 c 0,1.385 1.115,2.5 2.5,2.5 h 45 c 1.385,0 2.5,-1.115 2.5,-2.5 v -37.6 z"
+       style="fill:#5294e2" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path6"
+       d="M 9.5,202 C 8.115,202 7,203.115 7,204.5 v 2.5 h 50 v -2.5 c 0,-1.385 -1.115,-2.5 -2.5,-2.5 z"
+       style="fill:#1d344f" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path8"
+       d="m 21.6,242 c -1.44,0 -2.6,1.115 -2.6,2.5 v 2.5 h 26 v -2.5 c 0,-1.385 -1.16,-2.5 -2.6,-2.5 z"
+       style="fill:#1d344f" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path10"
+       d="M 9.5,202 C 8.115,202 7,203.115 7,204.5 v 1 C 7,204.115 8.115,203 9.5,203 h 45 c 1.385,0 2.5,1.115 2.5,2.5 v -1 c 0,-1.385 -1.115,-2.5 -2.5,-2.5 z"
+       style="opacity:0.1;fill:#ffffff" />
+  </g>
 </svg>

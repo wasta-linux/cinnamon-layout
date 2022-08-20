@@ -1,3 +1,9 @@
+cinnamon-layout-5-4 (5.4.3) jammy; urgency=medium
+
+  * simplify cinnamon restart logic, change .svg to 256px
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Sat, 20 Aug 2022 17:10:57 -0500
+
 cinnamon-layout-5-4 (5.4.2) jammy; urgency=medium
 
   * cinnamon-layout: rework cinnamon restart logic

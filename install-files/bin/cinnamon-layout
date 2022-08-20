@@ -1157,8 +1157,7 @@ if [[ "$CURR_SESSION_ID" ]]; then
         # give a few seconds before restarting Cinnamon
         sleep 2s
 
-        sudo -Hu $SUDO_USER DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$SUDO_UID/bus \
-            nohup cinnamon --replace &> /dev/null &
+        cinnamon --replace &> /dev/null &
 
         # give a few seconds for Cinnamon to finish restarting
         sleep 2s
