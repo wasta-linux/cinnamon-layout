@@ -1,4 +1,4 @@
-Source: cinnamon-layout-5-4
+Source: cinnamon-layout-6-0
 Section: utils
 Priority: optional
 Maintainer: Rik Shaw <rikshaw76@gmail.com>
@@ -6,12 +6,12 @@ Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 4.4.0
 Homepage: https://github.com/wasta-linux/cinnamon-layout
 
-Package: cinnamon-layout-5-4
+Package: cinnamon-layout-6-0
 Architecture: all
-Depends: cinnamon (>= 5.4), cinnamon-common (>= 5.4), cinnamon-control-center (>= 5.4), cinnamon-desktop-data (>= 5.4), cinnamon-l10n (>= 5.4), cinnamon-screensaver (>= 5.4), cinnamon-session (>= 5.4), cinnamon-settings-daemon (>= 5.4), cjs (>= 5.4), jq, muffin (>= 5.4), nemo (>= 5.4), plank, zenity, ${misc:Depends}
-Provides: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2
-Conflicts: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2
-Replaces: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2
+Depends: cinnamon (>= 6.0), cinnamon-common (>= 6.0), cinnamon-control-center (>= 6.0), cinnamon-desktop-data (>= 6.0), cinnamon-l10n (>= 6.0), cinnamon-screensaver (>= 6.0), cinnamon-session (>= 6.0), cinnamon-settings-daemon (>= 6.0), cjs (>= 6.0), jq, muffin (>= 6.0), nemo (>= 6.0), plank, zenity, ${misc:Depends}
+Provides: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2, cinnamon-layout-5-4
+Conflicts: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2, cinnamon-layout-5-4
+Replaces: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2, cinnamon-layout-5-4
 Description: Cinnamon Layout Switcher
  Layout switcher for Cinnamon Desktop. Current layout options include:
    - Traditional (30px bottom panel, non-grouped window list)

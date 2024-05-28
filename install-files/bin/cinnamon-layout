@@ -122,7 +122,12 @@ DIR=/usr/share/cinnamon-layout
 #   naming it 'cinnamon-layout.svg' If people really want their own icon to
 #   show here, they could use update-alternatives to register their own logo
 #   (or just replace this file).
-DIALOG_ICON="$DIR/resources/cinnamon-layout.svg"
+#DIALOG_ICON="$DIR/resources/cinnamon-layout.svg"
+#
+# 2024-05-28 rik: yad does support standard icon names, now not needed
+
+YAD_CONF="--center --fixed --width=450 --borders=10 --window-icon=user-desktop"
+
 SCHEMA_DIR=/usr/share/glib-2.0/schemas
 CONFIG_DIR=/home/$USER/.config/cinnamon-layout
 mkdir -p $CONFIG_DIR
@@ -594,20 +599,22 @@ fi
 # prompt user if $CHOICE not yet set
 if ! [ "$AUTO" ];
 then
-    CHOICE=$(zenity --list --title="Cinnamon-Layout" \
-        --window-icon=$DIALOG_ICON \
-        --height=350 --width=550 --text \
+    CHOICE=$(yad --list $YAD_CONF \
+        --title="Cinnamon-Layout" \
+        --width=550 \
+        --height=300 \
+        --text \
 "This utility <i><b>changes</b></i> the layout of the <i>panel</i> (taskbar) and other
 items of the Cinnamon Desktop Interface.
 
-<b><i>Choose your preferred layout:</i></b>" --radiolist \
-        --column "" --column "Layout" --column "Description" \
+<b><i>Choose your preferred layout:</i></b>" \
+        --radiolist --print-column=2 --separator="" \
+        --column="" --column="Layout" --column="Description" \
         TRUE        default           "System default Cinnamon layout" \
         FALSE       traditional       "Windows XP inspired layout with non-grouped window list" \
-        FALSE       redmond7          "Windows 7 inspired layout with grouped window list" \
+        FALSE       redmond7          "Windows 7/10 inspired layout with grouped window list" \
         FALSE       cupertino         "MacOS/OSX insipired layout" \
         FALSE       unity             "Ubuntu Unity inspired layout" \
-        FALSE       widescreen        "Left panel widescreen layout" \
         FALSE       gnome2            "Gnome 2 inspired top and bottom dual panel layout")
 fi
 
@@ -871,9 +878,9 @@ case "$CHOICE" in
 
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
-    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":28,"center":28,"right":16},{"panelId":2,left":28,"center":28,"right":28}]'
+    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":16,"center":16,"right":16},{"panelId":2,left":32,"center":32,"right":32}]'
     gsettings set org.cinnamon panels-autohide "['1:false', '2:false']"
-    gsettings set org.cinnamon panels-height "['1:28', '2:42']"
+    gsettings set org.cinnamon panels-height "['1:28', '2:60']"
     gsettings set org.cinnamon panels-hide-delay "['1:0', '2:0']"
     gsettings set org.cinnamon panels-show-delay "['1:0', '2:0']"
 
@@ -1108,13 +1115,15 @@ sleep 1s
 # prompt for running cinnamon-layout-system
 if ! [ "$AUTO" ];
 then
-    zenity --question --title "Cinnamon-Layout: Update System Default?" \
-        --no-wrap --height=150 --width=450 \
-        --window-icon=$DIALOG_ICON \
+    yad --image "gtk-dialog-question" $YAD_CONF \
+        --title "Cinnamon-Layout: Update System Default?" \
+        --button=No:1 --button=Yes:0 \
         --text="<b>Update Cinnamon-Layout system default to $CHOICE?</b>
 
-<i>NOTE: you will need to provide an administrative password</i>"
+<i>NOTE: you will need to provide an administrative password</i>\n\n"
     SET_DEFAULT=$?
+    
+    #read -p "output: $SET_DEFAULT"
 
     if [ "$SET_DEFAULT" == 0 ];
     then
@@ -1196,8 +1205,10 @@ echo
 # prompt user
 if ! [ "$AUTO" ];
 then
-    zenity --info --title "Cinnamon-Layout: Finished" --no-wrap --height=150 --width=450 \
-        --window-icon=$DIALOG_ICON \
+    yad $YAD_CONF \
+        --image "gtk-dialog-info" \
+        --title "Cinnamon-Layout: Finished" \
+        --button=OK:0 \
         --text="$MSG"
 fi
 

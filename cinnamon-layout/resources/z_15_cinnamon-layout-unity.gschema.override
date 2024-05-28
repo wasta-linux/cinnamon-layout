@@ -50,6 +50,7 @@
 #   2019-02-23 rik: updates for cinnamon 4.0
 #   2020-03-25 rik: added keyboard@cinnamon.org:124
 #   2020-09-02 rik: correct panel-zone-icon-sizes for ibus (24px)
+#   2024-05-28 rik: enlarging side panel to 60px, symbolic icons to 32px 
 #
 # ==============================================================================
 
@@ -58,9 +59,9 @@ enabled-applets = ['panel1:right:0:keyboard@cinnamon.org:124', 'panel1:right:1:r
 enabled-extensions = ['transparent-panels@germanfr']
 no-adjacent-panel-barriers = true
 panel-zone-icon-sizes = '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
-panel-zone-symbolic-icon-sizes = '[{"panelId":1,"left":28,"center":28,"right":16},{"panelId":2,left":28,"center":28,"right":28}]'
+panel-zone-symbolic-icon-sizes = '[{"panelId":1,"left":16,"center":16,"right":16},{"panelId":2,left":32,"center":32,"right":32}]'
 panels-autohide = ['1:false', '2:false']
 panels-enabled = ['1:0:top', '2:0:left']
-panels-height = ['1:28', '2:42']
+panels-height = ['1:28', '2:60']
 panels-hide-delay = ['1:0', '2:0']
 panels-show-delay = ['1:0', '2:0']

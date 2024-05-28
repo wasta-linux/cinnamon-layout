@@ -1,3 +1,11 @@
+cinnamon-layout-6-0 (6.0.0) noble; urgency=medium
+
+  * initial 6.0 release:
+    - migrate from zenity to yad
+    - unity layout: increase sidebar to 60px
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Tue, 28 May 2024 17:21:12 -0500
+
 cinnamon-layout-5-4 (5.4.3) jammy; urgency=medium
 
   * simplify cinnamon restart logic, change .svg to 256px
