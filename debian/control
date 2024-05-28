@@ -8,7 +8,7 @@ Homepage: https://github.com/wasta-linux/cinnamon-layout
 
 Package: cinnamon-layout-6-0
 Architecture: all
-Depends: cinnamon (>= 6.0), cinnamon-common (>= 6.0), cinnamon-control-center (>= 6.0), cinnamon-desktop-data (>= 6.0), cinnamon-l10n (>= 6.0), cinnamon-screensaver (>= 6.0), cinnamon-session (>= 6.0), cinnamon-settings-daemon (>= 6.0), cjs (>= 6.0), jq, muffin (>= 6.0), nemo (>= 6.0), plank, zenity, ${misc:Depends}
+Depends: cinnamon (>= 6.0), cinnamon-common (>= 6.0), cinnamon-control-center (>= 6.0), cinnamon-desktop-data (>= 6.0), cinnamon-l10n (>= 6.0), cinnamon-screensaver (>= 6.0), cinnamon-session (>= 6.0), cinnamon-settings-daemon (>= 6.0), cjs (>= 6.0), jq, muffin (>= 6.0), nemo (>= 6.0), plank, yad, ${misc:Depends}
 Provides: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2, cinnamon-layout-5-4
 Conflicts: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2, cinnamon-layout-5-4
 Replaces: cinnamon-layout-4-0, cinnamon-layout-4-2, cinnamon-layout-4-4, cinnamon-layout-4-6, cinnamon-layout-5-2, cinnamon-layout-5-4
