@@ -72,6 +72,8 @@
 #     - Updating zenity icon to local icon (zenity doesn't support standard
 #       icon names).
 #   2022-08-18 rik: rework cinnamon restart logic
+#   2024-05-29 rik: spices config dir changed from ~/.cinnamon/spices to
+#       ~/.config/cinnamon/spices
 #
 # ==============================================================================
 
@@ -129,8 +131,17 @@ DIR=/usr/share/cinnamon-layout
 YAD_CONF="--center --fixed --width=450 --borders=10 --window-icon=user-desktop"
 
 SCHEMA_DIR=/usr/share/glib-2.0/schemas
+
+APPLET_DIR=$APPLET_DIR
+EXTENSION_DIR=/usr/share/cinnamon/extensions
+
 CONFIG_DIR=/home/$USER/.config/cinnamon-layout
 mkdir -p $CONFIG_DIR
+SPICE_CONFIG_DIR=/home/$USER/.config/cinnamon/spices
+
+
+LOCAL_APPLET_DIR=$LOCAL_APPLET_DIR
+LOCAL_EXTENSION_DIR=$LOCAL_EXTENSION_DIR
 
 PREV_LAUNCHERS=""
 PREV_LAUNCHERS_FILE=$CONFIG_DIR/cinnamon-layout-launchers.txt
@@ -171,8 +182,8 @@ updatePanelLaunchers()
     #if SAVED_LAUNCHERS set panel-launchers
     if [ "$SAVED_LAUNCHERS" ];
     then
-        DEFAULT_CONFIG=/usr/share/cinnamon/applets/panel-launchers@cinnamon.org/settings-schema.json
-        JSON_DIR=/home/$USER/.cinnamon/configs/panel-launchers@cinnamon.org
+        DEFAULT_CONFIG=$APPLET_DIR/panel-launchers@cinnamon.org/settings-schema.json
+        JSON_DIR=$SPICE_CONFIG_DIR/panel-launchers@cinnamon.org
         # NOTE: #.json has to match enabled-applets number!!
         JSON_FILE=$JSON_DIR/103.json
 
@@ -201,8 +212,8 @@ updateGWLPinned()
     #if SAVED_LAUNCHERS set pinned-apps
     if [ "$SAVED_LAUNCHERS" ];
     then
-        DEFAULT_CONFIG=/usr/share/cinnamon/applets/grouped-window-list@cinnamon.org/settings-schema.json
-        JSON_DIR=/home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
+        DEFAULT_CONFIG=$APPLET_DIR/grouped-window-list@cinnamon.org/settings-schema.json
+        JSON_DIR=$SPICE_CONFIG_DIR/grouped-window-list@cinnamon.org
         # NOTE: #.json has to match enabled-applets number!!
         JSON_FILE=$JSON_DIR/120.json
 
@@ -229,8 +240,8 @@ updateWorldClocks()
 {
     if [ "$SAVED_WC" ];
     then
-        DEFAULT_CONFIG=/usr/share/cinnamon/applets/calendar@simonwiles.net/settings-schema.json
-        JSON_DIR=/home/$USER/.cinnamon/configs/calendar@simonwiles.net
+        DEFAULT_CONFIG=$APPLET_DIR/calendar@simonwiles.net/settings-schema.json
+        JSON_DIR=$SPICE_CONFIG_DIR/calendar@simonwiles.net
         # NOTE: #.json has to match enabled-applets number!!
         JSON_FILE=$JSON_DIR/113.json
 
@@ -256,8 +267,8 @@ updateWorldClocks()
 
 setClockSaved()
 {
-    DEFAULT_CONFIG=/usr/share/cinnamon/applets/calendar@simonwiles.net/settings-schema.json
-    JSON_DIR=/home/$USER/.cinnamon/configs/calendar@simonwiles.net
+    DEFAULT_CONFIG=$APPLET_DIR/calendar@simonwiles.net/settings-schema.json
+    JSON_DIR=$SPICE_CONFIG_DIR/calendar@simonwiles.net
     # NOTE: #.json has to match enabled-applets number!!
     JSON_FILE=$JSON_DIR/113.json
 
@@ -287,8 +298,8 @@ setClockSaved()
 setClockShort()
 {
     # remove AM / PM from worldclock time panel format
-    DEFAULT_CONFIG=/usr/share/cinnamon/applets/calendar@simonwiles.net/settings-schema.json
-    JSON_DIR=/home/$USER/.cinnamon/configs/calendar@simonwiles.net
+    DEFAULT_CONFIG=$APPLET_DIR/calendar@simonwiles.net/settings-schema.json
+    JSON_DIR=$SPICE_CONFIG_DIR/calendar@simonwiles.net
     # NOTE: #.json has to match enabled-applets number!!
     JSON_FILE=$JSON_DIR/113.json
 
@@ -317,8 +328,8 @@ setClockShort()
 
 setClockStandard()
 {
-    DEFAULT_CONFIG=/usr/share/cinnamon/applets/calendar@simonwiles.net/settings-schema.json
-    JSON_DIR=/home/$USER/.cinnamon/configs/calendar@simonwiles.net
+    DEFAULT_CONFIG=$APPLET_DIR/calendar@simonwiles.net/settings-schema.json
+    JSON_DIR=$SPICE_CONFIG_DIR/calendar@simonwiles.net
     # NOTE: #.json has to match enabled-applets number!!
     JSON_FILE=$JSON_DIR/113.json
 
@@ -347,8 +358,8 @@ setClockStandard()
 
 setClockFull()
 {
-    DEFAULT_CONFIG=/usr/share/cinnamon/applets/calendar@simonwiles.net/settings-schema.json
-    JSON_DIR=/home/$USER/.cinnamon/configs/calendar@simonwiles.net
+    DEFAULT_CONFIG=$APPLET_DIR/calendar@simonwiles.net/settings-schema.json
+    JSON_DIR=$SPICE_CONFIG_DIR/calendar@simonwiles.net
     # NOTE: #.json has to match enabled-applets number!!
     JSON_FILE=$JSON_DIR/113.json
 
@@ -379,8 +390,8 @@ updateIconList()
 {
     if [ "$SAVED_CS_ICON_LIST" ];
     then
-        DEFAULT_CONFIG=/usr/share/cinnamon/applets/collapsible-systray@feuerfuchs.eu/4.0/settings-schema.json
-        JSON_DIR=/home/$USER/.cinnamon/configs/collapsible-systray@feuerfuchs.eu
+        DEFAULT_CONFIG=$APPLET_DIR/collapsible-systray@feuerfuchs.eu/4.0/settings-schema.json
+        JSON_DIR=$SPICE_CONFIG_DIR/collapsible-systray@feuerfuchs.eu
         # NOTE: #.json has to match enabled-applets number!!
         JSON_FILE=$JSON_DIR/121.json
 
@@ -407,8 +418,8 @@ updateIconList()
 resetMenu()
 {
     #2024-05-29 rik TODO: not certain this is working correctly?
-    DEFAULT_CONFIG=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
-    JSON_DIR=/home/$USER/.cinnamon/configs/menu@cinnamon.org
+    DEFAULT_CONFIG=$APPLET_DIR/menu@cinnamon.org/settings-schema.json
+    JSON_DIR=$SPICE_CONFIG_DIR/menu@cinnamon.org
     # NOTE: #.json has to match enabled-applets number!!
     JSON_FILE=$JSON_DIR/101.json
 
@@ -437,7 +448,7 @@ resetMenu()
 
 removeMenuFavs()
 {
-    JSON_DIR=/home/$USER/.cinnamon/configs/menu@cinnamon.org
+    JSON_DIR=$SPICE_CONFIG_DIR/menu@cinnamon.org
     # NOTE: #.json has to match enabled-applets number!!
     JSON_FILE=$JSON_DIR/101.json
 
@@ -469,13 +480,13 @@ removeMenuFavs()
 # SAVE current GWL OR panel-launcher list to restore later....
 SAVED_LAUNCHERS=""
 
-PL_FILE=/home/$USER/.cinnamon/configs/panel-launchers@cinnamon.org/103.json
+PL_FILE=$SPICE_CONFIG_DIR/panel-launchers@cinnamon.org/103.json
 if [ -e "$PL_FILE" ];
 then
     PL_LAUNCHERS=$(jq -c '.["launcherList"].value' < $PL_FILE)
 fi
 
-GWL_FILE=/home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org/120.json
+GWL_FILE=$SPICE_CONFIG_DIR/grouped-window-list@cinnamon.org/120.json
 if [ -e "$GWL_FILE" ];
 then
     GWL_PINNED_APPS=$(jq -c '.["pinned-apps"].value' < $GWL_FILE)
@@ -523,7 +534,7 @@ fi
 SAVED_WC=""
 SAVED_CLOCK_FORMAT=""
 
-WC_FILE=/home/$USER/.cinnamon/configs/calendar@simonwiles.net/113.json
+WC_FILE=$SPICE_CONFIG_DIR/calendar@simonwiles.net/113.json
 if [ -e "$WC_FILE" ];
 then
     SAVED_WC=$(jq -c '.["worldclocks"].value' < $WC_FILE)
@@ -588,7 +599,7 @@ fi
 # SAVE collapsible-systray icon-visibility-list
 SAVED_CS_ICON_LIST=""
 
-CS_FILE=/home/$USER/.cinnamon/configs/collapsible-systray@feuerfuchs.eu/121.json
+CS_FILE=$SPICE_CONFIG_DIR/collapsible-systray@feuerfuchs.eu/121.json
 if [ -e "$CS_FILE" ];
 then
     SAVED_CS_ICON_LIST=$(jq -c '.["icon-visibility-list"].value' < $CS_FILE)
@@ -659,18 +670,18 @@ case "$CHOICE" in
 "default")
 #    # menu@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    rm -rf $LOCAL_APPLET_DIR/menu@cinnamon.org
+#    rm -rf $SPICE_CONFIG_DIR/menu@cinnamon.org
 
 #    # calendar@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@cinnamon.org
-#    rm -rf /home/$USER/.cinnamon/configs/calendar@cinnamon.org
+#    rm -rf $LOCAL_APPLET_DIR/calendar@cinnamon.org
+#    rm -rf $SPICE_CONFIG_DIR/calendar@cinnamon.org
 
 #    # calendar@simonwiles.net:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    rm -rf $LOCAL_APPLET_DIR/calendar@simonwiles.net
+#    rm -rf $SPICE_CONFIG_DIR/calendar@simonwiles.net
 
     # if SAVED_WC set worldclocks
     updateWorldClocks
@@ -717,16 +728,16 @@ case "$CHOICE" in
 "traditional")
 #    # menu@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    rm -rf $LOCAL_APPLET_DIR/menu@cinnamon.org
+#    rm -rf $SPICE_CONFIG_DIR/menu@cinnamon.org
 
     # reset menu applet to default:
     resetMenu
 
 #    # calendar@simonwiles.net:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    rm -rf $LOCAL_APPLET_DIR/calendar@simonwiles.net
+#    rm -rf $SPICE_CONFIG_DIR/calendar@simonwiles.net
 
     # if SAVED_WC set worldclocks
     updateWorldClocks
@@ -765,8 +776,8 @@ case "$CHOICE" in
 "redmond7")
 #    # menu@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    rm -rf $LOCAL_APPLET_DIR/menu@cinnamon.org
+#    rm -rf $SPICE_CONFIG_DIR/menu@cinnamon.org
 
     # reset Main Menu
     resetMenu
@@ -774,18 +785,18 @@ case "$CHOICE" in
     # legacy: remove for 20.04
     # IcingTaskManager@json:
     #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/IcingTaskManager@json
-    rm -rf /home/$USER/.cinnamon/configs/IcingTaskManager@json
+    rm -rf $LOCAL_APPLET_DIR/IcingTaskManager@json
+    rm -rf $SPICE_CONFIG_DIR/IcingTaskManager@json
 
 #    # grouped-window-list@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
-#    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
+#    rm -rf $LOCAL_APPLET_DIR/grouped-window-list@cinnamon.org
+#    rm -rf $SPICE_CONFIG_DIR/grouped-window-list@cinnamon.org
 
 #    # calendar@simonwiles.net:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    rm -rf $LOCAL_APPLET_DIR/calendar@simonwiles.net
+#    rm -rf $SPICE_CONFIG_DIR/calendar@simonwiles.net
 
     # if SAVED_LAUNCHERS set pinned-apps
     updateGWLPinned
@@ -824,8 +835,8 @@ case "$CHOICE" in
 "unity")
 #    # menu@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    rm -rf $LOCAL_APPLET_DIR/menu@cinnamon.org
+#    rm -rf $SPICE_CONFIG_DIR/menu@cinnamon.org
 
     # reset Main Menu
     resetMenu
@@ -836,23 +847,23 @@ case "$CHOICE" in
     # legacy: remove for 20.04
     # IcingTaskManager@json:
     #   - remove any local applet and configs (will be re-created from defaults)
-    rm -rf /home/$USER/.local/share/cinnamon/applets/IcingTaskManager@json
-    rm -rf /home/$USER/.cinnamon/configs/IcingTaskManager@json
+    rm -rf $LOCAL_APPLET_DIR/IcingTaskManager@json
+    rm -rf $SPICE_CONFIG_DIR/IcingTaskManager@json
 
 #    # grouped-window-list@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
-#    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
+#    rm -rf $LOCAL_APPLET_DIR/grouped-window-list@cinnamon.org
+#    rm -rf $SPICE_CONFIG_DIR/grouped-window-list@cinnamon.org
 
 #    # calendar@simonwiles.net:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    rm -rf $LOCAL_APPLET_DIR/calendar@simonwiles.net
+#    rm -rf $SPICE_CONFIG_DIR/calendar@simonwiles.net
 
 #    # transparent-panels@germanfr
 #    #   - remove any local extension and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
-#    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
+#    rm -rf $LOCAL_EXTENSION_DIR/transparent-panels@germanfr
+#    rm -rf $SPICE_CONFIG_DIR/transparent-panels@germanfr
 
     # if SAVED_LAUNCHERS set pinned-apps
     updateGWLPinned
@@ -891,8 +902,8 @@ case "$CHOICE" in
 "cupertino")
 #    # menu@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    rm -rf $LOCAL_APPLET_DIR/menu@cinnamon.org
+#    rm -rf $SPICE_CONFIG_DIR/menu@cinnamon.org
 
     # reset Main Menu
     resetMenu
@@ -904,13 +915,13 @@ case "$CHOICE" in
 
 #    # calendar@simonwiles.net:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    rm -rf $LOCAL_APPLET_DIR/calendar@simonwiles.net
+#    rm -rf $SPICE_CONFIG_DIR/calendar@simonwiles.net
 
 #    # transparent-panels@germanfr
 #    #   - remove any local extension and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
-#    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
+#    rm -rf $LOCAL_EXTENSION_DIR/transparent-panels@germanfr
+#    rm -rf $SPICE_CONFIG_DIR/transparent-panels@germanfr
 
     PLANK_FOLDER=/home/$USER/.config/plank/dock1/launchers
     if ! [ -e "$PLANK_FOLDER" ];
@@ -981,26 +992,26 @@ case "$CHOICE" in
 "widescreen")
 #    # menu@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    rm -rf $LOCAL_APPLET_DIR/menu@cinnamon.org
+#    rm -rf $SPICE_CONFIG_DIR/menu@cinnamon.org
 
     # reset Main Menu
     resetMenu
 
 #    # grouped-window-list@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/grouped-window-list@cinnamon.org
-#    rm -rf /home/$USER/.cinnamon/configs/grouped-window-list@cinnamon.org
+#    rm -rf $LOCAL_APPLET_DIR/grouped-window-list@cinnamon.org
+#    rm -rf $SPICE_CONFIG_DIR/grouped-window-list@cinnamon.org
 
 #    # calendar@simonwiles.net:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    rm -rf $LOCAL_APPLET_DIR/calendar@simonwiles.net
+#    rm -rf $SPICE_CONFIG_DIR/calendar@simonwiles.net
 
 #    # transparent-panels@germanfr
 #    #   - remove any local extension and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/extensions/transparent-panels@germanfr
-#    rm -rf /home/$USER/.cinnamon/configs/transparent-panels@germanfr
+#    rm -rf $LOCAL_EXTENSION_DIR/transparent-panels@germanfr
+#    rm -rf $SPICE_CONFIG_DIR/transparent-panels@germanfr
 
     # if SAVED_LAUNCHERS set pinned-apps
     updateGWLPinned
@@ -1042,21 +1053,21 @@ case "$CHOICE" in
 "gnome2")
 #    # menu@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/menu@cinnamon.org
-#    rm -rf /home/$USER/.cinnamon/configs/menu@cinnamon.org
+#    rm -rf $LOCAL_APPLET_DIR/menu@cinnamon.org
+#    rm -rf $SPICE_CONFIG_DIR/menu@cinnamon.org
 
     # reset menu applet to default:
     resetMenu
 
 #    # calendar@cinnamon.org:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/calendar@simonwiles.net
-#    rm -rf /home/$USER/.cinnamon/configs/calendar@simonwiles.net
+#    rm -rf $LOCAL_APPLET_DIR/calendar@simonwiles.net
+#    rm -rf $SPICE_CONFIG_DIR/calendar@simonwiles.net
 
 #    # places-bookmarks@dmo60.de:
 #    #   - remove any local applet and configs (will be re-created from defaults)
-#    rm -rf /home/$USER/.local/share/cinnamon/applets/places-bookmarks@dmo60.de
-#    rm -rf /home/$USER/.cinnamon/configs/places-bookmarks@dmo60.de
+#    rm -rf $LOCAL_APPLET_DIR/places-bookmarks@dmo60.de
+#    rm -rf $SPICE_CONFIG_DIR/places-bookmarks@dmo60.de
 
     # if SAVED_WC set worldclocks
     updateWorldClocks
