@@ -1,3 +1,9 @@
+cinnamon-layout-6-0 (6.0.0.1) noble; urgency=medium
+
+  * revert to 44px sidebar
+
+ -- Rik Shaw <rikshaw76@gmail.com>  Wed, 29 May 2024 09:52:03 -0500
+
 cinnamon-layout-6-0 (6.0.0) noble; urgency=medium
 
   * initial 6.0 release:

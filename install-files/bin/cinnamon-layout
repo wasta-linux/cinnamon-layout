@@ -406,6 +406,7 @@ updateIconList()
 
 resetMenu()
 {
+    #2024-05-29 rik TODO: not certain this is working correctly?
     DEFAULT_CONFIG=/usr/share/cinnamon/applets/menu@cinnamon.org/settings-schema.json
     JSON_DIR=/home/$USER/.cinnamon/configs/menu@cinnamon.org
     # NOTE: #.json has to match enabled-applets number!!
@@ -878,9 +879,9 @@ case "$CHOICE" in
 
     # all "panels" items need reset since number of panels could have changed
     gsettings set org.cinnamon panel-zone-icon-sizes '[{"panelId":1,"left":0,"center":0,"right":24},{"panelId":2,"left":0,"center":0,"right":0}]'
-    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":16,"center":16,"right":16},{"panelId":2,left":32,"center":32,"right":32}]'
+    gsettings set org.cinnamon panel-zone-symbolic-icon-sizes '[{"panelId":1,"left":16,"center":16,"right":16},{"panelId":2,left":28,"center":28,"right":28}]'
     gsettings set org.cinnamon panels-autohide "['1:false', '2:false']"
-    gsettings set org.cinnamon panels-height "['1:28', '2:60']"
+    gsettings set org.cinnamon panels-height "['1:28', '2:44']"
     gsettings set org.cinnamon panels-hide-delay "['1:0', '2:0']"
     gsettings set org.cinnamon panels-show-delay "['1:0', '2:0']"
 
